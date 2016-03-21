@@ -1,0 +1,1207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DAL.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Approval">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BacklogItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChageRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ApprovalId" Type="int" Nullable="false" />
+          <Property Name="ChangeTypeId" Type="int" Nullable="false" />
+          <Property Name="ImpactId" Type="int" Nullable="false" />
+          <Property Name="PriorityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChangeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Impact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sprint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+          <Property Name="RemainingTime" Type="int" Nullable="false" />
+          <Property Name="TaskStateId" Type="int" Nullable="false" />
+          <Property Name="SprintId" Type="int" />
+          <Property Name="BacklogItemId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="TaskState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskUpdate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+          <Property Name="ElapsedTime" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" />
+          <Property Name="PreviousTaskStateId" Type="int" Nullable="false" />
+          <Property Name="TaskStateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Steps" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="VersionOriginId" Type="int" Nullable="false" />
+          <Property Name="TestOutcomeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestOutcome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VersionOrigin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BacklogIt__Proje__36B12243">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BacklogItem">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Appro__3A81B327">
+          <End Role="Approval" Type="Self.Approval" Multiplicity="1" />
+          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="ApprovalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Chang__3B75D760">
+          <End Role="ChangeType" Type="Self.ChangeType" Multiplicity="1" />
+          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChangeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="ChangeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Impac__3C69FB99">
+          <End Role="Impact" Type="Self.Impact" Multiplicity="1" />
+          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="ImpactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Prior__3D5E1FD2">
+          <End Role="Priority" Type="Self.Priority" Multiplicity="1" />
+          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequest__Id__398D8EEE">
+          <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
+          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sprint__ProjectI__2F10007B">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Sprint" Type="Self.Sprint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sprint">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__BacklogIte__47DBAE45">
+          <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="BacklogItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__SprintId__46E78A0C">
+          <End Role="Sprint" Type="Self.Sprint" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__TaskStateI__45F365D3">
+          <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="TaskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__UserId__48CFD27E">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskUpdat__Previ__4D94879B">
+          <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
+          <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUpdate">
+              <PropertyRef Name="PreviousTaskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskUpdat__TaskI__4CA06362">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUpdate">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskUpdat__TaskS__4E88ABD4">
+          <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
+          <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUpdate">
+              <PropertyRef Name="TaskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team__ProjectId__32E0915F">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__Id__403A8C7D">
+          <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__TestOutcom__4222D4EF">
+          <End Role="TestOutcome" Type="Self.TestOutcome" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestOutcome">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="TestOutcomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__VersionOri__412EB0B6">
+          <End Role="VersionOrigin" Type="Self.VersionOrigin" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VersionOrigin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="VersionOriginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleId__276EDEB3">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DALStoreContainer">
+          <EntitySet Name="Approval" EntityType="Self.Approval" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BacklogItem" EntityType="Self.BacklogItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChageRequest" EntityType="Self.ChageRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChangeType" EntityType="Self.ChangeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Impact" EntityType="Self.Impact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sprint" EntityType="Self.Sprint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskState" EntityType="Self.TaskState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskUpdate" EntityType="Self.TaskUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestOutcome" EntityType="Self.TestOutcome" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VersionOrigin" EntityType="Self.VersionOrigin" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BacklogIt__Proje__36B12243" Association="Self.FK__BacklogIt__Proje__36B12243">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="BacklogItem" EntitySet="BacklogItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Appro__3A81B327" Association="Self.FK__ChageRequ__Appro__3A81B327">
+            <End Role="Approval" EntitySet="Approval" />
+            <End Role="ChageRequest" EntitySet="ChageRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Chang__3B75D760" Association="Self.FK__ChageRequ__Chang__3B75D760">
+            <End Role="ChangeType" EntitySet="ChangeType" />
+            <End Role="ChageRequest" EntitySet="ChageRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Impac__3C69FB99" Association="Self.FK__ChageRequ__Impac__3C69FB99">
+            <End Role="Impact" EntitySet="Impact" />
+            <End Role="ChageRequest" EntitySet="ChageRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Prior__3D5E1FD2" Association="Self.FK__ChageRequ__Prior__3D5E1FD2">
+            <End Role="Priority" EntitySet="Priority" />
+            <End Role="ChageRequest" EntitySet="ChageRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequest__Id__398D8EEE" Association="Self.FK__ChageRequest__Id__398D8EEE">
+            <End Role="BacklogItem" EntitySet="BacklogItem" />
+            <End Role="ChageRequest" EntitySet="ChageRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sprint__ProjectI__2F10007B" Association="Self.FK__Sprint__ProjectI__2F10007B">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Sprint" EntitySet="Sprint" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__BacklogIte__47DBAE45" Association="Self.FK__Task__BacklogIte__47DBAE45">
+            <End Role="BacklogItem" EntitySet="BacklogItem" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__SprintId__46E78A0C" Association="Self.FK__Task__SprintId__46E78A0C">
+            <End Role="Sprint" EntitySet="Sprint" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__TaskStateI__45F365D3" Association="Self.FK__Task__TaskStateI__45F365D3">
+            <End Role="TaskState" EntitySet="TaskState" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__UserId__48CFD27E" Association="Self.FK__Task__UserId__48CFD27E">
+            <End Role="User" EntitySet="User" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskUpdat__Previ__4D94879B" Association="Self.FK__TaskUpdat__Previ__4D94879B">
+            <End Role="TaskState" EntitySet="TaskState" />
+            <End Role="TaskUpdate" EntitySet="TaskUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskUpdat__TaskI__4CA06362" Association="Self.FK__TaskUpdat__TaskI__4CA06362">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="TaskUpdate" EntitySet="TaskUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskUpdat__TaskS__4E88ABD4" Association="Self.FK__TaskUpdat__TaskS__4E88ABD4">
+            <End Role="TaskState" EntitySet="TaskState" />
+            <End Role="TaskUpdate" EntitySet="TaskUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team__ProjectId__32E0915F" Association="Self.FK__Team__ProjectId__32E0915F">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__Id__403A8C7D" Association="Self.FK__Test__Id__403A8C7D">
+            <End Role="BacklogItem" EntitySet="BacklogItem" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__TestOutcom__4222D4EF" Association="Self.FK__Test__TestOutcom__4222D4EF">
+            <End Role="TestOutcome" EntitySet="TestOutcome" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__VersionOri__412EB0B6" Association="Self.FK__Test__VersionOri__412EB0B6">
+            <End Role="VersionOrigin" EntitySet="VersionOrigin" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleId__276EDEB3" Association="Self.FK__User__RoleId__276EDEB3">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DAL" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QSMgmtEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Approvals" EntityType="DAL.Approval" />
+          <EntitySet Name="BacklogItems" EntityType="DAL.BacklogItem" />
+          <EntitySet Name="ChangeTypes" EntityType="DAL.ChangeType" />
+          <EntitySet Name="Impacts" EntityType="DAL.Impact" />
+          <EntitySet Name="Priorities" EntityType="DAL.Priority" />
+          <EntitySet Name="Projects" EntityType="DAL.Project" />
+          <EntitySet Name="Roles" EntityType="DAL.Role" />
+          <EntitySet Name="Sprints" EntityType="DAL.Sprint" />
+          <EntitySet Name="Tasks" EntityType="DAL.Task" />
+          <EntitySet Name="TaskStates" EntityType="DAL.TaskState" />
+          <EntitySet Name="TaskUpdates" EntityType="DAL.TaskUpdate" />
+          <EntitySet Name="Teams" EntityType="DAL.Team" />
+          <EntitySet Name="TestOutcomes" EntityType="DAL.TestOutcome" />
+          <EntitySet Name="Users" EntityType="DAL.User" />
+          <EntitySet Name="VersionOrigins" EntityType="DAL.VersionOrigin" />
+          <AssociationSet Name="FK__ChageRequ__Appro__3A81B327" Association="DAL.FK__ChageRequ__Appro__3A81B327">
+            <End Role="Approval" EntitySet="Approvals" />
+            <End Role="ChageRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BacklogIt__Proje__36B12243" Association="DAL.FK__BacklogIt__Proje__36B12243">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="BacklogItem" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequest__Id__398D8EEE" Association="DAL.FK__ChageRequest__Id__398D8EEE">
+            <End Role="BacklogItem" EntitySet="BacklogItems" />
+            <End Role="ChageRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__BacklogIte__47DBAE45" Association="DAL.FK__Task__BacklogIte__47DBAE45">
+            <End Role="BacklogItem" EntitySet="BacklogItems" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__Id__403A8C7D" Association="DAL.FK__Test__Id__403A8C7D">
+            <End Role="BacklogItem" EntitySet="BacklogItems" />
+            <End Role="Test" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Chang__3B75D760" Association="DAL.FK__ChageRequ__Chang__3B75D760">
+            <End Role="ChangeType" EntitySet="ChangeTypes" />
+            <End Role="ChageRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Impac__3C69FB99" Association="DAL.FK__ChageRequ__Impac__3C69FB99">
+            <End Role="Impact" EntitySet="Impacts" />
+            <End Role="ChageRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Prior__3D5E1FD2" Association="DAL.FK__ChageRequ__Prior__3D5E1FD2">
+            <End Role="Priority" EntitySet="Priorities" />
+            <End Role="ChageRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sprint__ProjectI__2F10007B" Association="DAL.FK__Sprint__ProjectI__2F10007B">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Sprint" EntitySet="Sprints" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team__ProjectId__32E0915F" Association="DAL.FK__Team__ProjectId__32E0915F">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleId__276EDEB3" Association="DAL.FK__User__RoleId__276EDEB3">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__SprintId__46E78A0C" Association="DAL.FK__Task__SprintId__46E78A0C">
+            <End Role="Sprint" EntitySet="Sprints" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__TaskStateI__45F365D3" Association="DAL.FK__Task__TaskStateI__45F365D3">
+            <End Role="TaskState" EntitySet="TaskStates" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__UserId__48CFD27E" Association="DAL.FK__Task__UserId__48CFD27E">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskUpdat__TaskI__4CA06362" Association="DAL.FK__TaskUpdat__TaskI__4CA06362">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="TaskUpdate" EntitySet="TaskUpdates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskUpdat__Previ__4D94879B" Association="DAL.FK__TaskUpdat__Previ__4D94879B">
+            <End Role="TaskState" EntitySet="TaskStates" />
+            <End Role="TaskUpdate" EntitySet="TaskUpdates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaskUpdat__TaskS__4E88ABD4" Association="DAL.FK__TaskUpdat__TaskS__4E88ABD4">
+            <End Role="TaskState" EntitySet="TaskStates" />
+            <End Role="TaskUpdate" EntitySet="TaskUpdates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__TestOutcom__4222D4EF" Association="DAL.FK__Test__TestOutcom__4222D4EF">
+            <End Role="TestOutcome" EntitySet="TestOutcomes" />
+            <End Role="Test" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__VersionOri__412EB0B6" Association="DAL.FK__Test__VersionOri__412EB0B6">
+            <End Role="VersionOrigin" EntitySet="VersionOrigins" />
+            <End Role="Test" EntitySet="BacklogItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Approval">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Appro__3A81B327" FromRole="Approval" ToRole="ChageRequest" />
+        </EntityType>
+        <EntityType Name="BacklogItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="DAL.FK__BacklogIt__Proje__36B12243" FromRole="BacklogItem" ToRole="Project" />
+          <NavigationProperty Name="Tasks" Relationship="DAL.FK__Task__BacklogIte__47DBAE45" FromRole="BacklogItem" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="ChageRequest" BaseType="DAL.BacklogItem">
+          <Property Name="ApprovalId" Type="Int32" Nullable="false" />
+          <Property Name="ChangeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ImpactId" Type="Int32" Nullable="false" />
+          <Property Name="PriorityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Approval" Relationship="DAL.FK__ChageRequ__Appro__3A81B327" FromRole="ChageRequest" ToRole="Approval" />
+          <NavigationProperty Name="ChangeType" Relationship="DAL.FK__ChageRequ__Chang__3B75D760" FromRole="ChageRequest" ToRole="ChangeType" />
+          <NavigationProperty Name="Impact" Relationship="DAL.FK__ChageRequ__Impac__3C69FB99" FromRole="ChageRequest" ToRole="Impact" />
+          <NavigationProperty Name="Priority" Relationship="DAL.FK__ChageRequ__Prior__3D5E1FD2" FromRole="ChageRequest" ToRole="Priority" />
+        </EntityType>
+        <EntityType Name="ChangeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Chang__3B75D760" FromRole="ChangeType" ToRole="ChageRequest" />
+        </EntityType>
+        <EntityType Name="Impact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Impac__3C69FB99" FromRole="Impact" ToRole="ChageRequest" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Prior__3D5E1FD2" FromRole="Priority" ToRole="ChageRequest" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BacklogItems" Relationship="DAL.FK__BacklogIt__Proje__36B12243" FromRole="Project" ToRole="BacklogItem" />
+          <NavigationProperty Name="Sprints" Relationship="DAL.FK__Sprint__ProjectI__2F10007B" FromRole="Project" ToRole="Sprint" />
+          <NavigationProperty Name="Teams" Relationship="DAL.FK__Team__ProjectId__32E0915F" FromRole="Project" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="DAL.FK__User__RoleId__276EDEB3" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Sprint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="DAL.FK__Sprint__ProjectI__2F10007B" FromRole="Sprint" ToRole="Project" />
+          <NavigationProperty Name="Tasks" Relationship="DAL.FK__Task__SprintId__46E78A0C" FromRole="Sprint" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <Property Name="RemainingTime" Type="Int32" Nullable="false" />
+          <Property Name="TaskStateId" Type="Int32" Nullable="false" />
+          <Property Name="SprintId" Type="Int32" />
+          <Property Name="BacklogItemId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="BacklogItem" Relationship="DAL.FK__Task__BacklogIte__47DBAE45" FromRole="Task" ToRole="BacklogItem" />
+          <NavigationProperty Name="Sprint" Relationship="DAL.FK__Task__SprintId__46E78A0C" FromRole="Task" ToRole="Sprint" />
+          <NavigationProperty Name="TaskState" Relationship="DAL.FK__Task__TaskStateI__45F365D3" FromRole="Task" ToRole="TaskState" />
+          <NavigationProperty Name="User" Relationship="DAL.FK__Task__UserId__48CFD27E" FromRole="Task" ToRole="User" />
+          <NavigationProperty Name="TaskUpdates" Relationship="DAL.FK__TaskUpdat__TaskI__4CA06362" FromRole="Task" ToRole="TaskUpdate" />
+        </EntityType>
+        <EntityType Name="TaskState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tasks" Relationship="DAL.FK__Task__TaskStateI__45F365D3" FromRole="TaskState" ToRole="Task" />
+          <NavigationProperty Name="TaskUpdates" Relationship="DAL.FK__TaskUpdat__Previ__4D94879B" FromRole="TaskState" ToRole="TaskUpdate" />
+          <NavigationProperty Name="TaskUpdates1" Relationship="DAL.FK__TaskUpdat__TaskS__4E88ABD4" FromRole="TaskState" ToRole="TaskUpdate" />
+        </EntityType>
+        <EntityType Name="TaskUpdate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <Property Name="ElapsedTime" Type="Int32" Nullable="false" />
+          <Property Name="TaskId" Type="Int32" />
+          <Property Name="PreviousTaskStateId" Type="Int32" Nullable="false" />
+          <Property Name="TaskStateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="DAL.FK__TaskUpdat__TaskI__4CA06362" FromRole="TaskUpdate" ToRole="Task" />
+          <NavigationProperty Name="TaskState" Relationship="DAL.FK__TaskUpdat__Previ__4D94879B" FromRole="TaskUpdate" ToRole="TaskState" />
+          <NavigationProperty Name="TaskState1" Relationship="DAL.FK__TaskUpdat__TaskS__4E88ABD4" FromRole="TaskUpdate" ToRole="TaskState" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="DAL.FK__Team__ProjectId__32E0915F" FromRole="Team" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Test" BaseType="DAL.BacklogItem">
+          <Property Name="Steps" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VersionOriginId" Type="Int32" Nullable="false" />
+          <Property Name="TestOutcomeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestOutcome" Relationship="DAL.FK__Test__TestOutcom__4222D4EF" FromRole="Test" ToRole="TestOutcome" />
+          <NavigationProperty Name="VersionOrigin" Relationship="DAL.FK__Test__VersionOri__412EB0B6" FromRole="Test" ToRole="VersionOrigin" />
+        </EntityType>
+        <EntityType Name="TestOutcome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tests" Relationship="DAL.FK__Test__TestOutcom__4222D4EF" FromRole="TestOutcome" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="DAL.FK__User__RoleId__276EDEB3" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Tasks" Relationship="DAL.FK__Task__UserId__48CFD27E" FromRole="User" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="VersionOrigin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Tests" Relationship="DAL.FK__Test__VersionOri__412EB0B6" FromRole="VersionOrigin" ToRole="Test" />
+        </EntityType>
+        <Association Name="FK__ChageRequ__Appro__3A81B327">
+          <End Type="DAL.Approval" Role="Approval" Multiplicity="1" />
+          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="ApprovalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BacklogIt__Proje__36B12243">
+          <End Type="DAL.Project" Role="Project" Multiplicity="1" />
+          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BacklogItem">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequest__Id__398D8EEE">
+          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
+          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__BacklogIte__47DBAE45">
+          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
+          <End Type="DAL.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="BacklogItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__Id__403A8C7D">
+          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
+          <End Type="DAL.Test" Role="Test" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Chang__3B75D760">
+          <End Type="DAL.ChangeType" Role="ChangeType" Multiplicity="1" />
+          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChangeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="ChangeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Impac__3C69FB99">
+          <End Type="DAL.Impact" Role="Impact" Multiplicity="1" />
+          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="ImpactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Prior__3D5E1FD2">
+          <End Type="DAL.Priority" Role="Priority" Multiplicity="1" />
+          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChageRequest">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sprint__ProjectI__2F10007B">
+          <End Type="DAL.Project" Role="Project" Multiplicity="1" />
+          <End Type="DAL.Sprint" Role="Sprint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sprint">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team__ProjectId__32E0915F">
+          <End Type="DAL.Project" Role="Project" Multiplicity="1" />
+          <End Type="DAL.Team" Role="Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleId__276EDEB3">
+          <End Type="DAL.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="DAL.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__SprintId__46E78A0C">
+          <End Type="DAL.Sprint" Role="Sprint" Multiplicity="0..1" />
+          <End Type="DAL.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="SprintId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__TaskStateI__45F365D3">
+          <End Type="DAL.TaskState" Role="TaskState" Multiplicity="1" />
+          <End Type="DAL.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="TaskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__UserId__48CFD27E">
+          <End Type="DAL.User" Role="User" Multiplicity="0..1" />
+          <End Type="DAL.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskUpdat__TaskI__4CA06362">
+          <End Type="DAL.Task" Role="Task" Multiplicity="0..1" />
+          <End Type="DAL.TaskUpdate" Role="TaskUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUpdate">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskUpdat__Previ__4D94879B">
+          <End Type="DAL.TaskState" Role="TaskState" Multiplicity="1" />
+          <End Type="DAL.TaskUpdate" Role="TaskUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUpdate">
+              <PropertyRef Name="PreviousTaskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaskUpdat__TaskS__4E88ABD4">
+          <End Type="DAL.TaskState" Role="TaskState" Multiplicity="1" />
+          <End Type="DAL.TaskUpdate" Role="TaskUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskState">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaskUpdate">
+              <PropertyRef Name="TaskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__TestOutcom__4222D4EF">
+          <End Type="DAL.TestOutcome" Role="TestOutcome" Multiplicity="1" />
+          <End Type="DAL.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestOutcome">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="TestOutcomeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__VersionOri__412EB0B6">
+          <End Type="DAL.VersionOrigin" Role="VersionOrigin" Multiplicity="1" />
+          <End Type="DAL.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VersionOrigin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="VersionOriginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DALStoreContainer" CdmEntityContainer="QSMgmtEntities">
+          <EntitySetMapping Name="Approvals">
+            <EntityTypeMapping TypeName="DAL.Approval">
+              <MappingFragment StoreEntitySet="Approval">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BacklogItems">
+            <EntityTypeMapping TypeName="IsTypeOf(DAL.BacklogItem)">
+              <MappingFragment StoreEntitySet="BacklogItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(DAL.ChageRequest)">
+              <MappingFragment StoreEntitySet="ChageRequest">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApprovalId" ColumnName="ApprovalId" />
+                <ScalarProperty Name="ChangeTypeId" ColumnName="ChangeTypeId" />
+                <ScalarProperty Name="ImpactId" ColumnName="ImpactId" />
+                <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(DAL.Test)">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Steps" ColumnName="Steps" />
+                <ScalarProperty Name="VersionOriginId" ColumnName="VersionOriginId" />
+                <ScalarProperty Name="TestOutcomeId" ColumnName="TestOutcomeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangeTypes">
+            <EntityTypeMapping TypeName="DAL.ChangeType">
+              <MappingFragment StoreEntitySet="ChangeType">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Impacts">
+            <EntityTypeMapping TypeName="DAL.Impact">
+              <MappingFragment StoreEntitySet="Impact">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priorities">
+            <EntityTypeMapping TypeName="DAL.Priority">
+              <MappingFragment StoreEntitySet="Priority">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="DAL.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DAL.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sprints">
+            <EntityTypeMapping TypeName="DAL.Sprint">
+              <MappingFragment StoreEntitySet="Sprint">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="DAL.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BacklogItemId" ColumnName="BacklogItemId" />
+                <ScalarProperty Name="SprintId" ColumnName="SprintId" />
+                <ScalarProperty Name="TaskStateId" ColumnName="TaskStateId" />
+                <ScalarProperty Name="RemainingTime" ColumnName="RemainingTime" />
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskStates">
+            <EntityTypeMapping TypeName="DAL.TaskState">
+              <MappingFragment StoreEntitySet="TaskState">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskUpdates">
+            <EntityTypeMapping TypeName="DAL.TaskUpdate">
+              <MappingFragment StoreEntitySet="TaskUpdate">
+                <ScalarProperty Name="TaskStateId" ColumnName="TaskStateId" />
+                <ScalarProperty Name="PreviousTaskStateId" ColumnName="PreviousTaskStateId" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="ElapsedTime" ColumnName="ElapsedTime" />
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="DAL.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestOutcomes">
+            <EntityTypeMapping TypeName="DAL.TestOutcome">
+              <MappingFragment StoreEntitySet="TestOutcome">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="DAL.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VersionOrigins">
+            <EntityTypeMapping TypeName="DAL.VersionOrigin">
+              <MappingFragment StoreEntitySet="VersionOrigin">
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

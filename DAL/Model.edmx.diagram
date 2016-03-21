@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9600e8f342854aadb0c0d7cc77c37d55" Name="Diagram1">
+        <EntityTypeShape EntityType="DAL.Approval" Width="1.5" PointX="3" PointY="2" />
+        <EntityTypeShape EntityType="DAL.BacklogItem" Width="1.5" PointX="3" PointY="8.25" />
+        <EntityTypeShape EntityType="DAL.ChageRequest" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="DAL.ChangeType" Width="1.5" PointX="3" PointY="18.125" />
+        <EntityTypeShape EntityType="DAL.Impact" Width="1.5" PointX="3" PointY="15.625" />
+        <EntityTypeShape EntityType="DAL.Priority" Width="1.5" PointX="3" PointY="20.625" />
+        <EntityTypeShape EntityType="DAL.Project" Width="1.5" PointX="0.75" PointY="8.875" />
+        <EntityTypeShape EntityType="DAL.Role" Width="1.5" PointX="0.75" PointY="24" />
+        <EntityTypeShape EntityType="DAL.Sprint" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="DAL.Task" Width="1.5" PointX="5.25" PointY="12.5" />
+        <EntityTypeShape EntityType="DAL.TaskState" Width="1.5" PointX="3" PointY="26.875" />
+        <EntityTypeShape EntityType="DAL.TaskUpdate" Width="1.5" PointX="7.5" PointY="12.875" />
+        <EntityTypeShape EntityType="DAL.Team" Width="1.5" PointX="3" PointY="5.5" />
+        <EntityTypeShape EntityType="DAL.Test" Width="1.5" PointX="8.25" PointY="8.625" />
+        <EntityTypeShape EntityType="DAL.TestOutcome" Width="1.5" PointX="6" PointY="17.125" />
+        <EntityTypeShape EntityType="DAL.User" Width="1.5" PointX="3" PointY="23.75" />
+        <EntityTypeShape EntityType="DAL.VersionOrigin" Width="1.5" PointX="6" PointY="5.625" />
+        <AssociationConnector Association="DAL.FK__ChageRequ__Appro__3A81B327" />
+        <AssociationConnector Association="DAL.FK__BacklogIt__Proje__36B12243" />
+        <AssociationConnector Association="DAL.FK__ChageRequest__Id__398D8EEE" />
+        <AssociationConnector Association="DAL.FK__Task__BacklogIte__47DBAE45" />
+        <AssociationConnector Association="DAL.FK__Test__Id__403A8C7D" />
+        <AssociationConnector Association="DAL.FK__ChageRequ__Chang__3B75D760" />
+        <AssociationConnector Association="DAL.FK__ChageRequ__Impac__3C69FB99" />
+        <AssociationConnector Association="DAL.FK__ChageRequ__Prior__3D5E1FD2" />
+        <AssociationConnector Association="DAL.FK__Sprint__ProjectI__2F10007B" />
+        <AssociationConnector Association="DAL.FK__Team__ProjectId__32E0915F" />
+        <AssociationConnector Association="DAL.FK__User__RoleId__276EDEB3" />
+        <AssociationConnector Association="DAL.FK__Task__SprintId__46E78A0C" />
+        <AssociationConnector Association="DAL.FK__Task__TaskStateI__45F365D3" />
+        <AssociationConnector Association="DAL.FK__Task__UserId__48CFD27E" />
+        <AssociationConnector Association="DAL.FK__TaskUpdat__TaskI__4CA06362" />
+        <AssociationConnector Association="DAL.FK__TaskUpdat__Previ__4D94879B" />
+        <AssociationConnector Association="DAL.FK__TaskUpdat__TaskS__4E88ABD4" />
+        <AssociationConnector Association="DAL.FK__Test__TestOutcom__4222D4EF" />
+        <AssociationConnector Association="DAL.FK__Test__VersionOri__412EB0B6" />
+        <InheritanceConnector EntityType="DAL.ChageRequest" />
+        <InheritanceConnector EntityType="DAL.Test" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

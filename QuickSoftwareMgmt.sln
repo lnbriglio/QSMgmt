@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickSoftwareMgmt", "QuickSoftwareMgmt\QuickSoftwareMgmt.csproj", "{D3078E36-FEE3-439F-8D3C-329D00E074A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickSoftwareMgmt.Tests", "QuickSoftwareMgmt.Tests\QuickSoftwareMgmt.Tests.csproj", "{F42ECF1C-9C26-4E7F-822C-A87F0ED52069}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{364BDC10-E66B-406A-B930-3B3493908D36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{057CF4F3-2795-4580-8416-D714C5A37DD6}"
+	ProjectSection(SolutionItems) = preProject
+		DBCreation.sql = DBCreation.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3078E36-FEE3-439F-8D3C-329D00E074A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3078E36-FEE3-439F-8D3C-329D00E074A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3078E36-FEE3-439F-8D3C-329D00E074A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3078E36-FEE3-439F-8D3C-329D00E074A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F42ECF1C-9C26-4E7F-822C-A87F0ED52069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F42ECF1C-9C26-4E7F-822C-A87F0ED52069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F42ECF1C-9C26-4E7F-822C-A87F0ED52069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F42ECF1C-9C26-4E7F-822C-A87F0ED52069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{364BDC10-E66B-406A-B930-3B3493908D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{364BDC10-E66B-406A-B930-3B3493908D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{364BDC10-E66B-406A-B930-3B3493908D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{364BDC10-E66B-406A-B930-3B3493908D36}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
