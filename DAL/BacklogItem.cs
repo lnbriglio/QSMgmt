@@ -28,5 +28,7 @@ namespace DAL
     
         public virtual Project Project { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ChangeRequest ChangeRequest { get; set; }
+        public virtual Test Test { get; set; }
     }
 }

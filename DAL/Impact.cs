@@ -16,13 +16,13 @@ namespace DAL
     {
         public Impact()
         {
-            this.ChageRequests = new HashSet<ChageRequest>();
+            this.ChangeRequests = new HashSet<ChangeRequest>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Erased { get; set; }
     
-        public virtual ICollection<ChageRequest> ChageRequests { get; set; }
+        public virtual ICollection<ChangeRequest> ChangeRequests { get; set; }
     }
 }

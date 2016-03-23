@@ -12,7 +12,7 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ChageRequest : BacklogItem
+    public partial class ChangeRequest : BacklogItem
     {
         public int ApprovalId { get; set; }
         public int ChangeTypeId { get; set; }

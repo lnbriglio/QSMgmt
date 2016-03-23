@@ -1,0 +1,90 @@
+﻿@model DAL.ChangeRequest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ChangeRequest</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangeRequest.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangeRequest.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovalId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approval.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangeTypeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangeTypeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImpactId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Impact.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriorityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Priority.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

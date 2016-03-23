@@ -24,7 +24,7 @@ namespace DAL
         public int TaskStateId { get; set; }
     
         public virtual Task Task { get; set; }
+        public virtual TaskState PreviousTaskState { get; set; }
         public virtual TaskState TaskState { get; set; }
-        public virtual TaskState TaskState1 { get; set; }
     }
 }

@@ -24,7 +24,7 @@
           <Property Name="Erased" Type="bit" Nullable="false" />
           <Property Name="ProjectId" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="ChageRequest">
+        <EntityType Name="ChangeRequest">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -152,7 +152,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleId" Type="int" />
@@ -180,60 +180,60 @@
         </Association>
         <Association Name="FK__ChageRequ__Appro__3A81B327">
           <End Role="Approval" Type="Self.Approval" Multiplicity="1" />
-          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Approval">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ChageRequest">
+            <Dependent Role="ChangeRequest">
               <PropertyRef Name="ApprovalId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ChageRequ__Chang__3B75D760">
           <End Role="ChangeType" Type="Self.ChangeType" Multiplicity="1" />
-          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ChangeType">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ChageRequest">
+            <Dependent Role="ChangeRequest">
               <PropertyRef Name="ChangeTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ChageRequ__Impac__3C69FB99">
           <End Role="Impact" Type="Self.Impact" Multiplicity="1" />
-          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Impact">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ChageRequest">
+            <Dependent Role="ChangeRequest">
               <PropertyRef Name="ImpactId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ChageRequ__Prior__3D5E1FD2">
           <End Role="Priority" Type="Self.Priority" Multiplicity="1" />
-          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="*" />
+          <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Priority">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ChageRequest">
+            <Dependent Role="ChangeRequest">
               <PropertyRef Name="PriorityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ChageRequest__Id__398D8EEE">
           <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
-          <End Role="ChageRequest" Type="Self.ChageRequest" Multiplicity="0..1" />
+          <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="BacklogItem">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ChageRequest">
+            <Dependent Role="ChangeRequest">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -250,7 +250,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__BacklogIte__47DBAE45">
+        <Association Name="FK__Task__BacklogIte__5812160E">
           <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -262,7 +262,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__SprintId__46E78A0C">
+        <Association Name="FK__Task__SprintId__571DF1D5">
           <End Role="Sprint" Type="Self.Sprint" Multiplicity="0..1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -274,7 +274,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__TaskStateI__45F365D3">
+        <Association Name="FK__Task__TaskStateI__5629CD9C">
           <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -286,7 +286,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__UserId__48CFD27E">
+        <Association Name="FK__Task__UserId__59063A47">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -298,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskUpdat__Previ__4D94879B">
+        <Association Name="FK__TaskUpdat__Previ__5DCAEF64">
           <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
           <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -310,7 +310,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskUpdat__TaskI__4CA06362">
+        <Association Name="FK__TaskUpdat__TaskI__5CD6CB2B">
           <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
           <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -322,7 +322,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskUpdat__TaskS__4E88ABD4">
+        <Association Name="FK__TaskUpdat__TaskS__5EBF139D">
           <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
           <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -382,7 +382,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__RoleId__276EDEB3">
+        <Association Name="FK__User__RoleId__5165187F">
           <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -397,7 +397,7 @@
         <EntityContainer Name="DALStoreContainer">
           <EntitySet Name="Approval" EntityType="Self.Approval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BacklogItem" EntityType="Self.BacklogItem" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ChageRequest" EntityType="Self.ChageRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChangeRequest" EntityType="Self.ChangeRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChangeType" EntityType="Self.ChangeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Impact" EntityType="Self.Impact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
@@ -418,53 +418,53 @@
           </AssociationSet>
           <AssociationSet Name="FK__ChageRequ__Appro__3A81B327" Association="Self.FK__ChageRequ__Appro__3A81B327">
             <End Role="Approval" EntitySet="Approval" />
-            <End Role="ChageRequest" EntitySet="ChageRequest" />
+            <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
           <AssociationSet Name="FK__ChageRequ__Chang__3B75D760" Association="Self.FK__ChageRequ__Chang__3B75D760">
             <End Role="ChangeType" EntitySet="ChangeType" />
-            <End Role="ChageRequest" EntitySet="ChageRequest" />
+            <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
           <AssociationSet Name="FK__ChageRequ__Impac__3C69FB99" Association="Self.FK__ChageRequ__Impac__3C69FB99">
             <End Role="Impact" EntitySet="Impact" />
-            <End Role="ChageRequest" EntitySet="ChageRequest" />
+            <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
           <AssociationSet Name="FK__ChageRequ__Prior__3D5E1FD2" Association="Self.FK__ChageRequ__Prior__3D5E1FD2">
             <End Role="Priority" EntitySet="Priority" />
-            <End Role="ChageRequest" EntitySet="ChageRequest" />
+            <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
           <AssociationSet Name="FK__ChageRequest__Id__398D8EEE" Association="Self.FK__ChageRequest__Id__398D8EEE">
             <End Role="BacklogItem" EntitySet="BacklogItem" />
-            <End Role="ChageRequest" EntitySet="ChageRequest" />
+            <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
           <AssociationSet Name="FK__Sprint__ProjectI__2F10007B" Association="Self.FK__Sprint__ProjectI__2F10007B">
             <End Role="Project" EntitySet="Project" />
             <End Role="Sprint" EntitySet="Sprint" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__BacklogIte__47DBAE45" Association="Self.FK__Task__BacklogIte__47DBAE45">
+          <AssociationSet Name="FK__Task__BacklogIte__5812160E" Association="Self.FK__Task__BacklogIte__5812160E">
             <End Role="BacklogItem" EntitySet="BacklogItem" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__SprintId__46E78A0C" Association="Self.FK__Task__SprintId__46E78A0C">
+          <AssociationSet Name="FK__Task__SprintId__571DF1D5" Association="Self.FK__Task__SprintId__571DF1D5">
             <End Role="Sprint" EntitySet="Sprint" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__TaskStateI__45F365D3" Association="Self.FK__Task__TaskStateI__45F365D3">
+          <AssociationSet Name="FK__Task__TaskStateI__5629CD9C" Association="Self.FK__Task__TaskStateI__5629CD9C">
             <End Role="TaskState" EntitySet="TaskState" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__UserId__48CFD27E" Association="Self.FK__Task__UserId__48CFD27E">
+          <AssociationSet Name="FK__Task__UserId__59063A47" Association="Self.FK__Task__UserId__59063A47">
             <End Role="User" EntitySet="User" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskUpdat__Previ__4D94879B" Association="Self.FK__TaskUpdat__Previ__4D94879B">
+          <AssociationSet Name="FK__TaskUpdat__Previ__5DCAEF64" Association="Self.FK__TaskUpdat__Previ__5DCAEF64">
             <End Role="TaskState" EntitySet="TaskState" />
             <End Role="TaskUpdate" EntitySet="TaskUpdate" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskUpdat__TaskI__4CA06362" Association="Self.FK__TaskUpdat__TaskI__4CA06362">
+          <AssociationSet Name="FK__TaskUpdat__TaskI__5CD6CB2B" Association="Self.FK__TaskUpdat__TaskI__5CD6CB2B">
             <End Role="Task" EntitySet="Task" />
             <End Role="TaskUpdate" EntitySet="TaskUpdate" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskUpdat__TaskS__4E88ABD4" Association="Self.FK__TaskUpdat__TaskS__4E88ABD4">
+          <AssociationSet Name="FK__TaskUpdat__TaskS__5EBF139D" Association="Self.FK__TaskUpdat__TaskS__5EBF139D">
             <End Role="TaskState" EntitySet="TaskState" />
             <End Role="TaskUpdate" EntitySet="TaskUpdate" />
           </AssociationSet>
@@ -484,7 +484,7 @@
             <End Role="VersionOrigin" EntitySet="VersionOrigin" />
             <End Role="Test" EntitySet="Test" />
           </AssociationSet>
-          <AssociationSet Name="FK__User__RoleId__276EDEB3" Association="Self.FK__User__RoleId__276EDEB3">
+          <AssociationSet Name="FK__User__RoleId__5165187F" Association="Self.FK__User__RoleId__5165187F">
             <End Role="Role" EntitySet="Role" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -509,37 +509,13 @@
           <EntitySet Name="TestOutcomes" EntityType="DAL.TestOutcome" />
           <EntitySet Name="Users" EntityType="DAL.User" />
           <EntitySet Name="VersionOrigins" EntityType="DAL.VersionOrigin" />
-          <AssociationSet Name="FK__ChageRequ__Appro__3A81B327" Association="DAL.FK__ChageRequ__Appro__3A81B327">
-            <End Role="Approval" EntitySet="Approvals" />
-            <End Role="ChageRequest" EntitySet="BacklogItems" />
-          </AssociationSet>
           <AssociationSet Name="FK__BacklogIt__Proje__36B12243" Association="DAL.FK__BacklogIt__Proje__36B12243">
             <End Role="Project" EntitySet="Projects" />
             <End Role="BacklogItem" EntitySet="BacklogItems" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChageRequest__Id__398D8EEE" Association="DAL.FK__ChageRequest__Id__398D8EEE">
-            <End Role="BacklogItem" EntitySet="BacklogItems" />
-            <End Role="ChageRequest" EntitySet="BacklogItems" />
-          </AssociationSet>
           <AssociationSet Name="FK__Task__BacklogIte__47DBAE45" Association="DAL.FK__Task__BacklogIte__47DBAE45">
             <End Role="BacklogItem" EntitySet="BacklogItems" />
             <End Role="Task" EntitySet="Tasks" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Test__Id__403A8C7D" Association="DAL.FK__Test__Id__403A8C7D">
-            <End Role="BacklogItem" EntitySet="BacklogItems" />
-            <End Role="Test" EntitySet="BacklogItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ChageRequ__Chang__3B75D760" Association="DAL.FK__ChageRequ__Chang__3B75D760">
-            <End Role="ChangeType" EntitySet="ChangeTypes" />
-            <End Role="ChageRequest" EntitySet="BacklogItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ChageRequ__Impac__3C69FB99" Association="DAL.FK__ChageRequ__Impac__3C69FB99">
-            <End Role="Impact" EntitySet="Impacts" />
-            <End Role="ChageRequest" EntitySet="BacklogItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ChageRequ__Prior__3D5E1FD2" Association="DAL.FK__ChageRequ__Prior__3D5E1FD2">
-            <End Role="Priority" EntitySet="Priorities" />
-            <End Role="ChageRequest" EntitySet="BacklogItems" />
           </AssociationSet>
           <AssociationSet Name="FK__Sprint__ProjectI__2F10007B" Association="DAL.FK__Sprint__ProjectI__2F10007B">
             <End Role="Project" EntitySet="Projects" />
@@ -577,6 +553,30 @@
             <End Role="TaskState" EntitySet="TaskStates" />
             <End Role="TaskUpdate" EntitySet="TaskUpdates" />
           </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Appro__3A81B327" Association="DAL.FK__ChageRequ__Appro__3A81B327">
+            <End Role="Approval" EntitySet="Approvals" />
+            <End Role="ChangeRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequest__Id__398D8EEE" Association="DAL.FK__ChageRequest__Id__398D8EEE">
+            <End Role="BacklogItem" EntitySet="BacklogItems" />
+            <End Role="ChangeRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__Id__403A8C7D" Association="DAL.FK__Test__Id__403A8C7D">
+            <End Role="BacklogItem" EntitySet="BacklogItems" />
+            <End Role="Test" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Chang__3B75D760" Association="DAL.FK__ChageRequ__Chang__3B75D760">
+            <End Role="ChangeType" EntitySet="ChangeTypes" />
+            <End Role="ChangeRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Impac__3C69FB99" Association="DAL.FK__ChageRequ__Impac__3C69FB99">
+            <End Role="Impact" EntitySet="Impacts" />
+            <End Role="ChangeRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChageRequ__Prior__3D5E1FD2" Association="DAL.FK__ChageRequ__Prior__3D5E1FD2">
+            <End Role="Priority" EntitySet="Priorities" />
+            <End Role="ChangeRequest" EntitySet="BacklogItems" />
+          </AssociationSet>
           <AssociationSet Name="FK__Test__TestOutcom__4222D4EF" Association="DAL.FK__Test__TestOutcom__4222D4EF">
             <End Role="TestOutcome" EntitySet="TestOutcomes" />
             <End Role="Test" EntitySet="BacklogItems" />
@@ -585,7 +585,7 @@
             <End Role="VersionOrigin" EntitySet="VersionOrigins" />
             <End Role="Test" EntitySet="BacklogItems" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Approval">
           <Key>
             <PropertyRef Name="Id" />
@@ -593,7 +593,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Erased" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Appro__3A81B327" FromRole="Approval" ToRole="ChageRequest" />
+          <NavigationProperty Name="ChangeRequests" Relationship="DAL.FK__ChageRequ__Appro__3A81B327" FromRole="Approval" ToRole="ChangeRequest" />
         </EntityType>
         <EntityType Name="BacklogItem">
           <Key>
@@ -607,16 +607,8 @@
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="DAL.FK__BacklogIt__Proje__36B12243" FromRole="BacklogItem" ToRole="Project" />
           <NavigationProperty Name="Tasks" Relationship="DAL.FK__Task__BacklogIte__47DBAE45" FromRole="BacklogItem" ToRole="Task" />
-        </EntityType>
-        <EntityType Name="ChageRequest" BaseType="DAL.BacklogItem">
-          <Property Name="ApprovalId" Type="Int32" Nullable="false" />
-          <Property Name="ChangeTypeId" Type="Int32" Nullable="false" />
-          <Property Name="ImpactId" Type="Int32" Nullable="false" />
-          <Property Name="PriorityId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Approval" Relationship="DAL.FK__ChageRequ__Appro__3A81B327" FromRole="ChageRequest" ToRole="Approval" />
-          <NavigationProperty Name="ChangeType" Relationship="DAL.FK__ChageRequ__Chang__3B75D760" FromRole="ChageRequest" ToRole="ChangeType" />
-          <NavigationProperty Name="Impact" Relationship="DAL.FK__ChageRequ__Impac__3C69FB99" FromRole="ChageRequest" ToRole="Impact" />
-          <NavigationProperty Name="Priority" Relationship="DAL.FK__ChageRequ__Prior__3D5E1FD2" FromRole="ChageRequest" ToRole="Priority" />
+          <NavigationProperty Name="ChangeRequest" Relationship="DAL.FK__ChageRequest__Id__398D8EEE" FromRole="BacklogItem" ToRole="ChangeRequest" />
+          <NavigationProperty Name="Test" Relationship="DAL.FK__Test__Id__403A8C7D" FromRole="BacklogItem" ToRole="Test" />
         </EntityType>
         <EntityType Name="ChangeType">
           <Key>
@@ -625,7 +617,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Erased" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Chang__3B75D760" FromRole="ChangeType" ToRole="ChageRequest" />
+          <NavigationProperty Name="ChangeRequests" Relationship="DAL.FK__ChageRequ__Chang__3B75D760" FromRole="ChangeType" ToRole="ChangeRequest" />
         </EntityType>
         <EntityType Name="Impact">
           <Key>
@@ -634,7 +626,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Erased" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Impac__3C69FB99" FromRole="Impact" ToRole="ChageRequest" />
+          <NavigationProperty Name="ChangeRequests" Relationship="DAL.FK__ChageRequ__Impac__3C69FB99" FromRole="Impact" ToRole="ChangeRequest" />
         </EntityType>
         <EntityType Name="Priority">
           <Key>
@@ -643,7 +635,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Erased" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ChageRequests" Relationship="DAL.FK__ChageRequ__Prior__3D5E1FD2" FromRole="Priority" ToRole="ChageRequest" />
+          <NavigationProperty Name="ChangeRequests" Relationship="DAL.FK__ChageRequ__Prior__3D5E1FD2" FromRole="Priority" ToRole="ChangeRequest" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -723,8 +715,8 @@
           <Property Name="PreviousTaskStateId" Type="Int32" Nullable="false" />
           <Property Name="TaskStateId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Task" Relationship="DAL.FK__TaskUpdat__TaskI__4CA06362" FromRole="TaskUpdate" ToRole="Task" />
-          <NavigationProperty Name="TaskState" Relationship="DAL.FK__TaskUpdat__Previ__4D94879B" FromRole="TaskUpdate" ToRole="TaskState" />
-          <NavigationProperty Name="TaskState1" Relationship="DAL.FK__TaskUpdat__TaskS__4E88ABD4" FromRole="TaskUpdate" ToRole="TaskState" />
+          <NavigationProperty Name="PreviousTaskState" Relationship="DAL.FK__TaskUpdat__Previ__4D94879B" FromRole="TaskUpdate" ToRole="TaskState" />
+          <NavigationProperty Name="TaskState" Relationship="DAL.FK__TaskUpdat__TaskS__4E88ABD4" FromRole="TaskUpdate" ToRole="TaskState" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -735,13 +727,6 @@
           <Property Name="Erased" Type="Boolean" Nullable="false" />
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="DAL.FK__Team__ProjectId__32E0915F" FromRole="Team" ToRole="Project" />
-        </EntityType>
-        <EntityType Name="Test" BaseType="DAL.BacklogItem">
-          <Property Name="Steps" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="VersionOriginId" Type="Int32" Nullable="false" />
-          <Property Name="TestOutcomeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TestOutcome" Relationship="DAL.FK__Test__TestOutcom__4222D4EF" FromRole="Test" ToRole="TestOutcome" />
-          <NavigationProperty Name="VersionOrigin" Relationship="DAL.FK__Test__VersionOri__412EB0B6" FromRole="Test" ToRole="VersionOrigin" />
         </EntityType>
         <EntityType Name="TestOutcome">
           <Key>
@@ -773,18 +758,6 @@
           <Property Name="Erased" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Tests" Relationship="DAL.FK__Test__VersionOri__412EB0B6" FromRole="VersionOrigin" ToRole="Test" />
         </EntityType>
-        <Association Name="FK__ChageRequ__Appro__3A81B327">
-          <End Type="DAL.Approval" Role="Approval" Multiplicity="1" />
-          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Approval">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChageRequest">
-              <PropertyRef Name="ApprovalId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__BacklogIt__Proje__36B12243">
           <End Type="DAL.Project" Role="Project" Multiplicity="1" />
           <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="*" />
@@ -797,18 +770,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChageRequest__Id__398D8EEE">
-          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
-          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="BacklogItem">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChageRequest">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Task__BacklogIte__47DBAE45">
           <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
           <End Type="DAL.Task" Role="Task" Multiplicity="*" />
@@ -818,54 +779,6 @@
             </Principal>
             <Dependent Role="Task">
               <PropertyRef Name="BacklogItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Test__Id__403A8C7D">
-          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
-          <End Type="DAL.Test" Role="Test" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="BacklogItem">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Test">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ChageRequ__Chang__3B75D760">
-          <End Type="DAL.ChangeType" Role="ChangeType" Multiplicity="1" />
-          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ChangeType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChageRequest">
-              <PropertyRef Name="ChangeTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ChageRequ__Impac__3C69FB99">
-          <End Type="DAL.Impact" Role="Impact" Multiplicity="1" />
-          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Impact">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChageRequest">
-              <PropertyRef Name="ImpactId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ChageRequ__Prior__3D5E1FD2">
-          <End Type="DAL.Priority" Role="Priority" Multiplicity="1" />
-          <End Type="DAL.ChageRequest" Role="ChageRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Priority">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChageRequest">
-              <PropertyRef Name="PriorityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -977,6 +890,95 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ChangeRequest" BaseType="DAL.BacklogItem">
+          <Property Name="ApprovalId" Type="Int32" Nullable="false" />
+          <Property Name="ChangeTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ImpactId" Type="Int32" Nullable="false" />
+          <Property Name="PriorityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Approval" Relationship="DAL.FK__ChageRequ__Appro__3A81B327" FromRole="ChangeRequest" ToRole="Approval" />
+          <NavigationProperty Name="ChangeType" Relationship="DAL.FK__ChageRequ__Chang__3B75D760" FromRole="ChangeRequest" ToRole="ChangeType" />
+          <NavigationProperty Name="Impact" Relationship="DAL.FK__ChageRequ__Impac__3C69FB99" FromRole="ChangeRequest" ToRole="Impact" />
+          <NavigationProperty Name="Priority" Relationship="DAL.FK__ChageRequ__Prior__3D5E1FD2" FromRole="ChangeRequest" ToRole="Priority" />
+        </EntityType>
+        <EntityType Name="Test" BaseType="DAL.BacklogItem">
+          <Property Name="Steps" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VersionOriginId" Type="Int32" Nullable="false" />
+          <Property Name="TestOutcomeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestOutcome" Relationship="DAL.FK__Test__TestOutcom__4222D4EF" FromRole="Test" ToRole="TestOutcome" />
+          <NavigationProperty Name="VersionOrigin" Relationship="DAL.FK__Test__VersionOri__412EB0B6" FromRole="Test" ToRole="VersionOrigin" />
+        </EntityType>
+        <Association Name="FK__ChageRequ__Appro__3A81B327">
+          <End Type="DAL.Approval" Role="Approval" Multiplicity="1" />
+          <End Type="DAL.ChangeRequest" Role="ChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeRequest">
+              <PropertyRef Name="ApprovalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequest__Id__398D8EEE">
+          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
+          <End Type="DAL.ChangeRequest" Role="ChangeRequest" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeRequest">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__Id__403A8C7D">
+          <End Type="DAL.BacklogItem" Role="BacklogItem" Multiplicity="1" />
+          <End Type="DAL.Test" Role="Test" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BacklogItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Chang__3B75D760">
+          <End Type="DAL.ChangeType" Role="ChangeType" Multiplicity="1" />
+          <End Type="DAL.ChangeRequest" Role="ChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChangeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeRequest">
+              <PropertyRef Name="ChangeTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Impac__3C69FB99">
+          <End Type="DAL.Impact" Role="Impact" Multiplicity="1" />
+          <End Type="DAL.ChangeRequest" Role="ChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Impact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeRequest">
+              <PropertyRef Name="ImpactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChageRequ__Prior__3D5E1FD2">
+          <End Type="DAL.Priority" Role="Priority" Multiplicity="1" />
+          <End Type="DAL.ChangeRequest" Role="ChangeRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Priority">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangeRequest">
+              <PropertyRef Name="PriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Test__TestOutcom__4222D4EF">
           <End Type="DAL.TestOutcome" Role="TestOutcome" Multiplicity="1" />
           <End Type="DAL.Test" Role="Test" Multiplicity="*" />
@@ -1001,7 +1003,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1027,8 +1029,8 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
               </MappingFragment>
             </EntityTypeMapping>
-            <EntityTypeMapping TypeName="IsTypeOf(DAL.ChageRequest)">
-              <MappingFragment StoreEntitySet="ChageRequest">
+            <EntityTypeMapping TypeName="IsTypeOf(DAL.ChangeRequest)">
+              <MappingFragment StoreEntitySet="ChangeRequest">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ApprovalId" ColumnName="ApprovalId" />
                 <ScalarProperty Name="ChangeTypeId" ColumnName="ChangeTypeId" />
@@ -1181,7 +1183,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

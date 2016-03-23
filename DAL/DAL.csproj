@@ -54,7 +54,7 @@
     <Compile Include="BacklogItem.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="ChageRequest.cs">
+    <Compile Include="ChangeRequest.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ChangeType.cs">
@@ -64,6 +64,23 @@
     <Compile Include="Impact.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Approval.cs" />
+    <Compile Include="Logic\ChangeRequest.cs" />
+    <Compile Include="Logic\ChangeType.cs" />
+    <Compile Include="Logic\Impact.cs" />
+    <Compile Include="Logic\Priority.cs" />
+    <Compile Include="Logic\QSMgmtEntities.cs" />
+    <Compile Include="Logic\Role.cs" />
+    <Compile Include="Logic\Project.cs" />
+    <Compile Include="Logic\User.cs" />
+    <Compile Include="Logic\TaskUpdate.cs" />
+    <Compile Include="Logic\Task.cs" />
+    <Compile Include="Logic\Sprint.cs" />
+    <Compile Include="Logic\TaskState.cs" />
+    <Compile Include="Logic\Team.cs" />
+    <Compile Include="Logic\Test.cs" />
+    <Compile Include="Logic\TestOutcome.cs" />
+    <Compile Include="Logic\VersionOrigin.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
