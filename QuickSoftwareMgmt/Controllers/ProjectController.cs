@@ -11,14 +11,16 @@ using DAL;
 
 namespace QuickSoftwareMgmt.Controllers
 {
-    public class ProjectController : Controller
+    public class ProjectController : BaseController
     {
         private QSMgmtEntities db = new QSMgmtEntities();
 
         // GET: /Project/
         public async Task<ActionResult> Index()
         {
-            return View(await db.Projects.ToListAsync());
+            return View(await db.Projects
+                .Where(p => !p.Erased)
+                .ToListAsync());
         }
 
         // GET: /Project/Details/5
@@ -123,6 +125,43 @@ namespace QuickSoftwareMgmt.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public async Task<ActionResult> Dashboard(int? id)
+        {
+            if (id == null)
+            {
+                //id = 
+            }
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
+        [ChildActionOnly]
+        public ActionResult List()
+        {
+            if(!SelectedProjectId.HasValue)//TODO SACAR EN PROD
+                SelectedProjectId = 1;
+
+            var projectsList = db.Projects
+                .Where(p => !p.Erased)
+                .OrderBy(p => p.Name)
+                .ToList();
+
+            ViewBag.ProjectSelector = new SelectList(projectsList, "Id", "Name",SelectedProjectId);
+
+            return PartialView();
+        }
+
+        [HttpGet]
+        public ActionResult ChangeProject(int id)
+        {
+            SelectedProjectId = id;
+            return RedirectToAction("Index");
         }
     }
 }

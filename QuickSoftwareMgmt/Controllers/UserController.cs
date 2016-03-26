@@ -11,14 +11,16 @@ using DAL;
 
 namespace QuickSoftwareMgmt.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private QSMgmtEntities db = new QSMgmtEntities();
 
         // GET: /User/
         public async Task<ActionResult> Index()
         {
-            var users = db.Users.Include(u => u.Role);
+            var users = db.Users
+                .Where(u => !u.Erased)
+                .Include(u => u.Role);
             return View(await users.ToListAsync());
         }
 

@@ -11,14 +11,16 @@ using DAL;
 
 namespace QuickSoftwareMgmt.Controllers
 {
-    public class ChangeController : Controller
+    public class ChangeController : BaseController
     {
         private QSMgmtEntities db = new QSMgmtEntities();
 
         // GET: /Change/
         public async Task<ActionResult> Index()
         {
-            var backlogitems = db.ChangeRequests.Include(c => c.Project).Include(c => c.ChangeRequest).Include(c => c.Approval).Include(c => c.ChangeType).Include(c => c.Impact).Include(c => c.Priority);
+            var backlogitems = db.ChangeRequests
+                .Where(c => !c.Erased)
+                .Include(c => c.Project).Include(c => c.Approval).Include(c => c.ChangeType).Include(c => c.Impact).Include(c => c.Priority);
             return View(await backlogitems.ToListAsync());
         }
 

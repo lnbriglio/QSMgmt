@@ -11,14 +11,16 @@ using DAL;
 
 namespace QuickSoftwareMgmt.Controllers
 {
-    public class TestController : Controller
+    public class TestController : BaseController
     {
         private QSMgmtEntities db = new QSMgmtEntities();
 
         // GET: /Test/
         public async Task<ActionResult> Index()
         {
-            var tests = db.Tests.Include(t => t.Project).Include(t => t.TestOutcome).Include(t => t.VersionOrigin);
+            var tests = db.Tests
+                .Where(t => !t.Erased)
+                .Include(t => t.Project).Include(t => t.TestOutcome).Include(t => t.VersionOrigin);
             return View(await tests.ToListAsync());
         }
 

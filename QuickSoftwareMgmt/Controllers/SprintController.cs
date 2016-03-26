@@ -11,14 +11,16 @@ using DAL;
 
 namespace QuickSoftwareMgmt.Controllers
 {
-    public class SprintController : Controller
+    public class SprintController : BaseController
     {
         private QSMgmtEntities db = new QSMgmtEntities();
 
         // GET: /Sprint/
         public async Task<ActionResult> Index()
         {
-            var sprints = db.Sprints.Include(s => s.Project);
+            var sprints = db.Sprints
+                .Where(s => !s.Erased)
+                .Include(s => s.Project);
             return View(await sprints.ToListAsync());
         }
 

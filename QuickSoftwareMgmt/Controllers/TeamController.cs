@@ -11,14 +11,16 @@ using DAL;
 
 namespace QuickSoftwareMgmt.Controllers
 {
-    public class TeamController : Controller
+    public class TeamController : BaseController
     {
         private QSMgmtEntities db = new QSMgmtEntities();
 
         // GET: /Team/
         public async Task<ActionResult> Index()
         {
-            var teams = db.Teams.Include(t => t.Project);
+            var teams = db.Teams
+                .Where(t => !t.Erased)
+                .Include(t => t.Project);
             return View(await teams.ToListAsync());
         }
 
