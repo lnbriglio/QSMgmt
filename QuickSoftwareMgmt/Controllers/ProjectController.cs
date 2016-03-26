@@ -38,6 +38,21 @@ namespace QuickSoftwareMgmt.Controllers
             return View(project);
         }
 
+        public async Task<ActionResult> Dashboard(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                id = SelectedProjectId;
+            }
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
         // GET: /Project/Create
         public ActionResult Create()
         {
@@ -127,20 +142,6 @@ namespace QuickSoftwareMgmt.Controllers
             base.Dispose(disposing);
         }
 
-        public async Task<ActionResult> Dashboard(int? id)
-        {
-            if (id == null)
-            {
-                //id = 
-            }
-            Project project = await db.Projects.FindAsync(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
-            return View(project);
-        }
-
         [ChildActionOnly]
         public ActionResult List()
         {
@@ -161,7 +162,7 @@ namespace QuickSoftwareMgmt.Controllers
         public ActionResult ChangeProject(int id)
         {
             SelectedProjectId = id;
-            return RedirectToAction("Index");
+            return RedirectToAction("Dashboard");
         }
     }
 }

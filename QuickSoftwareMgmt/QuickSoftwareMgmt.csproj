@@ -963,6 +963,7 @@
     <Content Include="Views\Change\Edit.cshtml" />
     <Content Include="Views\Change\Index.cshtml" />
     <Content Include="Views\Project\List.cshtml" />
+    <Content Include="Views\Project\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
