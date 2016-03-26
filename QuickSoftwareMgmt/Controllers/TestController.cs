@@ -131,6 +131,48 @@ namespace QuickSoftwareMgmt.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<JsonResult> GetIdentifiedErrorsCount()
+        {
+            var count = await db.Tests
+                .Where(t => !t.Erased
+                    && t.ProjectId == SelectedProjectId)
+                .CountAsync();
+
+            return Json(count, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetAvgFixingTime()
+        {
+            //TODO Implement this
+
+            var count = 0;
+
+            return Json(count, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetNewVersionErrorsCount()
+        {
+            var count = await db.Tests
+                .Where(t => !t.Erased
+                    && t.ProjectId == SelectedProjectId
+                    && t.VersionOriginId == (int)VersionOriginEnum.New)
+                .CountAsync();
+
+            return Json(count, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetServiceAcceptanceFailuresCount()
+        {
+            var count = await db.Tests
+                .Where(t => !t.Erased
+                    && t.ProjectId == SelectedProjectId
+                    && t.TestOutcomeId == (int)TestOutcomeEnum.SuccessYes)
+                .CountAsync();
+
+            return Json(count, JsonRequestBehavior.AllowGet);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

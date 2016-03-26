@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using QuickSoftwareMgmt.Models.Hicharts.PieChart;
 
 namespace QuickSoftwareMgmt.Controllers
 {
@@ -56,7 +57,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Title,Description,CreationDate,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +101,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Title,Description,CreationDate,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
         {
             if (ModelState.IsValid)
             {
@@ -151,5 +152,124 @@ namespace QuickSoftwareMgmt.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public async Task<JsonResult> GetChangesByPriorityChart()
+        {
+            var changesByPriority = await db.ChangeRequests
+                .Where(c => !c.Erased
+                && c.ProjectId == SelectedProjectId)
+                .GroupBy(c => c.Priority)
+                .Select(c => new
+                {
+                    Name = c.Key.Name,
+                    Quantity = c.Count()
+                })
+                .ToArrayAsync();
+
+            var data = changesByPriority.Select(c => new Datum
+            {
+                name = c.Name,
+                y = c.Quantity
+            }).ToArray();
+
+            var chart = GetBasePieChart("Cambios por prioridad", data);
+
+            return Json(chart, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetChangesByTypeChart()
+        {
+            var changesByPriority = await db.ChangeRequests
+                .Where(c => !c.Erased
+                && c.ProjectId == SelectedProjectId
+                )
+                .GroupBy(c => c.ChangeType)
+                .Select(c => new
+                {
+                    Name = c.Key.Name,
+                    Quantity = c.Count()
+                })
+                .ToArrayAsync();
+
+            var data = changesByPriority.Select(c => new Datum
+            {
+                name = c.Name,
+                y = c.Quantity
+            }).ToArray();
+
+            var chart = GetBasePieChart("Cambios por tipo", data);
+
+            return Json(chart, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetEmergencyChangesCount()
+        {
+            var changesCount = await db.ChangeRequests
+                .Where(c => !c.Erased
+                    && c.ProjectId == SelectedProjectId
+                && c.ChangeTypeId == (int)ChangeTypeEnum.Emergency)
+                .CountAsync();
+
+            return Json(changesCount, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<JsonResult> GetPendingApprovalsCount()
+        {
+            var changesCount = await db.ChangeRequests
+                .Where(c => !c.Erased
+                    && c.ProjectId == SelectedProjectId
+                && c.ApprovalId == (int)ApprovalEnum.No)
+                .CountAsync();
+
+            return Json(changesCount, JsonRequestBehavior.AllowGet);
+        }
+
+        
+
+
+
+        private PieChart GetBasePieChart(String seriesName, Datum[] data)
+        {
+            return new PieChart
+                {
+                    chart = new Chart
+                    {
+                        plotBackgroundColor = null,
+                        plotBorderWidth = null,
+                        plotShadow = false,
+                        type = "pie"
+                    },
+                    title = new Title
+                    {
+                        text = ""
+                    },
+                    tooltip = new Tooltip
+                    {
+                        pointFormat = "{series.name}: <b>{point.percentage:.1f}%</b>"
+                    },
+                    plotOptions = new Plotoptions
+                    {
+                        pie = new Pie
+                        {
+                            allowPointSelect = true,
+                            cursor = "pointer",
+                            dataLabels = new Datalabels
+                            {
+                                enabled = false
+                            },
+                            showInLegend = true
+                        }
+                    },
+                    series = new Series[]{ 
+                        new Series{
+                            name=seriesName,
+                            colorByPoint=true,
+                            data= data
+                        }
+                    }
+                };
+        }
+
     }
 }

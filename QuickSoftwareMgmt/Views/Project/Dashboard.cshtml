@@ -4,9 +4,7 @@
     ViewBag.Title = "Dashboard";
 }
 
-<h1>
-    Burndown
-</h1>
+@*<h1>Burndown</h1>*@
 
 <div class="row">
     <div class="col-lg-12">
@@ -24,7 +22,7 @@
 </div>
 
 
-<h1>Cambios</h1>
+@*<h1>Cambios</h1>*@
 
 <div class="row">
     <div class="col-lg-5">
@@ -52,7 +50,7 @@
         </div>
     </div>
     <div class="col-lg-2">
-        
+
     </div>
 
     <div class="col-lg-2">
@@ -64,7 +62,7 @@
                         <i class="fa fa-spinner fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge" id="pendingApprovalChangesCountContainer"></div>
                         <div>Aprobaciones pendientes</div>
                     </div>
                 </div>
@@ -82,10 +80,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-fire fa-5x"></i>
+                        <i class="fa fa-bell fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge" id="emergencyChangesCountContainer"></div>
                         <div>Cambios de emergencia</div>
                     </div>
                 </div>
@@ -115,7 +113,8 @@
     </div>
 </div>
 
-<h1>Tests</h1>
+@*<h1>Tests</h1>*@
+
 <div class="row">
     <div class="col-lg-3">
         <!--Errores identificados-->
@@ -123,10 +122,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-info fa-5x"></i>
+                        <i class="fa fa-bug fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge" id="identifiedErrorsCountContainer"></div>
                         <div>Errores identificados</div>
                     </div>
                 </div>
@@ -149,7 +148,7 @@
                         <i class="fa fa-clock-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13 min</div>
+                        <div class="huge" id="avgFixingTimeContainer"></div>
                         <div>Tiempo de corrección promedio</div>
                     </div>
                 </div>
@@ -172,7 +171,7 @@
                         <i class="fa fa-plus fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge" id="newVersionErrorsCountContainer"></div>
                         <div>Incidentes causados por versiones nuevas</div>
                     </div>
                 </div>
@@ -195,7 +194,7 @@
                         <i class="fa fa-times fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">13</div>
+                        <div class="huge" id="serviceAcceptanceFailuresCountContainer"></div>
                         <div>Fracasos de pruebas de aceptación de servicio</div>
                     </div>
                 </div>
@@ -288,123 +287,45 @@
             });
         });
 
-
-
         $(function () {
-
-            $(document).ready(function () {
-
-                // Build the chart
-                $('#changesByPriorityContainer').highcharts({
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
-                        //text: 'Browser market shares January, 2015 to May, 2015'
-                        text: ''
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: false
-                            },
-                            showInLegend: true
-                        }
-                    },
-                    series: [{
-                        name: 'Brands',
-                        colorByPoint: true,
-                        data: [{
-                            name: 'Microsoft Internet Explorer',
-                            y: 56.33
-                        }, {
-                            name: 'Chrome',
-                            y: 24.03,
-                            sliced: true,
-                            selected: true
-                        }, {
-                            name: 'Firefox',
-                            y: 10.38
-                        }, {
-                            name: 'Safari',
-                            y: 4.77
-                        }, {
-                            name: 'Opera',
-                            y: 0.91
-                        }, {
-                            name: 'Proprietary or Undetectable',
-                            y: 0.2
-                        }]
-                    }]
-                });
+            $.get('@Url.Action("GetChangesByPriorityChart","Change")', null, function (data) {
+                $('#changesByPriorityContainer').highcharts(data);
             });
+
+            $.get('@Url.Action("GetChangesByTypeChart","Change")', null, function (data) {
+                $('#changesByTypeContainer').highcharts(data);
+            });
+
+            //Change
+            $.get('@Url.Action("GetEmergencyChangesCount", "Change")', null, function (data) {
+                $('#emergencyChangesCountContainer').html(data);
+            });
+
+            $.get('@Url.Action("GetPendingApprovalsCount", "Change")', null, function (data) {
+                $('#pendingApprovalChangesCountContainer').html(data);
+            });
+            
+            //Test
+            $.get('@Url.Action("GetIdentifiedErrorsCount", "Test")', null, function (data) {
+                $('#identifiedErrorsCountContainer').html(data);
+            });
+
+            $.get('@Url.Action("GetAvgFixingTime", "Test")', null, function (data) {
+                $('#avgFixingTimeContainer').html(data);
+            });
+
+            $.get('@Url.Action("GetNewVersionErrorsCount", "Test")', null, function (data) {
+                $('#newVersionErrorsCountContainer').html(data);
+            });
+
+            $.get('@Url.Action("GetServiceAcceptanceFailuresCount", "Test")', null, function (data) {
+                $('#serviceAcceptanceFailuresCountContainer').html(data);
+            });
+
+            
         });
 
-        $(function () {
-
-            $(document).ready(function () {
-
-                // Build the chart
-                $('#changesByTypeContainer').highcharts({
-                    chart: {
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false,
-                        type: 'pie'
-                    },
-                    title: {
-                        //text: 'Browser market shares January, 2015 to May, 2015'
-                        text: ''
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: false
-                            },
-                            showInLegend: true
-                        }
-                    },
-                    series: [{
-                        name: 'Brands',
-                        colorByPoint: true,
-                        data: [{
-                            name: 'Microsoft Internet Explorer',
-                            y: 56.33
-                        }, {
-                            name: 'Chrome',
-                            y: 24.03,
-                            sliced: true,
-                            selected: true
-                        }, {
-                            name: 'Firefox',
-                            y: 10.38
-                        }, {
-                            name: 'Safari',
-                            y: 4.77
-                        }, {
-                            name: 'Opera',
-                            y: 0.91
-                        }, {
-                            name: 'Proprietary or Undetectable',
-                            y: 0.2
-                        }]
-                    }]
-                });
-            });
-        });
+        
 
         $(function () {
             $('#changesUrgencyByDateContainer').highcharts({

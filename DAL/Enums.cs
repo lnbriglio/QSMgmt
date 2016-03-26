@@ -8,7 +8,7 @@ namespace DAL
 {
     public enum VersionOriginEnum
     {
-        Yes = 1,
+        New = 1,
         No = 2
     }
 
