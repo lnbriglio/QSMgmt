@@ -1,0 +1,149 @@
+﻿@model DAL.Team
+
+@{
+    ViewBag.Title = "EditMembers";
+}
+
+<h2>@Model.Name</h2>
+
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Agregar miembro
+        </div>
+        <div class="panel-body">
+            @Html.HiddenFor(model => model.Id)
+            <div class="col-lg-3">
+                @Html.DropDownList("UserId", null, "Seleccione un usuario...", new { @class = "form-control" })
+            </div>
+            <div class="col-lg-2">
+                @Html.TextBox("Capacity", null, new { @class = "form-control", placeholder = "Capacidad (hs)" })
+            </div>
+            <div class="col-lg-1">
+                <a class="btn btn-success" id="btnAddMember">Agregar</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="alert alert-warning" id="errorMessage"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>
+                Miembro
+            </td>
+            <td>
+                Capacidad (hs)
+            </td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model.TeamMembers.Where(m => !m.Erased))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => member.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => member.Capacity)
+                </td>
+                <td>
+                    <a class="removeMember" href="#" data-memberid="@member.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(function () {
+            $("#errorMessage").hide();
+
+            $("#btnAddMember").click(function (e) {
+                var userId = $("#UserId").val();
+                var capacity = $("#Capacity").val();
+                var teamId = $("#Id").val();
+
+                var errorMessage = "";
+                var error = false;
+
+                if (!error && userId == "") {
+                    error = true;
+                    showErrorMessage("Seleccione un usuario");
+                }
+
+                if (!error && (capacity == undefined || isNaN(capacity))) {
+                    error = true;
+                    showErrorMessage("Ingrese la capacidad diaria (hs)");
+                }
+
+
+
+
+                if (!error) {
+                    $.ajax({
+                        url: "@Url.Action("AddMember","Team")",
+                        method: "POST",
+                        data: {
+                            TeamId: teamId,
+                            UserId: userId,
+                            Capacity: capacity
+                        },
+                        success: function (result) {
+                            if (result === "0") {
+                                window.location.reload(true);
+                            } else {
+                                showErrorMessage(result);
+                            }
+                        },
+                        error: function (result) {
+                            showErrorMessage("Se produjo un error al intentar registrar el nuevo miembro")
+                        }
+                    });
+                }
+
+
+            });
+
+            //Remove
+            $("a.removeMember").click(function (e) {
+                var selectedMemberId = $(this).data("memberid");
+                $.ajax({
+                    url: "@Url.Action("RemoveMember","Team")",
+                    method: "POST",
+                    data: {
+                        TeamMemberId: selectedMemberId
+                    },
+                    success: function (result) {
+                        if (result === "0") {
+                            window.location.reload(true);
+                        } else {
+                            showErrorMessage(result);
+                        }
+                    },
+                    error: function (result) {
+                        showErrorMessage("Se produjo un error al eliminar el miembro")
+                    }
+                });
+            });
+
+            function showErrorMessage(msg) {
+                $("#errorMessage").html(msg);
+                $("#errorMessage").show();
+            }
+        });
+    </script>
+}

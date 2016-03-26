@@ -121,6 +121,9 @@
     <Compile Include="Team.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="TeamMember.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Test.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

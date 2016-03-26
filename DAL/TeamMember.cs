@@ -12,19 +12,15 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Team
+    public partial class TeamMember
     {
-        public Team()
-        {
-            this.TeamMembers = new HashSet<TeamMember>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
         public bool Erased { get; set; }
-        public int ProjectId { get; set; }
+        public int UserId { get; set; }
+        public int TeamId { get; set; }
+        public int Capacity { get; set; }
     
-        public virtual Project Project { get; set; }
-        public virtual ICollection<TeamMember> TeamMembers { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual User User { get; set; }
     }
 }

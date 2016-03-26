@@ -131,6 +131,16 @@
           <Property Name="Erased" Type="bit" Nullable="false" />
           <Property Name="ProjectId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="TeamMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Erased" Type="bit" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Test">
           <Key>
             <PropertyRef Name="Id" />
@@ -346,6 +356,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__TeamMembe__TeamI__6383C8BA">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="TeamMember" Type="Self.TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamMembe__UserI__628FA481">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TeamMember" Type="Self.TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Test__Id__403A8C7D">
           <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
           <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
@@ -408,6 +442,7 @@
           <EntitySet Name="TaskState" EntityType="Self.TaskState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskUpdate" EntityType="Self.TaskUpdate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamMember" EntityType="Self.TeamMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestOutcome" EntityType="Self.TestOutcome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -471,6 +506,14 @@
           <AssociationSet Name="FK__Team__ProjectId__32E0915F" Association="Self.FK__Team__ProjectId__32E0915F">
             <End Role="Project" EntitySet="Project" />
             <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamMembe__TeamI__6383C8BA" Association="Self.FK__TeamMembe__TeamI__6383C8BA">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TeamMember" EntitySet="TeamMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamMembe__UserI__628FA481" Association="Self.FK__TeamMembe__UserI__628FA481">
+            <End Role="User" EntitySet="User" />
+            <End Role="TeamMember" EntitySet="TeamMember" />
           </AssociationSet>
           <AssociationSet Name="FK__Test__Id__403A8C7D" Association="Self.FK__Test__Id__403A8C7D">
             <End Role="BacklogItem" EntitySet="BacklogItem" />
@@ -584,6 +627,15 @@
           <AssociationSet Name="FK__Test__VersionOri__412EB0B6" Association="DAL.FK__Test__VersionOri__412EB0B6">
             <End Role="VersionOrigin" EntitySet="VersionOrigins" />
             <End Role="Test" EntitySet="BacklogItems" />
+          </AssociationSet>
+          <EntitySet Name="TeamMembers" EntityType="DAL.TeamMember" />
+          <AssociationSet Name="FK__TeamMembe__TeamI__6383C8BA" Association="DAL.FK__TeamMembe__TeamI__6383C8BA">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TeamMember" EntitySet="TeamMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TeamMembe__UserI__628FA481" Association="DAL.FK__TeamMembe__UserI__628FA481">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TeamMember" EntitySet="TeamMembers" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Approval">
@@ -727,6 +779,7 @@
           <Property Name="Erased" Type="Boolean" Nullable="false" />
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="DAL.FK__Team__ProjectId__32E0915F" FromRole="Team" ToRole="Project" />
+          <NavigationProperty Name="TeamMembers" Relationship="DAL.FK__TeamMembe__TeamI__6383C8BA" FromRole="Team" ToRole="TeamMember" />
         </EntityType>
         <EntityType Name="TestOutcome">
           <Key>
@@ -748,6 +801,7 @@
           <Property Name="Erased" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Role" Relationship="DAL.FK__User__RoleId__276EDEB3" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Tasks" Relationship="DAL.FK__Task__UserId__48CFD27E" FromRole="User" ToRole="Task" />
+          <NavigationProperty Name="TeamMembers" Relationship="DAL.FK__TeamMembe__UserI__628FA481" FromRole="User" ToRole="TeamMember" />
         </EntityType>
         <EntityType Name="VersionOrigin">
           <Key>
@@ -1003,6 +1057,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TeamMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Erased" Type="Boolean" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Team" Relationship="DAL.FK__TeamMembe__TeamI__6383C8BA" FromRole="TeamMember" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="DAL.FK__TeamMembe__UserI__628FA481" FromRole="TeamMember" ToRole="User" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TeamMembe__TeamI__6383C8BA">
+          <End Type="DAL.Team" Role="Team" Multiplicity="1" />
+          <End Type="DAL.TeamMember" Role="TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TeamMembe__UserI__628FA481">
+          <End Type="DAL.User" Role="User" Multiplicity="1" />
+          <End Type="DAL.TeamMember" Role="TeamMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamMember">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1179,6 +1269,17 @@
               <MappingFragment StoreEntitySet="VersionOrigin">
                 <ScalarProperty Name="Erased" ColumnName="Erased" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamMembers">
+            <EntityTypeMapping TypeName="DAL.TeamMember">
+              <MappingFragment StoreEntitySet="TeamMember">
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Erased" ColumnName="Erased" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

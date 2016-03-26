@@ -17,6 +17,7 @@ namespace DAL
         public User()
         {
             this.Tasks = new HashSet<Task>();
+            this.TeamMembers = new HashSet<TeamMember>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace DAL
     
         public virtual Role Role { get; set; }
         public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<TeamMember> TeamMembers { get; set; }
     }
 }

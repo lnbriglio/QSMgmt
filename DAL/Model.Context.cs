@@ -40,5 +40,6 @@ namespace DAL
         public virtual DbSet<TestOutcome> TestOutcomes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VersionOrigin> VersionOrigins { get; set; }
+        public virtual DbSet<TeamMember> TeamMembers { get; set; }
     }
 }

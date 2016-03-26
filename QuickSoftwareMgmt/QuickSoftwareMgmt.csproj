@@ -132,6 +132,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\ChangeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -964,6 +965,8 @@
     <Content Include="Views\Change\Index.cshtml" />
     <Content Include="Views\Project\List.cshtml" />
     <Content Include="Views\Project\Dashboard.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\Team\EditMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

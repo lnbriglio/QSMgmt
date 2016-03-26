@@ -39,6 +39,66 @@ namespace QuickSoftwareMgmt.Controllers
             return View(team);
         }
 
+        public async Task<ActionResult> EditMembers(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Team team = await db.Teams
+                .Include(t => t.TeamMembers)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            var users = await db.Users.Where(u => !u.Erased).ToListAsync();
+
+            ViewBag.UserId = new SelectList(users, "Id", "UserName");
+
+            return View(team);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AddMember(int TeamId, int UserId, int Capacity)
+        {
+            if (await db.TeamMembers.AnyAsync(tm => !tm.Erased
+                && tm.TeamId == TeamId
+                && tm.UserId == UserId))
+            {
+                return Json("El usuario seleccionado ya es un miembro del equipo");
+            }
+
+            var teamMember = new TeamMember
+            {
+                Capacity = Capacity,
+                TeamId = TeamId,
+                UserId = UserId
+            };
+
+            db.Entry(teamMember).State = EntityState.Added;
+            await db.SaveChangesAsync();
+
+            return Json("0");
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> RemoveMember(int TeamMemberId)
+        {
+            var teamMember = await db.TeamMembers.FindAsync(TeamMemberId);
+
+            if (teamMember != null)
+            {
+                teamMember.Erased = true;
+                await db.SaveChangesAsync();
+
+                return Json("0");
+            }
+
+            return Json("Error");
+        }
+
         // GET: /Team/Create
         public ActionResult Create()
         {
@@ -51,7 +111,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,ProjectId")] Team team)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,ProjectId")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +145,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,ProjectId")] Team team)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,ProjectId")] Team team)
         {
             if (ModelState.IsValid)
             {

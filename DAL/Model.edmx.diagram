@@ -43,6 +43,9 @@
         <AssociationConnector Association="DAL.FK__Test__VersionOri__412EB0B6" />
         <InheritanceConnector EntityType="DAL.ChangeRequest" />
         <InheritanceConnector EntityType="DAL.Test" />
+        <EntityTypeShape EntityType="DAL.TeamMember" Width="1.5" PointX="8.25" PointY="16.875" />
+        <AssociationConnector Association="DAL.FK__TeamMembe__TeamI__6383C8BA" />
+        <AssociationConnector Association="DAL.FK__TeamMembe__UserI__628FA481" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
