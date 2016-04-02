@@ -133,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\BoardController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\ChangeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -598,6 +599,13 @@
     <Content Include="Global.asax" />
     <Content Include="js\flot-data.js" />
     <Content Include="js\morris-data.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\KanbanApp\boardCtrl.js" />
+    <Content Include="Scripts\KanbanApp\boardService.js" />
+    <Content Include="Scripts\KanbanApp\kanbanDragDrop.js" />
+    <Content Include="Scripts\KanbanApp\main.js" />
     <Content Include="Scripts\ProjectSelector.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -967,6 +975,8 @@
     <Content Include="Views\Project\Dashboard.cshtml" />
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Team\EditMembers.cshtml" />
+    <Content Include="Views\Sprint\Kanban.cshtml" />
+    <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
