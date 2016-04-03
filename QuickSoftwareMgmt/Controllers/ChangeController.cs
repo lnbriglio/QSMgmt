@@ -101,8 +101,11 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
         {
+            changerequest.CreationDate = DateTime.Now;
+            ValidateModel(changerequest);
+
             if (ModelState.IsValid)
             {
                 db.Entry(changerequest).State = EntityState.Modified;

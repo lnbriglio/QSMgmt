@@ -4,93 +4,73 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<div class="col-lg-6 col-lg-offset-0">
+    <h2>Editar</h2>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>ChangeRequest</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title)
+        <div class="form-horizontal">
+            <h4>Solicitud de cambio</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.CreationDate)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title)
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Title)
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Description)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreationDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreationDate)
-                @Html.ValidationMessageFor(model => model.CreationDate)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectId, "ProjectId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProjectId", String.Empty)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectId)
+                @Html.DropDownList("ProjectId", null, String.Empty, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ProjectId)
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ApprovalId, "ApprovalId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ApprovalId", String.Empty)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ApprovalId)
+                @Html.DropDownList("ApprovalId", null, String.Empty, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ApprovalId)
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ChangeTypeId, "ChangeTypeId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ChangeTypeId", String.Empty)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ChangeTypeId)
+                @Html.DropDownList("ChangeTypeId", null, String.Empty, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ChangeTypeId)
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImpactId, "ImpactId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ImpactId", String.Empty)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImpactId)
+                @Html.DropDownList("ImpactId", null, String.Empty, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ImpactId)
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PriorityId, "PriorityId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PriorityId", String.Empty)
+            <div class="form-group">
+                @Html.LabelFor(model => model.PriorityId)
+                @Html.DropDownList("PriorityId", null, String.Empty, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PriorityId)
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-default" />
             </div>
         </div>
-    </div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        @Html.ActionLink("Volver al índice", "Index")
+    </div>
 </div>
 
 @section Scripts {

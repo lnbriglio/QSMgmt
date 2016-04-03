@@ -13,6 +13,48 @@
 
     @Styles.Render("~/sbadmin/css")
 
+    <style type="text/css">
+        .voffset {
+            margin-top: 2px;
+        }
+
+        .voffset1 {
+            margin-top: 5px;
+        }
+
+        .voffset2 {
+            margin-top: 10px;
+        }
+
+        .voffset3 {
+            margin-top: 15px;
+        }
+
+        .voffset4 {
+            margin-top: 30px;
+        }
+
+        .voffset5 {
+            margin-top: 40px;
+        }
+
+        .voffset6 {
+            margin-top: 60px;
+        }
+
+        .voffset7 {
+            margin-top: 80px;
+        }
+
+        .voffset8 {
+            margin-top: 100px;
+        }
+
+        .voffset9 {
+            margin-top: 150px;
+        }
+    </style>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,7 +100,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="@Url.Action("LogOut","Account")"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -71,6 +113,7 @@
                     <ul class="nav" id="side-menu">
                         <li>
                             <a href="@Url.Action("Dashboard","Project")"><i class="fa fa-dashboard fa-fw"></i> Panel de control</a>
+                            <a href="@Url.Action("Kanban", "Sprint")"><i class="fa fa-th fa-fw"></i> Kanban</a>
                             <a href="@Url.Action("Index","Project")"><i class="fa fa-briefcase fa-fw"></i> Proyectos</a>
                             <a href="@Url.Action("Index","Sprint")"><i class="fa fa-flag fa-fw"></i> Sprints</a>
                             <a href="@Url.Action("Index","User")"><i class="fa fa-user fa-fw"></i> Usuarios</a>
@@ -85,8 +128,10 @@
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-            @RenderBody()
-        </div>
+            <div class="row">
+                @RenderBody()
+                </div>
+            </div>
         <!-- /#page-wrapper -->
     </div>
 

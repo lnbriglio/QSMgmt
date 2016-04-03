@@ -24,6 +24,8 @@ namespace QuickSoftwareMgmt.Controllers.API
 
             var states = await db.TaskStates
                 .Include(s => s.Tasks)
+                .Include("Tasks.BacklogItem")
+                .Include("Tasks.User")
                 .ToListAsync();
 
 
@@ -36,7 +38,20 @@ namespace QuickSoftwareMgmt.Controllers.API
                     Id = t.Id,
                     Name = t.Title,
                     Description = t.Description,
-                    ColumnId = t.TaskStateId
+                    ColumnId = t.TaskStateId,
+                    Parent = new
+                    {
+                        Id = t.BacklogItemId,
+                        Name = t.BacklogItem.Title,
+                        Description = t.BacklogItem.Description,
+                        IsTest = t.BacklogItem.IsTest
+                    },
+                    User = new
+                    {
+                        Id = t.UserId,
+                        Name = t.User!=null?t.User.UserName:"Sin asignar"
+                    },
+                    RemainingTime = t.RemainingTime
                 }).ToList()
             })
             .ToList();
@@ -54,12 +69,12 @@ namespace QuickSoftwareMgmt.Controllers.API
         {
             var response = Request.CreateResponse();
             response.StatusCode = HttpStatusCode.OK;
-            response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = true }));
+            response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = false }));
 
-            //if (sourceColId == (targetColId - 1))
-            //{
-            //    response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = true }));
-            //}
+            if (sourceColId == (targetColId - 1))
+            {
+                response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = true }));
+            }
 
             return response;
         }

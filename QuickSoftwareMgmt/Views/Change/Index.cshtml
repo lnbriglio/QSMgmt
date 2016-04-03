@@ -1,81 +1,146 @@
 ﻿@model IEnumerable<DAL.ChangeRequest>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Índice";
 }
 
-<h2>Index</h2>
+
+<h2>Índice</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Project.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChangeRequest.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Approval)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChangeTypeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImpactId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PriorityId)
-        </th>
-        <th></th>
-    </tr>
+<table class="table" id="mainTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApprovalId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChangeTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImpactId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriorityId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChangeRequest.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Approval.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChangeType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Impact.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Priority.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        <tr class="treegrid-log-@item.Id" style="background-color:#afe3f1;">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Approval.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChangeType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Impact.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority.Name)
+            </td>
+            <td>
+                <a href="#" class="addTaskLink" data-url="@Url.Action("Create", "Task", new { id= item.Id})">Nueva tarea</a> |
+  
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+        foreach (var taskItem in item.Tasks)
+        {
+            @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
+                @:<td>@Html.DisplayFor(task => taskItem.Title)</td>
+                @:<td></td>
+                @:<td></td>
+                @:<td>@Html.DisplayFor(task => taskItem.TaskState.Name)</td>
+                @:<td></td>
+                @:<td></td>
+                @:<td></td>
+                @:<td></td>
+                @:<td></td>
+                }
+    }
 
+
+        </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+<!-- /.modal -->
+
+
+
+@section Scripts{
+    @*http://maxazan.github.io/jquery-treegrid/*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/jquery.treegrid.css")"/>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.bootstrap3.js")"></script>
+
+    <script type="text/javascript">
+        $("#mainTable").treegrid();
+
+        $(".addTaskLink").click(function () {
+            var url = $(this).data("url");
+
+            $.get(url, function (partialResult) {
+                refreshModal(partialResult);
+            });
+
+            function refreshModal(data) {
+                $('#addTaskModal').html(data);
+
+                $("#addTaskModal").off("submit", "#form-createTask");
+
+                $("#addTaskModal").on("submit", "#form-createTask", function (e) {
+                    e.preventDefault();  // prevent standard form submission
+
+                    var form = $(this);
+                    $.ajax({
+                        url: form.attr("action"),
+                        method: form.attr("method"),  // post
+                        data: form.serialize(),
+                        success: function (partialResult) {
+                            refreshModal(partialResult);
+
+                            $('#addTaskModal').on('hidden.bs.modal', function () {
+                                window.location.reload(true);
+                            });
+                        }
+                    });
+                });
+
+                $('#addTaskModal').modal('show');
+            }
+        });
+
+
+    </script>
+}

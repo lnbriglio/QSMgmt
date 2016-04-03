@@ -53,8 +53,11 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Title,Description,CreationDate,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
+        public async Task<ActionResult> Create([Bind(Include="Id,Title,Description,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
         {
+            test.CreationDate = DateTime.Now;
+            ValidateModel(test);
+
             if (ModelState.IsValid)
             {
                 db.BacklogItems.Add(test);

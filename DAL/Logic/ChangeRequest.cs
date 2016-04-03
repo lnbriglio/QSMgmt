@@ -11,6 +11,13 @@ namespace DAL
     [MetadataType(typeof(ChangeRequestMetada))]
     public partial class ChangeRequest
     {
+        public bool IsChange
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 
     public class ChangeRequestMetada

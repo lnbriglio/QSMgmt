@@ -138,6 +138,7 @@
     <Compile Include="Controllers\ChangeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\SprintController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -592,6 +593,11 @@
     <Content Include="bower_components\raphael\license.txt" />
     <Content Include="bower_components\raphael\raphael-min.js" />
     <Content Include="bower_components\raphael\raphael.js" />
+    <Content Include="Content\img\collapse.png" />
+    <Content Include="Content\img\expand.png" />
+    <Content Include="Content\img\file.png" />
+    <Content Include="Content\img\folder.png" />
+    <Content Include="Content\jquery.treegrid.css" />
     <Content Include="dist\css\sb-admin-2.css" />
     <Content Include="dist\css\timeline.css" />
     <Content Include="dist\js\sb-admin-2.js" />
@@ -602,6 +608,8 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\jquery.treegrid.bootstrap3.js" />
+    <Content Include="Scripts\jquery.treegrid.min.js" />
     <Content Include="Scripts\KanbanApp\boardCtrl.js" />
     <Content Include="Scripts\KanbanApp\boardService.js" />
     <Content Include="Scripts\KanbanApp\kanbanDragDrop.js" />
@@ -621,7 +629,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
     <Folder Include="fonts\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
@@ -977,6 +984,12 @@
     <Content Include="Views\Team\EditMembers.cshtml" />
     <Content Include="Views\Sprint\Kanban.cshtml" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Views\Task\_CreateModal.cshtml" />
+    <Content Include="Views\Task\_CreateSuccessfulModal.cshtml" />
+    <Content Include="Views\Task\_CreateTaskUpdateModal.cshtml" />
+    <Content Include="Views\Task\_CreateTaskUpdateSuccessfulModal.cshtml" />
+    <Content Include="Views\Task\_EditModal.cshtml" />
+    <Content Include="Views\Task\_EditSuccessfulModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

@@ -11,6 +11,13 @@ namespace DAL
     [MetadataType(typeof(TestMetadata))]
     public partial class Test
     {
+        public override bool IsTest
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 
     public class TestMetadata

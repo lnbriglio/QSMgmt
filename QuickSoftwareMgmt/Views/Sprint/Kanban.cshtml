@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Kanban";
 }
 
@@ -17,66 +16,89 @@
             <div class="thumbnail" draggable="true" kanban-board-dragg="task"
                  ng-repeat="task in col.Tasks" style="margin-bottom: 10px;">
                 <div class="caption">
-                    <button class="btn btn-sm" data-original-title="Parent Task Blah" type="button" data-toggle="tooltip" data-placement="right" title="">Parent</button>
-                    <h5><strong>{{task.Name}}</strong></h5>
+                    <h5>
+                        <strong>(#{{task.Id}}) {{task.Name}}</strong>
+
+                        <button class="btn btn-warning btn-xs btn-circle pull-right" type="button" title="Editar tarea"
+                                ng-click="editTask(task.Id)"><i class="fa fa-pencil"></i></button>
+                    </h5>
                     <p>{{task.Description}}</p>
-                    <p><a href="#" class="btn btn-primary btn-sm" role="button">Edit</a></p>
+                    <p>
+                        <button class="btn btn-primary btn-xs" type="button" title="" data-id="{{task.User.Id}}" disabled><i class="fa fa-user"></i> {{task.User.Name}}</button>
+                        <button class="btn btn-info btn-xs" type="button" title="" disabled><i class="fa fa-spinner"></i> {{task.RemainingTime}}Hs</button>
+                        <button class="btn btn-default btn-xs pull-right" data-original-title="{{task.Parent.Name}} - {{task.Parent.Description}}" type="button"
+                                data-toggle="tooltip" data-placement="left" title="" >
+                            <i class="fa" ng-class="task.Parent.IsTest ? 'fa-flask' : 'fa-repeat'"></i> #{{task.Parent.Id}}
+                        </button>
+                    </p>
                 </div>
             </div>
         </div>
+        <input type="hidden" ng-init="UpdateTaskUrl='@Url.Action("Update","Task")'" ng-value="UpdateTaskUrl" />
+        <input type="hidden" ng-init="EditTaskUrl='@Url.Action("Edit","Task")'" ng-value="EditTaskUrl" />
     </div>
 
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="updateTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+<!-- /.modal -->
+
 @section Scripts{
     <style type="text/css">
-    .colStyle {
-        margin-right: 10px;
-        width: 32%;
-        padding-top: 10px;
-        margin-top: 20px;
-        border: 1px solid grey;
-        min-height: 500px;
-    }
+        .colStyle {
+            margin-right: 10px;
+            width: 32%;
+            padding-top: 10px;
+            margin-top: 20px;
+            border: 1px solid grey;
+            min-height: 500px;
+        }
 
-    .busyIndicator .alert {
-        left: 40%;
-        top: 5%;
-        position: fixed;
-        z-index: 1050;
-        width: 400px;
-        height: 40px;
-        padding-left: 10px;
-        padding-top: 10px;
-        background-color: lightgreen;
-        color: black;
-        border-color: transparent;
-    }
+        .busyIndicator .alert {
+            left: 40%;
+            top: 5%;
+            position: fixed;
+            z-index: 1050;
+            width: 400px;
+            height: 40px;
+            padding-left: 10px;
+            padding-top: 10px;
+            background-color: lightgreen;
+            color: black;
+            border-color: transparent;
+        }
 
-    .busyIndicator .backgroundMask {
-        top: 0;
-        left: 0;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        opacity: 0.5;
-        background: black;
-        z-index: 1049;
-    }
+        .busyIndicator .backgroundMask {
+            top: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            background: black;
+            z-index: 1049;
+        }
 
-    .over {
-        background-color: #fff;
-        border: 2px dashed red;
-    }
-
+        .over {
+            background-color: #fff;
+            border: 2px dashed red;
+        }
     </style>
 
-<script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular.js"></script>
 
-<script src="~/Scripts/KanbanApp/main.js"></script>
-<script src="~/Scripts/KanbanApp/kanbanDragDrop.js"></script>
-<script src="~/Scripts/KanbanApp/boardService.js"></script>
-<script src="~/Scripts/KanbanApp/boardCtrl.js"></script>
+    <script src="~/Scripts/KanbanApp/main.js"></script>
+    <script src="~/Scripts/KanbanApp/kanbanDragDrop.js"></script>
+    <script src="~/Scripts/KanbanApp/boardService.js"></script>
+    <script src="~/Scripts/KanbanApp/boardCtrl.js"></script>
 
     <script type="text/javascript">
         $('.tooltip-toggle').tooltip({
