@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using DAL;
 using QuickSoftwareMgmt.Models.Hicharts.PieChart;
+using QuickSoftwareMgmt.Models.Hicharts.LineChart;
 
 namespace QuickSoftwareMgmt.Controllers
 {
@@ -159,6 +160,99 @@ namespace QuickSoftwareMgmt.Controllers
             base.Dispose(disposing);
         }
 
+        public async Task<JsonResult> GetChangesUrgencyByDateChart()
+        {
+            int maxDaysBack = -15;
+
+            var startDate = DateTime.Today.AddDays(maxDaysBack);//Take changes from the last 15 days
+
+            var priorities = await db.Priorities.ToListAsync();
+
+            var dates = new List<DateTime>();
+            for (int i = maxDaysBack; i <= 0; i++)
+            {
+                dates.Add(DateTime.Today.AddDays(i));
+            }
+
+            var series = new Models.Hicharts.LineChart.Series[priorities.Count];
+
+            for (int i = 0; i < priorities.Count; i++)
+            {
+                var priorityId = priorities[i].Id;
+
+                var changes = await db.ChangeRequests
+
+    .Where(c => !c.Erased
+        && c.PriorityId == priorityId
+    && c.CreationDate > startDate)
+    .GroupBy(c => DbFunctions.CreateDateTime(c.CreationDate.Year, c.CreationDate.Month, c.CreationDate.Day, 0, 0, 0))
+    .Select(gc => new
+    {
+        TimeStamp = gc.Key.Value,
+        Count = gc.Count()
+    })
+    .ToArrayAsync();
+
+                series[i] = new Models.Hicharts.LineChart.Series
+                {
+                    name = priorities[i].Name,
+                    data = dates.Select(d =>
+                    {
+                        var change = changes.FirstOrDefault(c => c.TimeStamp == d);
+                        int count = 0;
+                        if (change != null) count = change.Count;
+                        return count;
+                    }).ToArray()
+                };
+            }
+
+            var lineChart = new LineChart
+            {
+                title = new QuickSoftwareMgmt.Models.Hicharts.LineChart.Title
+                {
+                    text = ""
+                },
+                subtitle = new Subtitle
+                {
+                    text = ""
+                },
+                xAxis = new Xaxis
+                {
+                    categories = dates.Select(d => d.ToString("{dd/MM}")).ToArray()
+                },
+                yAxis = new Yaxis
+                {
+                    title = new Models.Hicharts.LineChart.Title
+                    {
+                        text = "Fechas"
+                    },
+                    plotLines = new Plotline[]{
+                        new Plotline{
+                            value = 0,
+                            width = 1,
+                            color = "#808080"
+                        }
+                    }
+                },
+                tooltip = new Models.Hicharts.LineChart.Tooltip
+                {
+                    valueSuffix = "Cambios"
+                },
+                legend = new Legend
+                {
+                    layout = "vertical",
+                    align = "right",
+                    verticalAlign = "middle",
+                    borderWidth = 0
+                },
+                series = series
+            };
+
+
+
+            return Json(lineChart, JsonRequestBehavior.AllowGet);
+        }
+
 
         public async Task<JsonResult> GetChangesByPriorityChart()
         {
@@ -231,7 +325,7 @@ namespace QuickSoftwareMgmt.Controllers
             return Json(changesCount, JsonRequestBehavior.AllowGet);
         }
 
-        
+
 
 
 
@@ -246,11 +340,11 @@ namespace QuickSoftwareMgmt.Controllers
                         plotShadow = false,
                         type = "pie"
                     },
-                    title = new Title
+                    title = new QuickSoftwareMgmt.Models.Hicharts.PieChart.Title
                     {
                         text = ""
                     },
-                    tooltip = new Tooltip
+                    tooltip = new QuickSoftwareMgmt.Models.Hicharts.PieChart.Tooltip
                     {
                         pointFormat = "{series.name}: <b>{point.percentage:.1f}%</b>"
                     },
@@ -267,8 +361,8 @@ namespace QuickSoftwareMgmt.Controllers
                             showInLegend = true
                         }
                     },
-                    series = new Series[]{ 
-                        new Series{
+                    series = new QuickSoftwareMgmt.Models.Hicharts.PieChart.Series[]{ 
+                        new QuickSoftwareMgmt.Models.Hicharts.PieChart.Series{
                             name=seriesName,
                             colorByPoint=true,
                             data= data
