@@ -67,14 +67,6 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Erased" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Erased" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="Sprint">
           <Key>
             <PropertyRef Name="Id" />
@@ -136,10 +128,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
           <Property Name="Erased" Type="bit" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="TeamId" Type="int" Nullable="false" />
-          <Property Name="Capacity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -165,7 +157,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RoleId" Type="int" />
           <Property Name="Erased" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="VersionOrigin">
@@ -176,7 +167,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Erased" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__BacklogIt__Proje__36B12243">
+        <Association Name="FK__BacklogIt__Proje__38996AB5">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,7 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChageRequ__Appro__3A81B327">
+        <Association Name="FK__ChangeReq__Appro__3C69FB99">
           <End Role="Approval" Type="Self.Approval" Multiplicity="1" />
           <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +191,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChageRequ__Chang__3B75D760">
+        <Association Name="FK__ChangeReq__Chang__3D5E1FD2">
           <End Role="ChangeType" Type="Self.ChangeType" Multiplicity="1" />
           <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +203,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChageRequ__Impac__3C69FB99">
+        <Association Name="FK__ChangeReq__Impac__3E52440B">
           <End Role="Impact" Type="Self.Impact" Multiplicity="1" />
           <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -224,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChageRequ__Prior__3D5E1FD2">
+        <Association Name="FK__ChangeReq__Prior__3F466844">
           <End Role="Priority" Type="Self.Priority" Multiplicity="1" />
           <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="*" />
           <ReferentialConstraint>
@@ -236,7 +227,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ChageRequest__Id__398D8EEE">
+        <Association Name="FK__ChangeReques__Id__3B75D760">
           <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
           <End Role="ChangeRequest" Type="Self.ChangeRequest" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -248,7 +239,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Sprint__ProjectI__2F10007B">
+        <Association Name="FK__Sprint__ProjectI__2B3F6F97">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="Sprint" Type="Self.Sprint" Multiplicity="*" />
           <ReferentialConstraint>
@@ -260,7 +251,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__BacklogIte__5812160E">
+        <Association Name="FK__Task__BacklogIte__49C3F6B7">
           <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -272,7 +263,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__SprintId__571DF1D5">
+        <Association Name="FK__Task__SprintId__48CFD27E">
           <End Role="Sprint" Type="Self.Sprint" Multiplicity="0..1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -284,7 +275,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__TaskStateI__5629CD9C">
+        <Association Name="FK__Task__TaskStateI__47DBAE45">
           <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -296,7 +287,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Task__UserId__59063A47">
+        <Association Name="FK__Task__UserId__4AB81AF0">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Task" Type="Self.Task" Multiplicity="*" />
           <ReferentialConstraint>
@@ -308,7 +299,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskUpdat__Previ__5DCAEF64">
+        <Association Name="FK__TaskUpdat__Previ__4F7CD00D">
           <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
           <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -320,7 +311,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskUpdat__TaskI__5CD6CB2B">
+        <Association Name="FK__TaskUpdat__TaskI__4E88ABD4">
           <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
           <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -332,7 +323,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TaskUpdat__TaskS__5EBF139D">
+        <Association Name="FK__TaskUpdat__TaskS__5070F446">
           <End Role="TaskState" Type="Self.TaskState" Multiplicity="1" />
           <End Role="TaskUpdate" Type="Self.TaskUpdate" Multiplicity="*" />
           <ReferentialConstraint>
@@ -344,7 +335,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team__ProjectId__32E0915F">
+        <Association Name="FK__Team__ProjectId__2F10007B">
           <End Role="Project" Type="Self.Project" Multiplicity="1" />
           <End Role="Team" Type="Self.Team" Multiplicity="*" />
           <ReferentialConstraint>
@@ -356,7 +347,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TeamMembe__TeamI__6383C8BA">
+        <Association Name="FK__TeamMembe__TeamI__34C8D9D1">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="TeamMember" Type="Self.TeamMember" Multiplicity="*" />
           <ReferentialConstraint>
@@ -368,7 +359,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TeamMembe__UserI__628FA481">
+        <Association Name="FK__TeamMembe__UserI__33D4B598">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="TeamMember" Type="Self.TeamMember" Multiplicity="*" />
           <ReferentialConstraint>
@@ -380,7 +371,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Test__Id__403A8C7D">
+        <Association Name="FK__Test__Id__4222D4EF">
           <End Role="BacklogItem" Type="Self.BacklogItem" Multiplicity="1" />
           <End Role="Test" Type="Self.Test" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -392,7 +383,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Test__TestOutcom__4222D4EF">
+        <Association Name="FK__Test__TestOutcom__440B1D61">
           <End Role="TestOutcome" Type="Self.TestOutcome" Multiplicity="1" />
           <End Role="Test" Type="Self.Test" Multiplicity="*" />
           <ReferentialConstraint>
@@ -404,7 +395,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Test__VersionOri__412EB0B6">
+        <Association Name="FK__Test__VersionOri__4316F928">
           <End Role="VersionOrigin" Type="Self.VersionOrigin" Multiplicity="1" />
           <End Role="Test" Type="Self.Test" Multiplicity="*" />
           <ReferentialConstraint>
@@ -416,18 +407,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User__RoleId__5165187F">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DALStoreContainer">
           <EntitySet Name="Approval" EntityType="Self.Approval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BacklogItem" EntityType="Self.BacklogItem" Schema="dbo" store:Type="Tables" />
@@ -436,7 +415,6 @@
           <EntitySet Name="Impact" EntityType="Self.Impact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sprint" EntityType="Self.Sprint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskState" EntityType="Self.TaskState" Schema="dbo" store:Type="Tables" />
@@ -447,89 +425,85 @@
           <EntitySet Name="TestOutcome" EntityType="Self.TestOutcome" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VersionOrigin" EntityType="Self.VersionOrigin" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BacklogIt__Proje__36B12243" Association="Self.FK__BacklogIt__Proje__36B12243">
+          <AssociationSet Name="FK__BacklogIt__Proje__38996AB5" Association="Self.FK__BacklogIt__Proje__38996AB5">
             <End Role="Project" EntitySet="Project" />
             <End Role="BacklogItem" EntitySet="BacklogItem" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChageRequ__Appro__3A81B327" Association="Self.FK__ChageRequ__Appro__3A81B327">
+          <AssociationSet Name="FK__ChangeReq__Appro__3C69FB99" Association="Self.FK__ChangeReq__Appro__3C69FB99">
             <End Role="Approval" EntitySet="Approval" />
             <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChageRequ__Chang__3B75D760" Association="Self.FK__ChageRequ__Chang__3B75D760">
+          <AssociationSet Name="FK__ChangeReq__Chang__3D5E1FD2" Association="Self.FK__ChangeReq__Chang__3D5E1FD2">
             <End Role="ChangeType" EntitySet="ChangeType" />
             <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChageRequ__Impac__3C69FB99" Association="Self.FK__ChageRequ__Impac__3C69FB99">
+          <AssociationSet Name="FK__ChangeReq__Impac__3E52440B" Association="Self.FK__ChangeReq__Impac__3E52440B">
             <End Role="Impact" EntitySet="Impact" />
             <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChageRequ__Prior__3D5E1FD2" Association="Self.FK__ChageRequ__Prior__3D5E1FD2">
+          <AssociationSet Name="FK__ChangeReq__Prior__3F466844" Association="Self.FK__ChangeReq__Prior__3F466844">
             <End Role="Priority" EntitySet="Priority" />
             <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK__ChageRequest__Id__398D8EEE" Association="Self.FK__ChageRequest__Id__398D8EEE">
+          <AssociationSet Name="FK__ChangeReques__Id__3B75D760" Association="Self.FK__ChangeReques__Id__3B75D760">
             <End Role="BacklogItem" EntitySet="BacklogItem" />
             <End Role="ChangeRequest" EntitySet="ChangeRequest" />
           </AssociationSet>
-          <AssociationSet Name="FK__Sprint__ProjectI__2F10007B" Association="Self.FK__Sprint__ProjectI__2F10007B">
+          <AssociationSet Name="FK__Sprint__ProjectI__2B3F6F97" Association="Self.FK__Sprint__ProjectI__2B3F6F97">
             <End Role="Project" EntitySet="Project" />
             <End Role="Sprint" EntitySet="Sprint" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__BacklogIte__5812160E" Association="Self.FK__Task__BacklogIte__5812160E">
+          <AssociationSet Name="FK__Task__BacklogIte__49C3F6B7" Association="Self.FK__Task__BacklogIte__49C3F6B7">
             <End Role="BacklogItem" EntitySet="BacklogItem" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__SprintId__571DF1D5" Association="Self.FK__Task__SprintId__571DF1D5">
+          <AssociationSet Name="FK__Task__SprintId__48CFD27E" Association="Self.FK__Task__SprintId__48CFD27E">
             <End Role="Sprint" EntitySet="Sprint" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__TaskStateI__5629CD9C" Association="Self.FK__Task__TaskStateI__5629CD9C">
+          <AssociationSet Name="FK__Task__TaskStateI__47DBAE45" Association="Self.FK__Task__TaskStateI__47DBAE45">
             <End Role="TaskState" EntitySet="TaskState" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__Task__UserId__59063A47" Association="Self.FK__Task__UserId__59063A47">
+          <AssociationSet Name="FK__Task__UserId__4AB81AF0" Association="Self.FK__Task__UserId__4AB81AF0">
             <End Role="User" EntitySet="User" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskUpdat__Previ__5DCAEF64" Association="Self.FK__TaskUpdat__Previ__5DCAEF64">
+          <AssociationSet Name="FK__TaskUpdat__Previ__4F7CD00D" Association="Self.FK__TaskUpdat__Previ__4F7CD00D">
             <End Role="TaskState" EntitySet="TaskState" />
             <End Role="TaskUpdate" EntitySet="TaskUpdate" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskUpdat__TaskI__5CD6CB2B" Association="Self.FK__TaskUpdat__TaskI__5CD6CB2B">
+          <AssociationSet Name="FK__TaskUpdat__TaskI__4E88ABD4" Association="Self.FK__TaskUpdat__TaskI__4E88ABD4">
             <End Role="Task" EntitySet="Task" />
             <End Role="TaskUpdate" EntitySet="TaskUpdate" />
           </AssociationSet>
-          <AssociationSet Name="FK__TaskUpdat__TaskS__5EBF139D" Association="Self.FK__TaskUpdat__TaskS__5EBF139D">
+          <AssociationSet Name="FK__TaskUpdat__TaskS__5070F446" Association="Self.FK__TaskUpdat__TaskS__5070F446">
             <End Role="TaskState" EntitySet="TaskState" />
             <End Role="TaskUpdate" EntitySet="TaskUpdate" />
           </AssociationSet>
-          <AssociationSet Name="FK__Team__ProjectId__32E0915F" Association="Self.FK__Team__ProjectId__32E0915F">
+          <AssociationSet Name="FK__Team__ProjectId__2F10007B" Association="Self.FK__Team__ProjectId__2F10007B">
             <End Role="Project" EntitySet="Project" />
             <End Role="Team" EntitySet="Team" />
           </AssociationSet>
-          <AssociationSet Name="FK__TeamMembe__TeamI__6383C8BA" Association="Self.FK__TeamMembe__TeamI__6383C8BA">
+          <AssociationSet Name="FK__TeamMembe__TeamI__34C8D9D1" Association="Self.FK__TeamMembe__TeamI__34C8D9D1">
             <End Role="Team" EntitySet="Team" />
             <End Role="TeamMember" EntitySet="TeamMember" />
           </AssociationSet>
-          <AssociationSet Name="FK__TeamMembe__UserI__628FA481" Association="Self.FK__TeamMembe__UserI__628FA481">
+          <AssociationSet Name="FK__TeamMembe__UserI__33D4B598" Association="Self.FK__TeamMembe__UserI__33D4B598">
             <End Role="User" EntitySet="User" />
             <End Role="TeamMember" EntitySet="TeamMember" />
           </AssociationSet>
-          <AssociationSet Name="FK__Test__Id__403A8C7D" Association="Self.FK__Test__Id__403A8C7D">
+          <AssociationSet Name="FK__Test__Id__4222D4EF" Association="Self.FK__Test__Id__4222D4EF">
             <End Role="BacklogItem" EntitySet="BacklogItem" />
             <End Role="Test" EntitySet="Test" />
           </AssociationSet>
-          <AssociationSet Name="FK__Test__TestOutcom__4222D4EF" Association="Self.FK__Test__TestOutcom__4222D4EF">
+          <AssociationSet Name="FK__Test__TestOutcom__440B1D61" Association="Self.FK__Test__TestOutcom__440B1D61">
             <End Role="TestOutcome" EntitySet="TestOutcome" />
             <End Role="Test" EntitySet="Test" />
           </AssociationSet>
-          <AssociationSet Name="FK__Test__VersionOri__412EB0B6" Association="Self.FK__Test__VersionOri__412EB0B6">
+          <AssociationSet Name="FK__Test__VersionOri__4316F928" Association="Self.FK__Test__VersionOri__4316F928">
             <End Role="VersionOrigin" EntitySet="VersionOrigin" />
             <End Role="Test" EntitySet="Test" />
-          </AssociationSet>
-          <AssociationSet Name="FK__User__RoleId__5165187F" Association="Self.FK__User__RoleId__5165187F">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -543,7 +517,6 @@
           <EntitySet Name="Impacts" EntityType="DAL.Impact" />
           <EntitySet Name="Priorities" EntityType="DAL.Priority" />
           <EntitySet Name="Projects" EntityType="DAL.Project" />
-          <EntitySet Name="Roles" EntityType="DAL.Role" />
           <EntitySet Name="Sprints" EntityType="DAL.Sprint" />
           <EntitySet Name="Tasks" EntityType="DAL.Task" />
           <EntitySet Name="TaskStates" EntityType="DAL.TaskState" />
@@ -567,10 +540,6 @@
           <AssociationSet Name="FK__Team__ProjectId__32E0915F" Association="DAL.FK__Team__ProjectId__32E0915F">
             <End Role="Project" EntitySet="Projects" />
             <End Role="Team" EntitySet="Teams" />
-          </AssociationSet>
-          <AssociationSet Name="FK__User__RoleId__276EDEB3" Association="DAL.FK__User__RoleId__276EDEB3">
-            <End Role="Role" EntitySet="Roles" />
-            <End Role="User" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK__Task__SprintId__46E78A0C" Association="DAL.FK__Task__SprintId__46E78A0C">
             <End Role="Sprint" EntitySet="Sprints" />
@@ -701,15 +670,6 @@
           <NavigationProperty Name="Sprints" Relationship="DAL.FK__Sprint__ProjectI__2F10007B" FromRole="Project" ToRole="Sprint" />
           <NavigationProperty Name="Teams" Relationship="DAL.FK__Team__ProjectId__32E0915F" FromRole="Project" ToRole="Team" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Erased" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="DAL.FK__User__RoleId__276EDEB3" FromRole="Role" ToRole="User" />
-        </EntityType>
         <EntityType Name="Sprint">
           <Key>
             <PropertyRef Name="Id" />
@@ -797,9 +757,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RoleId" Type="Int32" />
           <Property Name="Erased" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Role" Relationship="DAL.FK__User__RoleId__276EDEB3" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Tasks" Relationship="DAL.FK__Task__UserId__48CFD27E" FromRole="User" ToRole="Task" />
           <NavigationProperty Name="TeamMembers" Relationship="DAL.FK__TeamMembe__UserI__628FA481" FromRole="User" ToRole="TeamMember" />
         </EntityType>
@@ -857,18 +815,6 @@
             </Principal>
             <Dependent Role="Team">
               <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__User__RoleId__276EDEB3">
-          <End Type="DAL.Role" Role="Role" Multiplicity="0..1" />
-          <End Type="DAL.User" Role="User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1174,15 +1120,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="DAL.Role">
-              <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Erased" ColumnName="Erased" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sprints">
             <EntityTypeMapping TypeName="DAL.Sprint">
               <MappingFragment StoreEntitySet="Sprint">
@@ -1257,7 +1194,6 @@
             <EntityTypeMapping TypeName="DAL.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="Erased" ColumnName="Erased" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

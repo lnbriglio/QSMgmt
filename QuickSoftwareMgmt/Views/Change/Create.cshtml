@@ -15,6 +15,7 @@
             <h4>Solicitud de cambio</h4>
             <hr />
             @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.CreationDate)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Title)

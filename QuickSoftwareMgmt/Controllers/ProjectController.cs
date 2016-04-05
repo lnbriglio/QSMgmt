@@ -68,6 +68,11 @@ namespace QuickSoftwareMgmt.Controllers
         {
             if (ModelState.IsValid)
             {
+                project.Teams.Add(new Team
+                {
+                    Name = "Team " + project.Name,
+                });
+
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -153,15 +158,22 @@ namespace QuickSoftwareMgmt.Controllers
                 .OrderBy(p => p.Name)
                 .ToList();
 
+            var sprintList = db.Sprints
+                .Where(s => s.ProjectId == SelectedProjectId)
+                .OrderBy(s => s.Name)
+                .ToList();
+
             ViewBag.ProjectSelector = new SelectList(projectsList, "Id", "Name",SelectedProjectId);
+            ViewBag.SprintSelector = new SelectList(sprintList, "Id", "Name", SelectedSprintId);
 
             return PartialView();
         }
 
         [HttpGet]
-        public ActionResult ChangeProject(int id)
+        public ActionResult ChangeProject(int projectId, int? sprintId)
         {
-            SelectedProjectId = id;
+            SelectedProjectId = projectId;
+            SelectedSprintId = sprintId;
             return RedirectToAction("Dashboard");
         }
     }

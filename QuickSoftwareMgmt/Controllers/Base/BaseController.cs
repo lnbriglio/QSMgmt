@@ -13,6 +13,7 @@ namespace QuickSoftwareMgmt.Controllers
 
         public static String USER_SESSION = "user_session";
         public static String SELECTED_PROJECT_ID = "selected_project_id";
+        public static String SELECTED_SPRINT_ID = "selected_sprint_id";
 
         #endregion
 
@@ -58,6 +59,23 @@ namespace QuickSoftwareMgmt.Controllers
             set
             {
                 Session[SELECTED_PROJECT_ID] = value;
+            }
+        }
+
+        public int? SelectedSprintId
+        {
+            get
+            {
+                int? temp = null;
+                if (Session != null && Session[SELECTED_SPRINT_ID] is Int32)
+                {
+                    temp = Session[SELECTED_SPRINT_ID] as Int32?;
+                }
+                return temp;
+            }
+            set
+            {
+                Session[SELECTED_SPRINT_ID] = value;
             }
         }
 

@@ -49,7 +49,13 @@ namespace QuickSoftwareMgmt.Controllers
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name");
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name");
             ViewBag.PriorityId = new SelectList(db.Priorities, "Id", "Name");
-            return View();
+
+            var change = new ChangeRequest
+            {
+                CreationDate = DateTime.Now,
+            };
+
+            return View(change);
         }
 
         // POST: /Change/Create
@@ -101,11 +107,8 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,ApprovalId,ChangeTypeId,ImpactId,PriorityId")] ChangeRequest changerequest)
         {
-            changerequest.CreationDate = DateTime.Now;
-            ValidateModel(changerequest);
-
             if (ModelState.IsValid)
             {
                 db.Entry(changerequest).State = EntityState.Modified;

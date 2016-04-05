@@ -20,9 +20,6 @@ namespace DAL
         public object UserName { get; set; }
         [DisplayName("Contraseña")]
         public object Password { get; set; }
-        [Required]
-        [DisplayName("Rol")]
-        public object RoleId { get; set; }
         public object Erased { get; set; }
     }
 }

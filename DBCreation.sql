@@ -1,6 +1,4 @@
-﻿
-
-CREATE TABLE Approval(
+﻿CREATE TABLE Approval(
 	Id INT PRIMARY KEY,
 	Name NVARCHAR(100) NOT NULL,
 	Erased BIT NOT NULL DEFAULT 0,
@@ -40,19 +38,12 @@ CREATE TABLE TaskState(
 	Id INT PRIMARY KEY,
 	Name NVARCHAR(100) NOT NULL,
 	Erased BIT NOT NULL DEFAULT 0,
-)	
-
-CREATE TABLE [Role](
-	Id INT PRIMARY KEY,
-	Name NVARCHAR(100) NOT NULL,
-	Erased BIT NOT NULL DEFAULT 0,
-)	
+)
 
 CREATE TABLE [User](
 	Id INT PRIMARY KEY IDENTITY,
 	UserName NVARCHAR(50) NOT NULL,
 	[Password] NVARCHAR(50) NOT NULL,
-	RoleId INT NULL FOREIGN KEY REFERENCES [Role](Id),
 	Erased BIT NOT NULL DEFAULT 0,
 )
 
@@ -140,12 +131,6 @@ CREATE TABLE TaskUpdate(
 --Version Origin
 INSERT INTO VersionOrigin(Id, Name) VALUES (1,'Si');
 INSERT INTO VersionOrigin(Id, Name) VALUES (2,'No');
-
---Role
-INSERT INTO [Role](Id, Name) VALUES (1,'Administrador');
-INSERT INTO [Role](Id, Name) VALUES (2,'Project Manager');
-INSERT INTO [Role](Id, Name) VALUES (3,'Desarrollador');
-INSERT INTO [Role](Id, Name) VALUES (4,'Tester');
 
 --TestOutcome
 INSERT INTO TestOutcome(Id, Name) VALUES (1,'Si');

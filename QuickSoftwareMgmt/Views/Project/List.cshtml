@@ -1,1 +1,2 @@
-﻿@Html.DropDownList("ProjectSelector",null,String.Empty, new { data_ref = Url.Action("ChangeProject", "Project", null, Request.Url.Scheme) })
+﻿@Html.DropDownList("ProjectSelector",null,"Proyecto...", new { data_ref = Url.Action("ChangeProject", "Project", null, Request.Url.Scheme) })
+@Html.DropDownList("SprintSelector", null, "Backlog...", new { data_ref = Url.Action("ChangeProject", "Project", null, Request.Url.Scheme) })

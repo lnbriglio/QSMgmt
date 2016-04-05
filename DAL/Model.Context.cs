@@ -31,7 +31,6 @@ namespace DAL
         public virtual DbSet<Impact> Impacts { get; set; }
         public virtual DbSet<Priority> Priorities { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Sprint> Sprints { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<TaskState> TaskStates { get; set; }

@@ -5,34 +5,32 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9600e8f342854aadb0c0d7cc77c37d55" Name="Diagram1">
-        <EntityTypeShape EntityType="DAL.Approval" Width="1.5" PointX="3" PointY="2" />
-        <EntityTypeShape EntityType="DAL.BacklogItem" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="DAL.ChangeType" Width="1.5" PointX="3" PointY="18.125" />
-        <EntityTypeShape EntityType="DAL.Impact" Width="1.5" PointX="3" PointY="15.625" />
-        <EntityTypeShape EntityType="DAL.Priority" Width="1.5" PointX="3" PointY="20.625" />
-        <EntityTypeShape EntityType="DAL.Project" Width="1.5" PointX="0.75" PointY="8.875" />
-        <EntityTypeShape EntityType="DAL.Role" Width="1.5" PointX="0.75" PointY="24" />
-        <EntityTypeShape EntityType="DAL.Sprint" Width="1.5" PointX="3" PointY="12" />
-        <EntityTypeShape EntityType="DAL.Task" Width="1.5" PointX="5.25" PointY="12.5" />
-        <EntityTypeShape EntityType="DAL.TaskState" Width="1.5" PointX="3" PointY="26.875" />
-        <EntityTypeShape EntityType="DAL.TaskUpdate" Width="1.5" PointX="7.5" PointY="12.875" />
-        <EntityTypeShape EntityType="DAL.Team" Width="1.5" PointX="3" PointY="5.5" />
-        <EntityTypeShape EntityType="DAL.TestOutcome" Width="1.5" PointX="6" PointY="17.125" />
-        <EntityTypeShape EntityType="DAL.User" Width="1.5" PointX="3" PointY="23.75" />
-        <EntityTypeShape EntityType="DAL.VersionOrigin" Width="1.5" PointX="6" PointY="5.625" />
+        <EntityTypeShape EntityType="DAL.Approval" Width="1.5" PointX="3.875" PointY="1.375" />
+        <EntityTypeShape EntityType="DAL.BacklogItem" Width="1.5" PointX="1.625" PointY="11.625" />
+        <EntityTypeShape EntityType="DAL.ChangeType" Width="1.5" PointX="3.875" PointY="16.375" />
+        <EntityTypeShape EntityType="DAL.Impact" Width="1.5" PointX="3.875" PointY="13.875" />
+        <EntityTypeShape EntityType="DAL.Priority" Width="1.5" PointX="3.875" PointY="19" />
+        <EntityTypeShape EntityType="DAL.Project" Width="1.5" PointX="1.625" PointY="8.5" />
+        <EntityTypeShape EntityType="DAL.Sprint" Width="1.5" PointX="3.875" PointY="9.875" />
+        <EntityTypeShape EntityType="DAL.Task" Width="1.5" PointX="6.125" PointY="10.375" />
+        <EntityTypeShape EntityType="DAL.TaskState" Width="1.5" PointX="3.875" PointY="22.25" />
+        <EntityTypeShape EntityType="DAL.TaskUpdate" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="DAL.Team" Width="1.5" PointX="3.875" PointY="7" />
+        <EntityTypeShape EntityType="DAL.TestOutcome" Width="1.5" PointX="6.875" PointY="15.5" />
+        <EntityTypeShape EntityType="DAL.User" Width="1.5" PointX="3.875" PointY="4" />
+        <EntityTypeShape EntityType="DAL.VersionOrigin" Width="1.5" PointX="6.875" PointY="4" />
         <AssociationConnector Association="DAL.FK__BacklogIt__Proje__36B12243" />
         <AssociationConnector Association="DAL.FK__Task__BacklogIte__47DBAE45" />
         <AssociationConnector Association="DAL.FK__Sprint__ProjectI__2F10007B" />
         <AssociationConnector Association="DAL.FK__Team__ProjectId__32E0915F" />
-        <AssociationConnector Association="DAL.FK__User__RoleId__276EDEB3" />
         <AssociationConnector Association="DAL.FK__Task__SprintId__46E78A0C" />
         <AssociationConnector Association="DAL.FK__Task__TaskStateI__45F365D3" />
         <AssociationConnector Association="DAL.FK__Task__UserId__48CFD27E" />
         <AssociationConnector Association="DAL.FK__TaskUpdat__TaskI__4CA06362" />
         <AssociationConnector Association="DAL.FK__TaskUpdat__Previ__4D94879B" />
         <AssociationConnector Association="DAL.FK__TaskUpdat__TaskS__4E88ABD4" />
-        <EntityTypeShape EntityType="DAL.ChangeRequest" Width="1.5" PointX="5.25" PointY="8.75" />
-        <EntityTypeShape EntityType="DAL.Test" Width="1.5" PointX="8.25" PointY="9.125" />
+        <EntityTypeShape EntityType="DAL.ChangeRequest" Width="1.5" PointX="0.75" PointY="21.5" />
+        <EntityTypeShape EntityType="DAL.Test" Width="1.5" PointX="6.25" PointY="18" />
         <AssociationConnector Association="DAL.FK__ChageRequ__Appro__3A81B327" />
         <AssociationConnector Association="DAL.FK__ChageRequest__Id__398D8EEE" />
         <AssociationConnector Association="DAL.FK__Test__Id__403A8C7D" />
@@ -43,7 +41,7 @@
         <AssociationConnector Association="DAL.FK__Test__VersionOri__412EB0B6" />
         <InheritanceConnector EntityType="DAL.ChangeRequest" />
         <InheritanceConnector EntityType="DAL.Test" />
-        <EntityTypeShape EntityType="DAL.TeamMember" Width="1.5" PointX="8.25" PointY="16.875" />
+        <EntityTypeShape EntityType="DAL.TeamMember" Width="1.5" PointX="6.125" PointY="6.875" />
         <AssociationConnector Association="DAL.FK__TeamMembe__TeamI__6383C8BA" />
         <AssociationConnector Association="DAL.FK__TeamMembe__UserI__628FA481" />
         </Diagram>

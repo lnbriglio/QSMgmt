@@ -19,8 +19,7 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> Index()
         {
             var users = db.Users
-                .Where(u => !u.Erased)
-                .Include(u => u.Role);
+                .Where(u => !u.Erased);
             return View(await users.ToListAsync());
         }
 
@@ -42,7 +41,6 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /User/Create
         public ActionResult Create()
         {
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name");
             return View();
         }
 
@@ -60,7 +58,6 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", user.RoleId);
             return View(user);
         }
 
@@ -76,7 +73,6 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", user.RoleId);
             return View(user);
         }
 
@@ -93,7 +89,6 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.RoleId = new SelectList(db.Roles, "Id", "Name", user.RoleId);
             return View(user);
         }
 
