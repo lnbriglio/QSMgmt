@@ -17,9 +17,9 @@ namespace QuickSoftwareMgmt.Controllers.API
         private QSMgmtEntities db = new QSMgmtEntities();
 
         [HttpGet]
-        public async Task<HttpResponseMessage> Get()
+        public async Task<HttpResponseMessage> Get(int projectId, int sprintId)
         {
-            
+
             var response = Request.CreateResponse();
 
             var states = await db.TaskStates
@@ -34,7 +34,10 @@ namespace QuickSoftwareMgmt.Controllers.API
                 Description = s.Name,
                 Id = s.Id,
                 Name = s.Name,
-                Tasks = s.Tasks.Select(t => new  {
+                Tasks = s.Tasks
+                .Where(t => t.SprintId == sprintId)
+                .Select(t => new
+                {
                     Id = t.Id,
                     Name = t.Title,
                     Description = t.Description,
@@ -49,7 +52,7 @@ namespace QuickSoftwareMgmt.Controllers.API
                     User = new
                     {
                         Id = t.UserId,
-                        Name = t.User!=null?t.User.UserName:"Sin asignar"
+                        Name = t.User != null ? t.User.UserName : "Sin asignar"
                     },
                     RemainingTime = t.RemainingTime
                 }).ToList()

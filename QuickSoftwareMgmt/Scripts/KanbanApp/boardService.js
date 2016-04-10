@@ -1,8 +1,17 @@
 ﻿sulhome.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) {
     var proxy = null;
 
-    var getColumns = function () {
-        return $http.get("/api/Board").then(function (response) {
+    var getColumns = function (projectId, sprintId) {
+        return $http.get("/api/Board?projectId=" + projectId + "&sprintId=" + sprintId)
+        //return $http({
+        //    url: "/api/Board/",
+        //    method: "Get",
+        //    params: {
+        //        projectId: projectId,
+        //        sprintId: sprintId
+        //    }
+        //})
+            .then(function (response) {
             return response.data;
         }, function (error) {
             return $q.reject(error.data.Message);

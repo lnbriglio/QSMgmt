@@ -24,7 +24,7 @@
 @*<h1>Cambios</h1>*@
 
 <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel panel-heading">
                 <i class="fa fa-bell fa-fw">
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel panel-heading">
                 <i class="fa fa-bell fa-fw">
@@ -52,7 +52,7 @@
 
     </div>
 
-    <div class="col-lg-2">
+    <div class="col-lg-4">
         <!--Aprobaciones pendientes-->
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -66,13 +66,6 @@
                     </div>
                 </div>
             </div>
-            @*<a href="#">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>*@
         </div>
         <!--Cambios de emergencia-->
         <div class="panel panel-danger">
@@ -87,33 +80,9 @@
                     </div>
                 </div>
             </div>
-            @*<a href="#">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>*@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel panel-heading">
-                <i class="fa fa-bell fa-fw">
-                </i>
-                Urgencia de cambios por fecha
-            </div>
-            <div class="panel panel-body">
-                <div id="changesUrgencyByDateContainer"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@*<h1>Tests</h1>*@
-
 <div class="row">
     <div class="col-lg-3">
         <!--Errores identificados-->
@@ -129,16 +98,7 @@
                     </div>
                 </div>
             </div>
-            @*<a href="#">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>*@
         </div>
-    </div>
-    <div class="col-lg-3">
         <!--Tiempo de corrección promedio-->
         <div class="panel panel-info">
             <div class="panel-heading">
@@ -152,16 +112,7 @@
                     </div>
                 </div>
             </div>
-            @*<a href="#">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>*@
         </div>
-    </div>
-    <div class="col-lg-3">
         <!--Incidentes causados por versiones nuevas-->
         <div class="panel panel-warning">
             <div class="panel-heading">
@@ -175,16 +126,7 @@
                     </div>
                 </div>
             </div>
-            @*<a href="#">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>*@
         </div>
-    </div>
-    <div class="col-lg-3">
         <!--Fracasos de pruebas de aceptación de servicio-->
         <div class="panel panel-red">
             <div class="panel-heading">
@@ -198,16 +140,23 @@
                     </div>
                 </div>
             </div>
-            @*<a href="#">
-                <div class="panel-footer">
-                    <span class="pull-left">View Details</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>*@
+        </div>
+    </div>
+    <div class="col-lg-9">
+        <div class="panel panel-default">
+            <div class="panel panel-heading">
+                <i class="fa fa-bell fa-fw">
+                </i>
+                Urgencia de cambios por fecha
+            </div>
+            <div class="panel panel-body">
+                <div id="changesUrgencyByDateContainer"></div>
+            </div>
         </div>
     </div>
 </div>
+
+@*<h1>Tests</h1>*@
 
 
 @section Scripts{
@@ -220,7 +169,7 @@
             $.get('@Url.Action("GetBurndownChart", "Sprint")', null, function (data) {
                 $('#burndownContainer').highcharts(data);
             });
-            
+
 
             //
             $.get('@Url.Action("GetChangesByPriorityChart","Change")', null, function (data) {
@@ -245,7 +194,7 @@
             });
 
             GetChangesUrgencyByDateChart
-            
+
             //Test
             $.get('@Url.Action("GetIdentifiedErrorsCount", "Test")', null, function (data) {
                 $('#identifiedErrorsCountContainer').html(data);
@@ -263,7 +212,7 @@
                 $('#serviceAcceptanceFailuresCountContainer').html(data);
             });
 
-            
+
         });
 
     </script>

@@ -21,7 +21,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> Index()
         {
             var backlogitems = db.ChangeRequests
-                .Where(c => !c.Erased)
+                .Where(c => !c.Erased
+                && c.ProjectId == SelectedProjectId)
                 .Include(c => c.Project).Include(c => c.Approval).Include(c => c.ChangeType).Include(c => c.Impact).Include(c => c.Priority);
             return View(await backlogitems.ToListAsync());
         }
@@ -44,8 +45,6 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /Change/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name");
-            ViewBag.Id = new SelectList(db.BacklogItems, "Id", "Title");
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name");
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name");
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name");
@@ -53,6 +52,7 @@ namespace QuickSoftwareMgmt.Controllers
 
             var change = new ChangeRequest
             {
+                ProjectId = SelectedProjectId.Value,
                 CreationDate = DateTime.Now,
             };
 
@@ -73,8 +73,6 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", changerequest.ProjectId);
-            ViewBag.Id = new SelectList(db.BacklogItems, "Id", "Title", changerequest.Id);
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name", changerequest.ApprovalId);
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name", changerequest.ChangeTypeId);
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name", changerequest.ImpactId);
@@ -94,7 +92,6 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", changerequest.ProjectId);
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name", changerequest.ApprovalId);
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name", changerequest.ChangeTypeId);
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name", changerequest.ImpactId);
@@ -115,7 +112,7 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", changerequest.ProjectId);
+
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name", changerequest.ApprovalId);
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name", changerequest.ChangeTypeId);
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name", changerequest.ImpactId);
@@ -181,6 +178,7 @@ namespace QuickSoftwareMgmt.Controllers
                 var changes = await db.ChangeRequests
 
     .Where(c => !c.Erased
+        && c.ProjectId == SelectedProjectId
         && c.PriorityId == priorityId
     && c.CreationDate > startDate)
     .GroupBy(c => DbFunctions.CreateDateTime(c.CreationDate.Year, c.CreationDate.Month, c.CreationDate.Day, 0, 0, 0))
@@ -280,8 +278,7 @@ namespace QuickSoftwareMgmt.Controllers
         {
             var changesByPriority = await db.ChangeRequests
                 .Where(c => !c.Erased
-                && c.ProjectId == SelectedProjectId
-                )
+                && c.ProjectId == SelectedProjectId)
                 .GroupBy(c => c.ChangeType)
                 .Select(c => new
                 {

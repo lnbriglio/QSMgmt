@@ -992,6 +992,7 @@
     <Content Include="Views\Task\_CreateTaskUpdateSuccessfulModal.cshtml" />
     <Content Include="Views\Task\_EditModal.cshtml" />
     <Content Include="Views\Task\_EditSuccessfulModal.cshtml" />
+    <Content Include="Views\Project\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

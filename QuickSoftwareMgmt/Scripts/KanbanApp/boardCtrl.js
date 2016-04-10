@@ -2,6 +2,7 @@
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
+    
 
     function init() {
         $scope.isLoading = true;
@@ -9,13 +10,16 @@
         //    $scope.isLoading = false;
         //    $scope.refreshBoard();
         //}, onError);
+        
         $scope.isLoading = false;
         $scope.refreshBoard();
+        
     };
 
     $scope.refreshBoard = function refreshBoard() {
         $scope.isLoading = true;
-        boardService.getColumns()
+        
+        boardService.getColumns($scope.SelectedProjectId, $scope.SelectedSprintId)
            .then(function (data) {
                $scope.isLoading = false;
                $scope.columns = data;
@@ -80,12 +84,13 @@
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
         $scope.refreshBoard();
-        toastr.success("Board updated successfully", "Success");
+        //toastr.success("Board updated successfully", "Success");
     });
 
     var onError = function (errorMessage) {
         $scope.isLoading = false;
-        toastr.error(errorMessage, "Error");
+        //toastr.error(errorMessage, "Error");
+        console.log(errorMessage);
     };
 
     $scope.editTask = function (taskId) {
@@ -129,5 +134,9 @@
         }
     };
 
-    init();
+    angular.element(document).ready(function () {
+        init();
+    });
+
+
 });

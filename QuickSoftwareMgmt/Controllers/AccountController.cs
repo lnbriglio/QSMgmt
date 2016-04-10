@@ -43,7 +43,7 @@ namespace QuickSoftwareMgmt.Controllers
         public ActionResult LogOut()
         {
             Session.Abandon();
-            return View();
+            return RedirectToAction("LogIn");
         }
 	}
 }

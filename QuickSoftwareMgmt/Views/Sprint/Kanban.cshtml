@@ -5,7 +5,7 @@
 <div style="width:100%; margin: 0 auto 0 auto;" ng-app="kanbanBoardApp">
 
     <div class="row tooltip-toggle" ng-controller="boardCtrl">
-
+        
         @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
 
         <div class="col-lg-4 panel panel-primary colStyle" id="{{col.Id}}" kanban-board-drop="over"
@@ -36,6 +36,10 @@
         </div>
         <input type="hidden" ng-init="UpdateTaskUrl='@Url.Action("Update","Task")'" ng-value="UpdateTaskUrl" />
         <input type="hidden" ng-init="EditTaskUrl='@Url.Action("Edit","Task")'" ng-value="EditTaskUrl" />
+        <input type="hidden" ng-init="SelectedProjectId=@ViewBag.SelectedProjectId" ng-value="SelectedProjectId" />
+        <input type="hidden" ng-init="SelectedSprintId=@ViewBag.SelectedSprintId" ng-value="SelectedSprintId" />
+        
+
     </div>
 
 </div>

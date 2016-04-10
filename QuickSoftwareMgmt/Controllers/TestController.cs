@@ -19,7 +19,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> Index()
         {
             var tests = db.Tests
-                .Where(t => !t.Erased)
+                .Where(t => !t.Erased
+                    && t.ProjectId == SelectedProjectId)
                 .Include(t => t.Project).Include(t => t.TestOutcome).Include(t => t.VersionOrigin);
             return View(await tests.ToListAsync());
         }
@@ -42,10 +43,16 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /Test/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name");
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name");
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name");
-            return View();
+
+            var test = new Test
+            {
+                ProjectId = SelectedProjectId.Value,
+                CreationDate = DateTime.Now
+            };
+
+            return View(test);
         }
 
         // POST: /Test/Create
@@ -53,11 +60,8 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Title,Description,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
         {
-            test.CreationDate = DateTime.Now;
-            ValidateModel(test);
-
             if (ModelState.IsValid)
             {
                 db.BacklogItems.Add(test);
@@ -65,7 +69,6 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", test.ProjectId);
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
             return View(test);
@@ -83,7 +86,6 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", test.ProjectId);
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
             return View(test);
@@ -94,7 +96,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Title,Description,CreationDate,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +104,6 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", test.ProjectId);
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
             return View(test);

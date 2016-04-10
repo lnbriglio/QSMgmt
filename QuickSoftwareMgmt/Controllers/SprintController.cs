@@ -20,7 +20,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> Index()
         {
             var sprints = db.Sprints
-                .Where(s => !s.Erased)
+                .Where(s => !s.Erased
+                && s.ProjectId == SelectedProjectId)
                 .Include(s => s.Project);
             return View(await sprints.ToListAsync());
         }
@@ -43,8 +44,11 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /Sprint/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name");
-            return View();
+            var sprint = new Sprint
+            {
+                ProjectId = SelectedProjectId.Value
+            };
+            return View(sprint);
         }
 
         // POST: /Sprint/Create
@@ -61,7 +65,6 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", sprint.ProjectId);
             return View(sprint);
         }
 
@@ -77,7 +80,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", sprint.ProjectId);
+
             return View(sprint);
         }
 
@@ -94,7 +97,7 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", sprint.ProjectId);
+
             return View(sprint);
         }
 

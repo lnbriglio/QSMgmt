@@ -21,6 +21,7 @@ namespace QuickSoftwareMgmt.Controllers
 
         public BaseController()
         {
+            
         }
         #endregion
 
@@ -80,6 +81,12 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         #endregion
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            ViewBag.SelectedProjectId = SelectedProjectId;
+            ViewBag.SelectedSprintId = SelectedSprintId;
+        }
 
     }
 

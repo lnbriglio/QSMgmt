@@ -38,6 +38,20 @@ namespace QuickSoftwareMgmt.Controllers
             return View(project);
         }
 
+        public async Task<ActionResult> Home()
+        {
+            if (SelectedProjectId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = await db.Projects.FindAsync(SelectedProjectId);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
         public async Task<ActionResult> Dashboard(int? id)
         {
             if (id == null)
@@ -150,9 +164,6 @@ namespace QuickSoftwareMgmt.Controllers
         [ChildActionOnly]
         public ActionResult List()
         {
-            if(!SelectedProjectId.HasValue)//TODO SACAR EN PROD
-                SelectedProjectId = 1;
-
             var projectsList = db.Projects
                 .Where(p => !p.Erased)
                 .OrderBy(p => p.Name)
@@ -170,11 +181,15 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         [HttpGet]
-        public ActionResult ChangeProject(int projectId, int? sprintId)
+        public ActionResult ChangeProject(int? projectId, int? sprintId)
         {
-            SelectedProjectId = projectId;
-            SelectedSprintId = sprintId;
-            return RedirectToAction("Dashboard");
+            if (projectId.HasValue)
+            {
+                SelectedProjectId = projectId;
+                SelectedSprintId = sprintId;
+                return RedirectToAction("Home");
+            }
+            return RedirectToAction("Index");
         }
     }
 }
