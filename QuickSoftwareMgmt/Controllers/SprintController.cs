@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using QuickSoftwareMgmt.Models.Hicharts.AreaChart;
 
 namespace QuickSoftwareMgmt.Controllers
 {
@@ -42,7 +43,7 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /Sprint/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name");
             return View();
         }
 
@@ -51,7 +52,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,StartDate,EndDate,ProjectId")] Sprint sprint)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,StartDate,EndDate,ProjectId")] Sprint sprint)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +61,7 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", sprint.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", sprint.ProjectId);
             return View(sprint);
         }
 
@@ -76,7 +77,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", sprint.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", sprint.ProjectId);
             return View(sprint);
         }
 
@@ -85,7 +86,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,StartDate,EndDate,ProjectId")] Sprint sprint)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,StartDate,EndDate,ProjectId")] Sprint sprint)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +137,143 @@ namespace QuickSoftwareMgmt.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public async Task<JsonResult> GetBurndownChart()
+        {
+            var sprintId = SelectedSprintId;
+            var sprint = await db.Sprints
+                .FindAsync(sprintId);
+
+            //var team = await db.Teams
+            //    .Include(t => t.TeamMembers)
+            //    .FirstOrDefaultAsync(t => !t.Erased && t.ProjectId == SelectedProjectId);
+
+            //var teamDailyCapacity = team.TeamMembers
+            //    .Where(t => !t.Erased)
+            //    .Sum(t => t.Capacity);
+
+            int totalWorkLoad = await db.Tasks
+                .Where(t => !t.Erased
+                && t.SprintId == sprintId)
+                .SumAsync(t => t.EstimatedTime);
+
+            var workableDates = new List<DateTime>();
+            var sprintDuration = (int)(sprint.EndDate - sprint.StartDate).TotalDays;
+
+            for (int i = 0; i <= sprintDuration; i++)
+            {
+                var date = sprint.StartDate.AddDays(i);
+                if (!(date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    workableDates.Add(date);
+                }
+            }
+
+
+            var sprintTaskUpdates = await db.TaskUpdates
+                .Where(u => !u.Erased
+                    && u.Task.SprintId == sprintId
+                    && u.EventDate >= sprint.StartDate
+                    && u.EventDate <= sprint.EndDate)
+                    .ToListAsync();
+
+            int idealDailyBurn = 0;
+            if (workableDates.Count > 0)
+                idealDailyBurn = (int)Math.Ceiling(totalWorkLoad / (workableDates.Count * 1.0f));
+
+            List<int> idealBurn = new List<int>();
+            List<int> actualBurn = new List<int>();
+
+            for (int i = 0; i < workableDates.Count; i++)
+            {
+                var date = workableDates[i];
+
+                idealBurn.Add(totalWorkLoad - i * idealDailyBurn);
+                actualBurn.Add(sprintTaskUpdates
+                    .Where(u => u.EventDate.Date == date)
+                    .Sum(u => u.ElapsedTime));
+            }
+
+            var series = new List<Series>();
+            series.Add(new Series
+            {
+                data = idealBurn.ToArray(),
+                name = "Ideal burn"
+            });
+
+            series.Add(new Series
+            {
+                data = actualBurn.ToArray(),
+                name = "Actual burn"
+            });
+
+            AreaChart areachart = null;
+
+            areachart = new AreaChart
+            {
+                chart = new Chart
+                {
+                    type = "areaspline"
+                },
+                title = new Title
+                {
+                    text = ""
+                },
+                //subtitle = new Subtitle
+                //{
+                //    text = ""
+                //},
+                xAxis = new Xaxis
+                {
+                    //allowDecimals = false,
+                    labels = new Labels
+                    {
+                        format = "{value}"
+                    },
+                    categories = workableDates.Select(d => d.ToString("{dd/MM}")).ToArray()
+                },
+                yAxis = new Yaxis
+                {
+                    title = new Title
+                    {
+                        text = "Horas"
+                    },
+                    labels = new Labels
+                    {
+                        format = "{value}"
+                    }
+                },
+                tooltip = new Tooltip
+                {
+                    pointFormat = "{point.y} horas"
+                },
+                plotOptions = new Plotoptions
+                {
+                    area = new Area
+                    {
+                        pointStart = 0,
+                        marker = new Marker
+                        {
+                            enabled = false,
+                            symbol = "circle",
+                            radius = 2,
+                            states = new States
+                            {
+                                hover = new Hover
+                                {
+                                    enabled = true
+                                }
+                            }
+                        }
+                    }
+                },
+                series = series.ToArray()
+            };
+
+
+
+            return Json(areachart, JsonRequestBehavior.AllowGet);
         }
     }
 }

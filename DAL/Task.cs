@@ -29,6 +29,7 @@ namespace DAL
         public Nullable<int> SprintId { get; set; }
         public int BacklogItemId { get; set; }
         public Nullable<int> UserId { get; set; }
+        public int EstimatedTime { get; set; }
     
         public virtual BacklogItem BacklogItem { get; set; }
         public virtual Sprint Sprint { get; set; }

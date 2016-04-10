@@ -92,6 +92,7 @@
           <Property Name="SprintId" Type="int" />
           <Property Name="BacklogItemId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" />
+          <Property Name="EstimatedTime" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TaskState">
           <Key>
@@ -702,6 +703,7 @@
           <NavigationProperty Name="TaskState" Relationship="DAL.FK__Task__TaskStateI__45F365D3" FromRole="Task" ToRole="TaskState" />
           <NavigationProperty Name="User" Relationship="DAL.FK__Task__UserId__48CFD27E" FromRole="Task" ToRole="User" />
           <NavigationProperty Name="TaskUpdates" Relationship="DAL.FK__TaskUpdat__TaskI__4CA06362" FromRole="Task" ToRole="TaskUpdate" />
+          <Property Name="EstimatedTime" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TaskState">
           <Key>
@@ -1135,6 +1137,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="DAL.Task">
               <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="EstimatedTime" ColumnName="EstimatedTime" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="BacklogItemId" ColumnName="BacklogItemId" />
                 <ScalarProperty Name="SprintId" ColumnName="SprintId" />

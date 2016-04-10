@@ -30,6 +30,12 @@
                         </div>
 
                         <div class="form-group">
+                            @Html.LabelFor(model => model.EstimatedTime)
+                            @Html.TextBoxFor(model => model.EstimatedTime, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.EstimatedTime)
+                        </div>
+
+                        <div class="form-group">
                             @Html.LabelFor(model => model.RemainingTime)
                             @Html.TextBoxFor(model => model.RemainingTime, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.RemainingTime)

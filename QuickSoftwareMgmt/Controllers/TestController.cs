@@ -42,7 +42,7 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /Test/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name");
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name");
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name");
             return View();
@@ -65,7 +65,7 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", test.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", test.ProjectId);
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
             return View(test);
@@ -83,7 +83,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", test.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", test.ProjectId);
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
             return View(test);
@@ -102,7 +102,7 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", test.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", test.ProjectId);
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
             return View(test);

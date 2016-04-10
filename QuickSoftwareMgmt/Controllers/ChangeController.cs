@@ -44,7 +44,7 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /Change/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name");
             ViewBag.Id = new SelectList(db.BacklogItems, "Id", "Title");
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name");
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name");
@@ -73,7 +73,7 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", changerequest.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", changerequest.ProjectId);
             ViewBag.Id = new SelectList(db.BacklogItems, "Id", "Title", changerequest.Id);
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name", changerequest.ApprovalId);
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name", changerequest.ChangeTypeId);
@@ -94,8 +94,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", changerequest.ProjectId);
-            ViewBag.Id = new SelectList(db.BacklogItems, "Id", "Title", changerequest.Id);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", changerequest.ProjectId);
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name", changerequest.ApprovalId);
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name", changerequest.ChangeTypeId);
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name", changerequest.ImpactId);
@@ -116,8 +115,7 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", changerequest.ProjectId);
-            ViewBag.Id = new SelectList(db.BacklogItems, "Id", "Title", changerequest.Id);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", changerequest.ProjectId);
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name", changerequest.ApprovalId);
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name", changerequest.ChangeTypeId);
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name", changerequest.ImpactId);

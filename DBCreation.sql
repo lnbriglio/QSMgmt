@@ -108,6 +108,7 @@ CREATE TABLE Task(
 	[Description] NVARCHAR(MAX) NULL,
 	CreationDate DateTime NOT NULL,
 	Erased BIT NOT NULL DEFAULT 0,
+	EstimatedTime INT NOT NULL,
 	RemainingTime INT NOT NULL,
 	TaskStateId INT NOT NULL FOREIGN KEY REFERENCES TaskState(Id),
 	SprintId INT NULL FOREIGN KEY REFERENCES Sprint(Id),

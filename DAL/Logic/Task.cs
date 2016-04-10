@@ -25,6 +25,8 @@ namespace DAL
         public object Erased { get; set; }
         [DisplayName("Tiempo restante")]
         public object RemainingTime { get; set; }
+        [DisplayName("Tiempo estimado")]
+        public object EstimatedTime { get; set; }
         [DisplayName("Estado")]
         public object TaskStateId { get; set; }
         [DisplayName("Sprint")]

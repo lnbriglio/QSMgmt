@@ -120,7 +120,7 @@ namespace QuickSoftwareMgmt.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", team.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", team.ProjectId);
             return View(team);
         }
 
@@ -136,7 +136,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", team.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", team.ProjectId);
             return View(team);
         }
 
@@ -153,7 +153,7 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", team.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", team.ProjectId);
             return View(team);
         }
 

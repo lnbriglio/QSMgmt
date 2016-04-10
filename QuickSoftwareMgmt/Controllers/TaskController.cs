@@ -38,7 +38,9 @@ namespace QuickSoftwareMgmt.Controllers
             List<User> users = new List<User>();
             if (team != null)
             {
-                users = team.TeamMembers.Select(tm => tm.User).ToList();
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
             }
 
             ViewBag.UserId = new SelectList(users, "Id", "UserName");
@@ -47,7 +49,7 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "BacklogItemId,Title,Description,RemainingTime,SprintId,UserId")] DAL.Task task)
+        public async Task<ActionResult> Create([Bind(Include = "BacklogItemId,Title,Description,EstimatedTime,RemainingTime,SprintId,UserId")] DAL.Task task)
         {
             task.CreationDate = DateTime.Now;
             task.TaskStateId = (int)TaskStateEnum.ToDo;
@@ -84,7 +86,9 @@ namespace QuickSoftwareMgmt.Controllers
             List<User> users = new List<User>();
             if (team != null)
             {
-                users = team.TeamMembers.Select(tm => tm.User).ToList();
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
             }
 
             ViewBag.UserId = new SelectList(users, "Id", "UserName", task.UserId);
@@ -119,7 +123,9 @@ namespace QuickSoftwareMgmt.Controllers
             List<User> users = new List<User>();
             if (team != null)
             {
-                users = team.TeamMembers.Select(tm => tm.User).ToList();
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
             }
 
             ViewBag.UserId = new SelectList(users, "Id", "UserName", task.UserId);
@@ -128,7 +134,7 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,BacklogItemId,Title,Description,RemainingTime,SprintId,UserId,CreationDate,TaskStateId")] DAL.Task task)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,BacklogItemId,Title,Description,EstimatedTime,RemainingTime,SprintId,UserId,CreationDate,TaskStateId")] DAL.Task task)
         {
             try
             {
@@ -161,7 +167,9 @@ namespace QuickSoftwareMgmt.Controllers
             List<User> users = new List<User>();
             if (team != null)
             {
-                users = team.TeamMembers.Select(tm => tm.User).ToList();
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
             }
 
             ViewBag.UserId = new SelectList(users, "Id", "UserName", task.UserId);
