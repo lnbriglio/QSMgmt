@@ -24,19 +24,25 @@ namespace DAL
     {
         public object Id { get; set; }
         [DisplayName("Título")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(100)]
         public object Title { get; set; }
         [DisplayName("Descripción")]
         public object Description { get; set; }
         [DisplayName("Fecha de creación")]
+        [DataType(DataType.Date)]
         public object CreationDate { get; set; }
         [DisplayName("Proyecto")]
+        [Required]
         public object ProjectId { get; set; }
-
         [DisplayName("Pasos para reproducirlo")]
         public object Steps { get; set; }
         [DisplayName("Incidente por nueva versión")]
+        [Required]
         public object VersionOriginId { get; set; }
         [DisplayName("Exitoso")]
+        [Required]
         public object TestOutcomeId { get; set; }
     }
 }

@@ -17,8 +17,12 @@ namespace DAL
     {
         public object Id { get; set; }
         [DisplayName("Nombre")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(100)]
         public object Name { get; set; }
         [DisplayName("Descripción")]
+        [MaxLength(500)]
         public object Description { get; set; }
         public object Erased { get; set; }
     }

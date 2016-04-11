@@ -17,8 +17,14 @@ namespace DAL
     {
         public object Id { get; set; }
         [DisplayName("Nombre de usuario")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(50)]
         public object UserName { get; set; }
         [DisplayName("Contraseña")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(50)]
         public object Password { get; set; }
         public object Erased { get; set; }
     }

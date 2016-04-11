@@ -19,15 +19,20 @@ namespace DAL
         [DisplayName("Comentario")]
         public object Comment { get; set; }
         [DisplayName("Fecha del evento")]
+        [DataType(DataType.Date)]
         public object EventDate { get; set; }
-        public object Erased { get; set; }
         [DisplayName("Tiempo invertido")]
+        [Required]
+        [Range(0,999)]
         public object ElapsedTime { get; set; }
         [DisplayName("Tarea")]
+        [Required]
         public object TaskId { get; set; }
         [DisplayName("Estado anterior")]
+        [Required]
         public object PreviousTaskStateId { get; set; }
         [DisplayName("Estado")]
+        [Required]
         public object TaskStateId { get; set; }
     }
 }

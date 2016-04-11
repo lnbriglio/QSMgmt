@@ -163,5 +163,33 @@ INSERT INTO TaskState(Id, Name) VALUES (1,'Por hacer');
 INSERT INTO TaskState(Id, Name) VALUES (2,'En ejecución');
 INSERT INTO TaskState(Id, Name) VALUES (3,'Hecho');
 
+--Indices
+CREATE NONCLUSTERED INDEX NCI_User_Name_Password
+    ON [User] (Erased,UserName,Password); 
 
+CREATE NONCLUSTERED INDEX NCI_BackLogItem
+    ON BackLogItem (CreationDate,Erased,ProjectId);
 
+CREATE NONCLUSTERED INDEX NCI_Change
+    ON ChangeRequest (ApprovalId,ChangeTypeId,ImpactId,PriorityId);
+
+CREATE NONCLUSTERED INDEX NCI_Test
+    ON Test (VersionOriginId,TestOutcomeId);
+
+CREATE NONCLUSTERED INDEX NCI_Sprint
+    ON Sprint (Erased,ProjectId);
+
+CREATE NONCLUSTERED INDEX NCI_Task_General
+    ON Task (Erased,BacklogItemId,SprintId,CreationDate);
+
+CREATE NONCLUSTERED INDEX NCI_Task_StateId
+    ON Task (TaskStateId);
+
+CREATE NONCLUSTERED INDEX NCI_TaskUpdate
+    ON TaskUpdate (Erased,TaskId,EventDate);
+
+CREATE NONCLUSTERED INDEX NCI_Team
+    ON Team (Erased,ProjectId);
+
+CREATE NONCLUSTERED INDEX NCI_TeamMember
+    ON TeamMember (Erased,TeamId,UserId);

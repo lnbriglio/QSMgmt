@@ -21,6 +21,8 @@ namespace QuickSoftwareMgmt.Controllers
             var task = new DAL.Task
             {
                 BacklogItemId = parentId,
+                CreationDate = DateTime.Now,
+                TaskStateId = (int)TaskStateEnum.ToDo
             };
 
             var sprints = await db.Sprints
@@ -51,10 +53,6 @@ namespace QuickSoftwareMgmt.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([Bind(Include = "BacklogItemId,Title,Description,EstimatedTime,RemainingTime,SprintId,UserId")] DAL.Task task)
         {
-            task.CreationDate = DateTime.Now;
-            task.TaskStateId = (int)TaskStateEnum.ToDo;
-            ValidateModel(task);
-
             try
             {
                 if (ModelState.IsValid)
@@ -96,7 +94,7 @@ namespace QuickSoftwareMgmt.Controllers
             return PartialView("_CreateModal", task);
         }
 
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -244,6 +242,20 @@ namespace QuickSoftwareMgmt.Controllers
             }
 
             return PartialView("_CreateTaskUpdateModal", taskUpdate);
+        }
+
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DAL.Task task = await db.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+            return View(task);
         }
     }
 }

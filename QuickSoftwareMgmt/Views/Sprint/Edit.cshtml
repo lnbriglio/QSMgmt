@@ -50,4 +50,22 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/datepicker.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment-with-locales.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.i18n/es.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment-datepicker.min.js")"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#StartDate").datepicker({
+                language: 'es'
+            });
+            $("#EndDate").datepicker({
+                language: 'es'
+            });
+
+        });
+    </script>
 }

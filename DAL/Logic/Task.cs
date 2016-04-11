@@ -17,21 +17,30 @@ namespace DAL
     {
         public object Id { get; set; }
         [DisplayName("Título")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(100)]
         public object Title { get; set; }
         [DisplayName("Descripción")]
         public object Description { get; set; }
         [DisplayName("Fecha de creación")]
+        [DataType(DataType.Date)]
         public object CreationDate { get; set; }
-        public object Erased { get; set; }
         [DisplayName("Tiempo restante")]
+        [Required]
+        [Range(0,999)]
         public object RemainingTime { get; set; }
         [DisplayName("Tiempo estimado")]
+        [Required]
+        [Range(0,999)]
         public object EstimatedTime { get; set; }
         [DisplayName("Estado")]
+        [Required]
         public object TaskStateId { get; set; }
         [DisplayName("Sprint")]
         public object SprintId { get; set; }
         [DisplayName("Padre")]
+        [Required]
         public object BacklogItemId { get; set; }
         [DisplayName("Usuario")]
         public object UserId { get; set; }

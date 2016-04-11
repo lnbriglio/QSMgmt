@@ -72,6 +72,7 @@
     <Compile Include="Logic\Priority.cs" />
     <Compile Include="Logic\QSMgmtEntities.cs" />
     <Compile Include="Logic\Project.cs" />
+    <Compile Include="Logic\TeamMember.cs" />
     <Compile Include="Logic\User.cs" />
     <Compile Include="Logic\TaskUpdate.cs" />
     <Compile Include="Logic\Task.cs" />

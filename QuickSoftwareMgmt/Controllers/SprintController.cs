@@ -46,7 +46,9 @@ namespace QuickSoftwareMgmt.Controllers
         {
             var sprint = new Sprint
             {
-                ProjectId = SelectedProjectId.Value
+                ProjectId = SelectedProjectId.Value,
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today
             };
             return View(sprint);
         }
@@ -185,17 +187,24 @@ namespace QuickSoftwareMgmt.Controllers
             if (workableDates.Count > 0)
                 idealDailyBurn = (int)Math.Ceiling(totalWorkLoad / (workableDates.Count * 1.0f));
 
-            List<int> idealBurn = new List<int>();
-            List<int> actualBurn = new List<int>();
+            var idealBurn = new List<int>();
+            var actualBurn = new List<int>();
 
+            var burned = totalWorkLoad;
             for (int i = 0; i < workableDates.Count; i++)
             {
                 var date = workableDates[i];
-
-                idealBurn.Add(totalWorkLoad - i * idealDailyBurn);
-                actualBurn.Add(sprintTaskUpdates
+                //Ideal
+                if (totalWorkLoad - i * idealDailyBurn > 0)
+                    idealBurn.Add(totalWorkLoad - i * idealDailyBurn);
+                else
+                    idealBurn.Add(0);
+                //Actual
+                burned-= sprintTaskUpdates
                     .Where(u => u.EventDate.Date == date)
-                    .Sum(u => u.ElapsedTime));
+                    .Sum(u => u.ElapsedTime);
+                actualBurn.Add(burned);
+                
             }
 
             var series = new List<Series>();

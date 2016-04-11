@@ -16,6 +16,8 @@
 
                         @Html.ValidationSummary(true)
                         @Html.HiddenFor(model => model.BacklogItemId)
+                        @Html.HiddenFor(model => model.CreationDate)
+                        @Html.HiddenFor(model => model.TaskStateId)
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Title)

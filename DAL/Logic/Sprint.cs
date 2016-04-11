@@ -17,13 +17,21 @@ namespace DAL
     {
         public object Id { get; set; }
         [DisplayName("Nombre")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(100)]
         public object Name { get; set; }
         [DisplayName("Fecha de inicio")]
+        [Required]
+        [DataType(DataType.Date)]
         public object StartDate { get; set; }
         [DisplayName("Fecha de fin")]
+        [Required]
+        [DataType(DataType.Date)]
         public object EndDate { get; set; }
         public object Erased { get; set; }
         [DisplayName("Proyecto")]
+        [Required]
         public object ProjectId { get; set; }
     }
 }

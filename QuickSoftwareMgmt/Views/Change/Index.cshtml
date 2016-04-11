@@ -74,9 +74,7 @@
                 @:<td>@Html.DisplayFor(task => taskItem.TaskState.Name)</td>
                 @:<td></td>
                 @:<td></td>
-                @:<td></td>
-                @:<td></td>
-                @:<td></td>
+                @:<td>@Html.ActionLink("Detalles", "Details","Task", new { id = taskItem.Id },null)</td>
                 }
     }
 
