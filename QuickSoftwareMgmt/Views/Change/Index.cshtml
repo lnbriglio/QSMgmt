@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DAL.ChangeRequest>
+﻿@using DAL
+@model IEnumerable<DAL.ChangeRequest>
 
 @{
     ViewBag.Title = "Índice";
@@ -15,9 +16,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ApprovalId)
@@ -38,12 +36,9 @@
     @foreach (var item in Model)
     {
 
-        <tr class="treegrid-log-@item.Id" style="background-color:#afe3f1;">
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+        <tr class="treegrid-log-@item.Id">
+            <td title="@Html.DisplayFor(modelItem => item.Description)" style="font-weight:bolder;">
+                [@Html.DisplayFor(modelItem => item.Id)] @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Approval.Name)
@@ -65,16 +60,24 @@
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
             </td>
         </tr>
-        foreach (var taskItem in item.Tasks)
+        foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
         {
             @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
-                @:<td>@Html.DisplayFor(task => taskItem.Title)</td>
-                @:<td></td>
-                @:<td></td>
-                @:<td>@Html.DisplayFor(task => taskItem.TaskState.Name)</td>
-                @:<td></td>
-                @:<td></td>
-                @:<td>@Html.ActionLink("Detalles", "Details","Task", new { id = taskItem.Id },null)</td>
+                @:<td>
+                switch ((TaskStateEnum)taskItem.TaskStateId)
+                {
+                    case TaskStateEnum.ToDo: 
+                        @:<button class="btn btn-xs btn-danger" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
+                        break;
+                        case TaskStateEnum.Doing: 
+                        @:<button class="btn btn-xs btn-info" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
+                        break;
+                        case TaskStateEnum.Done: 
+                        @:<button class="btn btn-xs btn-success" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
+                        break;
+                        
+                }
+        @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null)
                 }
     }
 

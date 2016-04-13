@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace QuickSoftwareMgmt.Controllers
 {
@@ -11,9 +12,9 @@ namespace QuickSoftwareMgmt.Controllers
     {
         #region Constants
 
-        public static String USER_SESSION = "user_session";
-        public static String SELECTED_PROJECT_ID = "selected_project_id";
-        public static String SELECTED_SPRINT_ID = "selected_sprint_id";
+        private static String USER_SESSION = "user_session";
+        private static String SELECTED_PROJECT_ID = "selected_project_id";
+        private static String SELECTED_SPRINT_ID = "selected_sprint_id";
 
         #endregion
 
@@ -31,7 +32,7 @@ namespace QuickSoftwareMgmt.Controllers
         {
             get
             {
-                var temp = new User();
+                User temp = null;
 
                 if (Session != null && Session[USER_SESSION] is User)
                 {
@@ -84,8 +85,23 @@ namespace QuickSoftwareMgmt.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            if(CurrentUser == null
+                && filterContext.ActionDescriptor.ActionName != "LogOut"
+                && filterContext.ActionDescriptor.ActionName != "LogIn")
+            {
+                var redirectTarget = new RouteValueDictionary();
+                redirectTarget.Add("action", "LogOut");
+                redirectTarget.Add("controller", "Account");
+                filterContext.Result = new RedirectToRouteResult(redirectTarget);
+            }
+            else
+            {
             ViewBag.SelectedProjectId = SelectedProjectId;
+
             ViewBag.SelectedSprintId = SelectedSprintId;
+            }
+
+            base.OnActionExecuting(filterContext);
         }
 
     }

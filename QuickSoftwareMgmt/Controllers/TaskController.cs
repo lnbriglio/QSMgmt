@@ -51,7 +51,7 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "BacklogItemId,Title,Description,EstimatedTime,RemainingTime,SprintId,UserId")] DAL.Task task)
+        public async Task<ActionResult> Create([Bind(Include = "BacklogItemId,Title,Description,CreationDate,TaskStateId,EstimatedTime,RemainingTime,SprintId,UserId")] DAL.Task task)
         {
             try
             {

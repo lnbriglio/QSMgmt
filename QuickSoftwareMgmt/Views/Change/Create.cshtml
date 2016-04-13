@@ -14,7 +14,7 @@
         <div class="form-horizontal">
             <h4>Solicitud de cambio</h4>
             <hr />
-            @Html.ValidationSummary(true)
+            @Html.ValidationSummary(false)
             @Html.HiddenFor(model => model.CreationDate)
             @Html.HiddenFor(model => model.ProjectId)
             
@@ -67,5 +67,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
 }
