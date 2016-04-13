@@ -614,6 +614,9 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\jquery.treegrid.bootstrap3.js" />
     <Content Include="Scripts\jquery.treegrid.min.js" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <None Include="Properties\PublishProfiles\Agil-Devtil - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Agil-Devtil - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -675,7 +678,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="fonts\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
