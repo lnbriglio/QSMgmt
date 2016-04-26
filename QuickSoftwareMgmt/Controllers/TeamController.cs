@@ -19,7 +19,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> Index()
         {
             var teams = db.Teams
-                .Where(t => !t.Erased)
+                .Where(t => !t.Erased
+                && t.Project.CompanyId == CurrentUser.CompanyId)
                 .Include(t => t.Project);
             return View(await teams.ToListAsync());
         }
@@ -53,9 +54,12 @@ namespace QuickSoftwareMgmt.Controllers
                 return HttpNotFound();
             }
 
-            var users = await db.Users.Where(u => !u.Erased).ToListAsync();
+            var users = await db.Users
+                .Where(u => !u.Erased
+                && u.CompanyId == CurrentUser.CompanyId)
+                .ToListAsync();
 
-            ViewBag.UserId = new SelectList(users, "Id", "UserName");
+            ViewBag.UserId = new SelectList(users, "Id", "FullName");
 
             return View(team);
         }
@@ -100,7 +104,7 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         // GET: /Team/Create
-        public ActionResult Create()
+        private ActionResult Create()
         {
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             return View();
@@ -111,7 +115,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,ProjectId")] Team team)
+        private async Task<ActionResult> Create([Bind(Include = "Id,Name,ProjectId")] Team team)
         {
             if (ModelState.IsValid)
             {
@@ -136,7 +140,6 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", team.ProjectId);
             return View(team);
         }
 
@@ -153,7 +156,6 @@ namespace QuickSoftwareMgmt.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects.Where(p => !p.Erased), "Id", "Name", team.ProjectId);
             return View(team);
         }
 

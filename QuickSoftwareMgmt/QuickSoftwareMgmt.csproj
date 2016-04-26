@@ -626,6 +626,7 @@
     <Content Include="Scripts\KanbanApp\boardService.js" />
     <Content Include="Scripts\KanbanApp\kanbanDragDrop.js" />
     <Content Include="Scripts\KanbanApp\main.js" />
+    <Content Include="Scripts\mail-validator.js" />
     <Content Include="Scripts\moment-datepicker.min.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.i18n\all.min.js" />
@@ -675,6 +676,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Account\SignUpSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

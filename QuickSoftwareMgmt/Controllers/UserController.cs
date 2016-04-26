@@ -19,7 +19,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> Index()
         {
             var users = db.Users
-                .Where(u => !u.Erased);
+                .Where(u => !u.Erased
+                && u.CompanyId == CurrentUser.CompanyId);
             return View(await users.ToListAsync());
         }
 
@@ -41,7 +42,11 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /User/Create
         public ActionResult Create()
         {
-            return View();
+            var user = new User
+            {
+                CompanyId = CurrentUser.CompanyId,
+            };
+            return View(user);
         }
 
         // POST: /User/Create
@@ -49,7 +54,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="UserName,Password,RoleId")] User user)
+        public async Task<ActionResult> Create([Bind(Include="UserName,Password,CompanyId")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +86,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,UserName,Password,RoleId")] User user)
+        public async Task<ActionResult> Edit([Bind(Include="Id,UserName,Password,CompanyId")] User user)
         {
             if (ModelState.IsValid)
             {

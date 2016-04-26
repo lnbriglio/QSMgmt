@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Log in - Agil Devtil</title>
+    <title>¡Registro satisfactorio! - Agil Devtil</title>
 
     @Styles.Render("~/sbadmin/css")
 
@@ -54,30 +54,15 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h1>Agil Devtil</h1>
+                        <h1>¡Registro satisfactorio!</h1>
 
                     </div>
                     <div class="panel-body">
-                        @using (Html.BeginForm())
-                        {
-                            <fieldset>
-                                @Html.ValidationSummary(true)
 
-                                <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
-                                    @Html.ValidationMessageFor(model => model.Email)
-                                </div>
+                        <fieldset>
 
-                                <div class="form-group">
-                                    @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Password)
-                                </div>
-
-
-                                <input type="submit" value="Log in" class="btn btn-lg btn-block btn-info" />
-                                @Html.ActionLink("Registrarse", "SignUp", "Account", null, new { @class = "btn btn-lg btn-block btn-success" })
-                            </fieldset>
-                        }
+                            @Html.ActionLink("Volver al Log in", "LogIn", "Account", null, new { @class = "btn btn-lg btn-block btn-success" })
+                        </fieldset>
                     </div>
                 </div>
             </div>

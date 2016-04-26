@@ -15,6 +15,7 @@
         <h4>Proyecto</h4>
         <hr />
         @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.CompanyId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name)

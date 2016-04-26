@@ -46,7 +46,7 @@ jQuery.ajaxTransport(function( options ) {
 					xhr = options.xhr(),
 					id = ++xhrId;
 
-				xhr.open( options.type, options.url, options.async, options.username, options.password );
+				xhr.open( options.type, options.url, options.async, options.Email, options.password );
 
 				// Apply custom fields if provided
 				if ( options.xhrFields ) {

@@ -40,5 +40,6 @@ namespace DAL
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VersionOrigin> VersionOrigins { get; set; }
         public virtual DbSet<TeamMember> TeamMembers { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
     }
 }

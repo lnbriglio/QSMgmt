@@ -11,21 +11,38 @@ namespace DAL
     [MetadataType(typeof(UserMetadata))]
     public partial class User
     {
+        public String FullName
+        {
+            get
+            { return String.Format("{0} {1}", this.FirstName, this.LastName); }
+        }
+
     }
 
     public class UserMetadata
     {
         public object Id { get; set; }
-        [DisplayName("Nombre de usuario")]
+        [DisplayName("Email")]
         [Required]
         [MinLength(1)]
         [MaxLength(50)]
-        public object UserName { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public object Email { get; set; }
         [DisplayName("Contraseña")]
         [Required]
         [MinLength(1)]
         [MaxLength(50)]
         public object Password { get; set; }
+        [DisplayName("Nombre")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(25)]
+        public object FirstName { get; set; }
+        [DisplayName("Apellido")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(25)]
+        public object LastName { get; set; }
         public object Erased { get; set; }
     }
 }

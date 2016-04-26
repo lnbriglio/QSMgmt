@@ -1,4 +1,79 @@
-﻿CREATE TABLE Approval(
+﻿IF OBJECT_ID(N'dbo.TaskUpdate','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.TaskUpdate
+END
+
+IF OBJECT_ID(N'dbo.Task','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Task
+END
+
+IF OBJECT_ID(N'dbo.ChangeRequest','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.ChangeRequest
+END
+
+IF OBJECT_ID(N'dbo.Test','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Test
+END
+
+
+IF OBJECT_ID(N'dbo.BacklogItem','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.BacklogItem
+END
+
+
+IF OBJECT_ID(N'dbo.TeamMember','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.TeamMember
+END
+
+IF OBJECT_ID(N'dbo.Team','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Team
+END
+
+IF OBJECT_ID(N'dbo.Sprint','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Sprint
+END
+
+IF OBJECT_ID(N'dbo.Project','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Project
+END
+
+IF OBJECT_ID(N'dbo.[User]','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.[User]
+END
+
+IF OBJECT_ID(N'dbo.Company','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Company
+END
+
+IF OBJECT_ID(N'dbo.Approval','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Approval
+END
+
+IF OBJECT_ID(N'dbo.Impact','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.Impact
+END
+
+IF OBJECT_ID(N'dbo.ChangeType','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.ChangeType
+END
+
+IF OBJECT_ID(N'dbo.TaskState','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.TaskState
+END
+
+IF OBJECT_ID(N'dbo.[Priority]','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.[Priority]
+END
+
+IF OBJECT_ID(N'dbo.TestOutcome','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.TestOutcome
+END
+
+IF OBJECT_ID(N'dbo.VersionOrigin','U') IS NOT NULL BEGIN
+    DROP TABLE dbo.VersionOrigin
+END
+
+
+CREATE TABLE Approval(
 	Id INT PRIMARY KEY,
 	Name NVARCHAR(100) NOT NULL,
 	Erased BIT NOT NULL DEFAULT 0,
@@ -40,11 +115,22 @@ CREATE TABLE TaskState(
 	Erased BIT NOT NULL DEFAULT 0,
 )
 
+CREATE TABLE Company(
+	Id INT PRIMARY KEY IDENTITY(1,1),
+	Name NVARCHAR(100) NOT NULL,
+	Description NVARCHAR(255) NULL,
+	Erased BIT NOT NULL DEFAULT 0,
+	Domain NVARCHAR(50) NOT NULL,
+)
+
 CREATE TABLE [User](
 	Id INT PRIMARY KEY IDENTITY,
-	UserName NVARCHAR(50) NOT NULL,
+	Email NVARCHAR(50) NOT NULL,
+	FirstName NVARCHAR(25) NOT NULL,
+	LastName NVARCHAR(25) NOT NULL,
 	[Password] NVARCHAR(50) NOT NULL,
 	Erased BIT NOT NULL DEFAULT 0,
+	CompanyId INT NOT NULL FOREIGN KEY REFERENCES Company(Id),
 )
 
 CREATE TABLE Project(
@@ -52,6 +138,7 @@ CREATE TABLE Project(
 	Name NVARCHAR(100) NOT NULL,
 	Description NVARCHAR(500) NULL,
 	Erased BIT NOT NULL DEFAULT 0,
+	CompanyId INT NOT NULL FOREIGN KEY REFERENCES Company(Id),
 )
 
 CREATE TABLE Sprint(
@@ -164,8 +251,11 @@ INSERT INTO TaskState(Id, Name) VALUES (2,'En ejecución');
 INSERT INTO TaskState(Id, Name) VALUES (3,'Hecho');
 
 --Indices
-CREATE NONCLUSTERED INDEX NCI_User_Name_Password
-    ON [User] (Erased,UserName,Password); 
+CREATE NONCLUSTERED INDEX NCI_User_Name_Company
+    ON [User] (Erased,Email,CompanyId); 
+
+CREATE NONCLUSTERED INDEX NCI_Project
+    ON Project (CompanyId);
 
 CREATE NONCLUSTERED INDEX NCI_BackLogItem
     ON BackLogItem (CreationDate,Erased,ProjectId);

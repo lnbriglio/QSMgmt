@@ -52,7 +52,7 @@ namespace QuickSoftwareMgmt.Controllers.API
                     User = new
                     {
                         Id = t.UserId,
-                        Name = t.User != null ? t.User.UserName : "Sin asignar"
+                        Name = t.User != null ? t.User.Email : "Sin asignar"
                     },
                     RemainingTime = t.RemainingTime
                 }).ToList()

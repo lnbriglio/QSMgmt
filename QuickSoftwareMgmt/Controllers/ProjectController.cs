@@ -19,7 +19,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> Index()
         {
             return View(await db.Projects
-                .Where(p => !p.Erased)
+                .Where(p => !p.Erased
+                && p.CompanyId == CurrentUser.CompanyId)
                 .ToListAsync());
         }
 
@@ -70,7 +71,12 @@ namespace QuickSoftwareMgmt.Controllers
         // GET: /Project/Create
         public ActionResult Create()
         {
-            return View();
+            var project = new Project
+            {
+                CompanyId = CurrentUser.CompanyId,
+            };
+
+            return View(project);
         }
 
         // POST: /Project/Create
@@ -78,7 +84,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="Id,Name,Description")] Project project)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,CompanyId")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +121,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,Name,Description")] Project project)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,CompanyId")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -174,7 +180,7 @@ namespace QuickSoftwareMgmt.Controllers
                 .OrderBy(s => s.Name)
                 .ToList();
 
-            ViewBag.ProjectSelector = new SelectList(projectsList, "Id", "Name",SelectedProjectId);
+            ViewBag.ProjectSelector = new SelectList(projectsList, "Id", "Name", SelectedProjectId);
             ViewBag.SprintSelector = new SelectList(sprintList, "Id", "Name", SelectedSprintId);
 
             return PartialView();

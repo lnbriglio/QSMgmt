@@ -23257,7 +23257,7 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
               <input type="text" name="userName" ng-model="user.name" required>
            </label>
            <div role="alert">
-             <span class="error" ng-show="myForm.userName.$error.required">
+             <span class="error" ng-show="myForm.Email.$error.required">
               Required!</span>
            </div>
            <label>
@@ -23274,8 +23274,8 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
          </form>
          <hr>
          <tt>user = {{user}}</tt><br/>
-         <tt>myForm.userName.$valid = {{myForm.userName.$valid}}</tt><br/>
-         <tt>myForm.userName.$error = {{myForm.userName.$error}}</tt><br/>
+         <tt>myForm.Email.$valid = {{myForm.Email.$valid}}</tt><br/>
+         <tt>myForm.Email.$error = {{myForm.Email.$error}}</tt><br/>
          <tt>myForm.lastName.$valid = {{myForm.lastName.$valid}}</tt><br/>
          <tt>myForm.lastName.$error = {{myForm.lastName.$error}}</tt><br/>
          <tt>myForm.$valid = {{myForm.$valid}}</tt><br/>
@@ -23286,7 +23286,7 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
       </file>
       <file name="protractor.js" type="protractor">
         var user = element(by.exactBinding('user'));
-        var userNameValid = element(by.binding('myForm.userName.$valid'));
+        var userNameValid = element(by.binding('myForm.Email.$valid'));
         var lastNameValid = element(by.binding('myForm.lastName.$valid'));
         var lastNameError = element(by.binding('myForm.lastName.$error'));
         var formValid = element(by.binding('myForm.$valid'));
@@ -26931,7 +26931,7 @@ var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
 
           $scope.cancel = function(e) {
             if (e.keyCode == 27) {
-              $scope.userForm.userName.$rollbackViewValue();
+              $scope.userForm.Email.$rollbackViewValue();
             }
           };
         }]);
@@ -26972,7 +26972,7 @@ var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
                    ng-model="user.name"
                    ng-model-options="{ debounce: 1000 }" />
           </label>
-          <button ng-click="userForm.userName.$rollbackViewValue(); user.name=''">Clear</button>
+          <button ng-click="userForm.Email.$rollbackViewValue(); user.name=''">Clear</button>
           <br />
         </form>
         <pre>user.name = <span ng-bind="user.name"></span></pre>

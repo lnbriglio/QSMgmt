@@ -22,7 +22,7 @@ namespace QuickSoftwareMgmt.Controllers
 
         public BaseController()
         {
-            
+
         }
         #endregion
 
@@ -85,9 +85,14 @@ namespace QuickSoftwareMgmt.Controllers
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if(CurrentUser == null
+            if (CurrentUser == null
                 && filterContext.ActionDescriptor.ActionName != "LogOut"
-                && filterContext.ActionDescriptor.ActionName != "LogIn")
+                && filterContext.ActionDescriptor.ActionName != "LogIn"
+                && filterContext.ActionDescriptor.ActionName != "SignUp"
+                && filterContext.ActionDescriptor.ActionName != "CheckEmail"
+                && filterContext.ActionDescriptor.ActionName != "SignUpSuccess"
+
+                )
             {
                 var redirectTarget = new RouteValueDictionary();
                 redirectTarget.Add("action", "LogOut");
@@ -96,9 +101,11 @@ namespace QuickSoftwareMgmt.Controllers
             }
             else
             {
-            ViewBag.SelectedProjectId = SelectedProjectId;
+                ViewBag.SelectedProjectId = SelectedProjectId;
+                ViewBag.SelectedSprintId = SelectedSprintId;
 
-            ViewBag.SelectedSprintId = SelectedSprintId;
+                if (CurrentUser != null)
+                    ViewBag.CurrentUserNameAndCompany = String.Format("{0} {1} - {2}", CurrentUser.FirstName, CurrentUser.LastName, CurrentUser.Company.Name);
             }
 
             base.OnActionExecuting(filterContext);

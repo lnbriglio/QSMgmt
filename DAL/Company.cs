@@ -12,24 +12,21 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Project
+    public partial class Company
     {
-        public Project()
+        public Company()
         {
-            this.BacklogItems = new HashSet<BacklogItem>();
-            this.Sprints = new HashSet<Sprint>();
-            this.Teams = new HashSet<Team>();
+            this.Projects = new HashSet<Project>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Erased { get; set; }
-        public int CompanyId { get; set; }
+        public string Domain { get; set; }
     
-        public virtual ICollection<BacklogItem> BacklogItems { get; set; }
-        public virtual ICollection<Sprint> Sprints { get; set; }
-        public virtual ICollection<Team> Teams { get; set; }
-        public virtual Company Company { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

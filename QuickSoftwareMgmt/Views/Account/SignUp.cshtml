@@ -1,0 +1,160 @@
+﻿@model DAL.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es-ar">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Registro - Agil Devtil</title>
+
+    @Styles.Render("~/sbadmin/css")
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        body {
+            background-color: #000;
+            background-image: url("http://demo.duotive.org/duotive-fortune/assets/03-dark-grey_03.jpg");
+            background-size: cover;
+        }
+
+        .panel {
+            background-color: rgba(255,255,255,0.8);
+        }
+
+        .panel-heading {
+            background-color: rgba(0, 0, 0,0.5) !important;
+            color: #fff !important;
+        }
+
+            .panel-heading h1 {
+                text-align: center;
+            }
+    </style>
+
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Nuevo usuario</h1>
+
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm())
+                        {
+                            <fieldset>
+                                @Html.ValidationSummary(false)
+
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
+                                    <span title="Email valido" class="btn btn-xs btn-success" id="mailCheck"
+                                          style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-check"></i></span>
+                                    @Html.ValidationMessageFor(model => model.Email)
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Password)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.FirstName, new { placeholder = "Nombre", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FirstName)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.LastName, new { placeholder = "Apellido", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.LastName)
+                                </div>
+                                <div id="companySection">
+                                    <h3>Empresa</h3>
+                                    @Html.HiddenFor(model => model.CompanyId)
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Company.Name, new { placeholder = "Nombre", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Company.Name)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(model => model.Company.Description, new { placeholder = "Descripción", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Company.Description)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Company.Domain, new { placeholder = "Dominio", @class = "form-control" })
+                                        <span title="El dominio representa es la parte después de la @("@") en un mail, al determinar un dominio, todos los mails del mismo se asociarán a esta empresa"
+                                              class="btn btn-xs btn-info" id="domainInfo"
+                                              style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-info"></i></span>
+                                        @Html.ValidationMessageFor(model => model.Company.Domain)
+                                    </div>
+                                </div>
+                                <input type="submit" value="Registrase" class="btn btn-lg btn-block btn-info" />
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/sbadmin")
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/mail-validator.js")"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#mailCheck").hide();
+            $("#Email").blur(function (e) {
+                var mailaddress = $(this).val();
+
+                if (isValidEmailAddress(mailaddress)) {
+                    $.ajax({
+                        url: '@Url.Action("CheckEmail","Account")',
+                        data: { email: mailaddress },
+                        type: "POST",
+                        success: function (response) {
+                            if (response.userExists) {
+                                $("#mailCheck").attr("title", "Ya existe un usuario con esta mail, por favor elija otro").show();
+                            } else {
+                                $("#mailCheck").attr("title", "Email válido").show();
+                            }
+
+                            if (response.companyId != 0) {
+                                $("#CompanyId").val(response.companyId);
+                                $("#companySection").hide();
+                            } else {
+                                $("#Company_Domain").val(response.domain);
+                            }
+
+
+                        },
+                        error: function (err) {
+
+                        }
+                    });
+
+
+                } else {
+
+                }
+
+            });
+
+
+        });
+    </script>
+</body>
+</html>

@@ -60,6 +60,9 @@
     <Compile Include="ChangeType.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Company.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Enums.cs" />
     <Compile Include="Impact.cs">
       <DependentUpon>Model.tt</DependentUpon>
