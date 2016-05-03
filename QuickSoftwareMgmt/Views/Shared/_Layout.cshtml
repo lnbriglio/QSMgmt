@@ -10,7 +10,7 @@
     <title>@ViewBag.Title - Agil Devtil</title>
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
-
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:900">
     @Styles.Render("~/sbadmin/css")
 
     <style type="text/css">
@@ -53,6 +53,23 @@
         .voffset9 {
             margin-top: 150px;
         }
+
+        .logo-title{
+            font-family: 'Lato', sans-serif;
+            font-size: 2.5em;
+            color:#23527c !important;
+            text-shadow: 0px 0px 5px #dafeff;
+        }
+
+        /*#page-wrapper{
+            background-color: #f0f7f9;
+            color:#605e5c;
+        }
+        #page-wrapper h1,h2,h3,h4{
+            color:#9dd3c8;
+        }*/
+        
+
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -76,7 +93,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Agil Devtil</a>
+                <a class="navbar-brand logo-title" href="index.html">AGIL DEVTIL</a>
 
             </div>
             <!-- /.navbar-header -->
@@ -84,8 +101,12 @@
                 @{Html.RenderAction("List", "Project");}
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> @ViewBag.CurrentUserNameAndCompany <i class="fa fa-caret-down"></i>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding:5px;">
+                        @*<i class="fa fa-user fa-fw"></i> @ViewBag.CurrentUserNameAndCompany <i class="fa fa-caret-down"></i>*@
+                        <i class="fa fa-user fa-fw" style="display:inline-block;top:-10px;position:relative;"></i>  
+                        <span style="display:inline-block;">Leandro Briglio <br /> Some COmpany</span>
+                        <i class="fa fa-caret-down" style="display:inline-block;top:-10px;position:relative;"></i>
+                        
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         @*<li>

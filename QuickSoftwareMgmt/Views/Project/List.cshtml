@@ -1,7 +1,7 @@
-﻿<li>
+﻿<li style="top:-10px;">
     @Html.DropDownList("ProjectSelector", null, "Proyecto...", new { data_ref = Url.Action("ChangeProject", "Project", null, Request.Url.Scheme), @class = "form-control" })
 
 </li>
-<li>
+<li style="top:-10px;">
     @Html.DropDownList("SprintSelector", null, "Backlog...", new { data_ref = Url.Action("ChangeProject", "Project", null, Request.Url.Scheme), @class = "form-control" })
 </li>
