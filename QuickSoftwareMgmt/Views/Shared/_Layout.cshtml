@@ -14,13 +14,14 @@
     @*@Styles.Render("~/sbadmin/css")*@
     <link rel="stylesheet" href="@Url.Content("~/Content/font.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/app.v2.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/custom.css")" />
 
 </head>
 
 <body>
 
     <!-- header -->
-    <header id="header" class="navbar">
+    <header id="header" class="navbar bg bg-black">
 
         <ul class="nav navbar-nav navbar-avatar pull-right">
             @{Html.RenderAction("List", "Project");}
@@ -50,7 +51,7 @@
             </li>
         </ul>
         <a class="navbar-brand" href="#">
-            Agil Devtil
+            @*Agil Devtil*@
         </a>
         
         @*<form class="navbar-form pull-left shift" action="" data-toggle="shift:appendTo" data-target=".nav-primary">

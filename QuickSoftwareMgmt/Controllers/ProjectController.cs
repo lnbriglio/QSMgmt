@@ -171,7 +171,8 @@ namespace QuickSoftwareMgmt.Controllers
         public ActionResult List()
         {
             var projectsList = db.Projects
-                .Where(p => !p.Erased)
+                .Where(p => !p.Erased
+                    && p.CompanyId == CurrentUser.CompanyId)
                 .OrderBy(p => p.Name)
                 .ToList();
 

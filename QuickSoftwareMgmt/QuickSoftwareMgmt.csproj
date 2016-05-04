@@ -596,6 +596,7 @@
     <Content Include="bower_components\raphael\raphael-min.js" />
     <Content Include="bower_components\raphael\raphael.js" />
     <Content Include="Content\app.v2.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker2.css" />
     <Content Include="Content\font.css" />
@@ -603,6 +604,7 @@
     <Content Include="Content\img\expand.png" />
     <Content Include="Content\img\file.png" />
     <Content Include="Content\img\folder.png" />
+    <Content Include="Content\img\l2.png" />
     <Content Include="Content\jquery.treegrid.css" />
     <Content Include="dist\css\sb-admin-2.css" />
     <Content Include="dist\css\timeline.css" />
