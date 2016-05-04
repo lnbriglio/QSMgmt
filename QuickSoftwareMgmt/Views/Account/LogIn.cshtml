@@ -15,78 +15,113 @@
 
     <title>Log in - Agil Devtil</title>
 
-    @Styles.Render("~/sbadmin/css")
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:900">
-    <style type="text/css">
-        body {
-            background-color: #000;
-            background-image: url("http://demo.duotive.org/duotive-fortune/assets/03-dark-grey_03.jpg");
-            background-size: cover;
-        }
-
-        .panel {
-            background-color: rgba(255,255,255,0.4);
-        }
-
-        .panel-heading {
-            background-color: rgba(0, 0, 0,0.5) !important;
-            color: #fff !important;
-        }
-
-            .panel-heading h1 {
-                text-align: center;
-                font-family: 'Lato', sans-serif;
-                font-size: 3.5em;
-                text-shadow: 0px 0px 5px #ff6a00;
-            }
-    </style>
-
-
+    <link rel="stylesheet" href="@Url.Content("~/Content/font.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/app.v2.css")" />
+    <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
 </head>
 <body>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h1>AGIL DEVTIL</h1>
-
-                    </div>
-                    <div class="panel-body">
-                        @using (Html.BeginForm())
+    <!-- header -->
+    <header id="header" class="navbar bg bg-black">
+        <a href="docs.html" class="btn btn-link pull-right m-t-mini">
+            <i class="fa fa-question fa-lg text-default">
+            </i>
+        </a>
+        <a class="navbar-brand" href="#">
+            Agil Devtil
+        </a>
+    </header>
+    <!-- / header -->
+    <section id="content">
+        <div class="main padder">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 m-t-large">
+                    <section class="panel">
+                        <header class="panel-heading text-center">
+                            Sign in
+                        </header>
+                        @using (Html.BeginForm("LogIn", "Account", null, FormMethod.Post, new { @class = "panel-body" }))
                         {
-                            <fieldset>
-                                @Html.ValidationSummary(true)
-
-                                <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
-                                    @Html.ValidationMessageFor(model => model.Email)
+                            @Html.ValidationSummary(true)
+                            <div class="block">
+                                <label class="control-label">
+                                    Email
+                                </label>
+                                @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+                            <div class="block">
+                                <label class="control-label">
+                                    Contraseña
+                                </label>
+                                @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password)
+                            </div>
+                            @*<div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Keep me logged in
+                                    </label>
                                 </div>
+                                <a href="#" class="pull-right m-t-mini">
+                                    <small>
+                                        Forgot password?
+                                    </small>
+                                </a>*@
 
-                                <div class="form-group">
-                                    @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Password)
-                                </div>
-
-
-                                <input type="submit" value="Log in" class="btn btn-lg btn-block btn-info" />
-                                @Html.ActionLink("Registrarse", "SignUp", "Account", null, new { @class = "btn btn-lg btn-block btn-success" })
-                            </fieldset>
+                            <input type="submit" value="Log in" class="btn btn-info" />
+                            <div class="line line-dashed">
+                            </div>
+                            @*<a href="#" class="btn btn-facebook btn-block m-b-small">
+                                <i class="fa fa-facebook pull-left">
+                                </i>Sign in with Facebook
+                            </a>
+                            <a href="#" class="btn btn-twitter btn-block">
+                                <i class="fa fa-twitter pull-left">
+                                </i>Sign in with Twitter
+                            </a>
+                            <div class="line line-dashed">
+                            </div>*@
+                            <p class="text-muted text-center">
+                                <small>
+                                    ¿No tiene una cuenta?
+                                </small>
+                            </p>
+                            <a href="@Url.Action("SignUp")" class="btn btn-white btn-block">
+                                Crear una cuenta
+                            </a>
                         }
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>
-    </div>
-
-    @Scripts.Render("~/bundles/sbadmin")
+    </section>
+    <!-- footer -->
+    <footer id="footer">
+        <div class="text-center padder clearfix">
+            <p>
+                <small>
+                    &copy; Agil Devtil @DateTime.Today.Year
+                </small>
+                <br>
+                <br>
+                <a href="#" class="btn btn-xs btn-circle btn-twitter">
+                    <i class="fa fa-twitter">
+                    </i>
+                </a>
+                <a href="#" class="btn btn-xs btn-circle btn-facebook">
+                    <i class="fa fa-facebook">
+                    </i>
+                </a>
+                <a href="#" class="btn btn-xs btn-circle btn-gplus">
+                    <i class="fa fa-google-plus">
+                    </i>
+                </a>
+            </p>
+        </div>
+    </footer>
+    <!-- / footer -->
+    <!-- Bootstrap -->
+    <!-- app -->
+    <script src="@Url.Content("~/Scripts/app.v2.js")"></script>
 </body>
 </html>

@@ -3,161 +3,168 @@
 @{
     ViewBag.Title = "Dashboard";
 }
-
-@*<h1>Burndown</h1>*@
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel panel-heading">
-                <i class="fa fa-bell fa-fw">
-                </i>
+    @*<h1>Burndown</h1>*@
+    <div class="col-lg-6">
+        <section class="panel">
+            <header class="panel-heading">
+                @*<i class="fa fa-bell fa-fw">
+                    </i>*@
                 Burndown
-            </div>
-            <div class="panel panel-body">
+            </header>
+            <div class="panel-body">
                 <div id="burndownContainer"></div>
             </div>
-        </div>
-    </div>
-</div>
-
-
-@*<h1>Cambios</h1>*@
-
-<div class="row">
-    <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel panel-heading">
-                <i class="fa fa-bell fa-fw">
-                </i>
-                Cambios por prioridad
-            </div>
-            <div class="panel panel-body">
-                <div id="changesByPriorityContainer"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="panel panel-default">
-            <div class="panel panel-heading">
-                <i class="fa fa-bell fa-fw">
-                </i>
-                Cambios por tipo
-            </div>
-            <div class="panel panel-body">
-                <div id="changesByTypeContainer"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-2">
-
+        </section>
     </div>
 
-    <div class="col-lg-4">
-        <!--Aprobaciones pendientes-->
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-spinner fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" id="pendingApprovalChangesCountContainer">0</div>
-                        <div>Aprobaciones pendientes</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Cambios de emergencia-->
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-bell fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" id="emergencyChangesCountContainer">0</div>
-                        <div>Cambios de emergencia</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-3">
-        <!--Errores identificados-->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-bug fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" id="identifiedErrorsCountContainer">0</div>
-                        <div>Errores identificados</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Tiempo de corrección promedio-->
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-clock-o fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge"><span id="avgFixingTimeContainer">0</span><span> hs</span></div>
-                        <div>Tiempo de corrección promedio</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Incidentes causados por versiones nuevas-->
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-plus fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" id="newVersionErrorsCountContainer">0</div>
-                        <div>Incidentes causados por versiones nuevas</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Fracasos de pruebas de aceptación de servicio-->
-        <div class="panel panel-red">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-times fa-5x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" id="serviceAcceptanceFailuresCountContainer">0</div>
-                        <div>Fracasos de pruebas de aceptación de servicio</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-9">
-        <div class="panel panel-default">
-            <div class="panel panel-heading">
-                <i class="fa fa-bell fa-fw">
+    @*Urgencia de cambios por fecha*@
+    <div class="col-lg-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <i class="fa fa-area-chart fa-fw">
                 </i>
                 Urgencia de cambios por fecha
-            </div>
-            <div class="panel panel-body">
+            </header>
+            <div class="panel-body">
                 <div id="changesUrgencyByDateContainer"></div>
             </div>
-        </div>
+        </section>
     </div>
 </div>
 
-@*<h1>Tests</h1>*@
+@*<h1>Cambios</h1>*@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="col-lg-6">
+            <section class="panel">
+                <header class="panel-heading">
+                    <i class="fa fa-bell fa-fw">
+                    </i>
+                    Cambios por prioridad
+                </header>
+                <div class="panel-body">
+                    <div id="changesByPriorityContainer"></div>
+                </div>
+            </section>
+        </div>
+        <section class="col-lg-6">
+            <header class="panel">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw">
+                    </i>
+                    Cambios por tipo
+                </div>
+                <div class="panel-body">
+                    <div id="changesByTypeContainer"></div>
+                </div>
+            </header>
+        </section>
+    </div>
+    <div class="col-lg-6">
+    <div class="row">
+        <!--Aprobaciones pendientes-->
+        <div class="col-lg-4">
+            <section class="panel text-center">
+                <div class="panel-body">
+                    <a class="btn btn-circle btn-info btn-lg">
+                        <i class="fa fa-exclamation-triangle"></i>
+                    </a>
 
+                    <div class="h4">Aprobaciones pendientes</div>
+                    <div class="line m-l m-r"></div>
+                    <h4 class="text" id="pendingApprovalChangesCountContainer"></h4>
+                    @*<small>Errores identificados</small>*@
+                </div>
+            </section>
+        </div>
+
+        <!--Cambios de emergencia-->
+        <div class="col-lg-4">
+            <section class="panel text-center">
+                <div class="panel-body">
+                    <a class="btn btn-circle btn-default btn-lg">
+                        <i class="fa fa-bolt"></i>
+                    </a>
+
+                    <div class="h4">Cambios de emergencia</div>
+                    <div class="line m-l m-r"></div>
+                    <h4 class="text" id="emergencyChangesCountContainer"></h4>
+                    @*<small>Errores identificados</small>*@
+                </div>
+            </section>
+        </div>
+        <!--Fracasos de pruebas de aceptación de servicio-->
+        <div class="col-lg-4">
+            <section class="panel text-center">
+                <div class="panel-body">
+                    <a class="btn btn-circle btn-danger btn-lg">
+                        <i class="fa fa-times"></i>
+                    </a>
+
+                    <div class="h4">Fracasos de pruebas de aceptación de servicio</div>
+                    <div class="line m-l m-r"></div>
+                    <h4 class="text" id="serviceAcceptanceFailuresCountContainer">0</h4>
+                    @*<small>hs</small>*@
+                </div>
+            </section>
+        </div>
+        
+        
+    </div>
+        <div class="row">
+            <!--Tiempo de corrección promedio-->
+            <div class="col-lg-4">
+                <section class="panel text-center">
+                    <div class="panel-body">
+                        <a class="btn btn-circle btn-primary btn-lg">
+                            <i class="fa fa-clock-o"></i>
+                        </a>
+
+                        <div class="h4">Tiempo de corrección promedio</div>
+                        <div class="line m-l m-r"></div>
+                        <h4 class="text" id="avgFixingTimeContainer">0</h4>
+                        <small>hs</small>
+                    </div>
+                </section>
+            </div>
+            <!--Incidentes causados por versiones nuevas-->
+            <div class="col-lg-4">
+                <section class="panel text-center">
+                    <div class="panel-body">
+                        <a class="btn btn-circle btn-warning btn-lg">
+                            <i class="fa fa-plus"></i>
+                        </a>
+
+                        <div class="h4">Incidentes causados por versiones nuevas</div>
+                        <div class="line m-l m-r"></div>
+                        <h4 class="text" id="newVersionErrorsCountContainer"></h4>
+                        @*<small>Errores identificados</small>*@
+                    </div>
+                </section>
+            </div>
+
+
+
+            @*Errores identificados*@
+            <div class="col-lg-4">
+                <section class="panel text-center">
+                    <div class="panel-body">
+                        <a class="btn btn-circle btn-inverse btn-lg">
+                            <i class="fa fa-bug"></i>
+                        </a>
+
+                        <div class="h5">Errores identificados</div>
+                        <div class="line m-l m-r"></div>
+                        <h4 class="text" id="identifiedErrorsCountContainer"></h4>
+                        @*<small>Errores identificados</small>*@
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    @*<h1>Tests</h1>*@
+</div>
 
 @section Scripts{
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -193,7 +200,7 @@
                 $('#changesUrgencyByDateContainer').highcharts(data);
             });
 
-            GetChangesUrgencyByDateChart
+            //GetChangesUrgencyByDateChart
 
             //Test
             $.get('@Url.Action("GetIdentifiedErrorsCount", "Test")', null, function (data) {

@@ -1,42 +1,57 @@
 ﻿@model DAL.User
 
 @{
-    ViewBag.Title = "Crear";
+    ViewBag.Title = "Crear usuario";
 }
-<div class="col-lg-6 col-lg-offset-0">
-    <h2>Crear</h2>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-0">
+        <section class="panel">
+            <header>
+                <div class="text-center h4">
+                    Crear usuario
+                </div>
+            </header>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+            <div class="panel-body">
+                @using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <hr />
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.CompanyId)
 
-        <div class="form-horizontal">
-            <h4>Usuario</h4>
-            <hr />
-            @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.CompanyId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email)
-                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Email)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <input type="submit" value="Crear" class="btn btn-primary" />
+                        </div>
+                    </div>
+                }
+
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Password)
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Password)
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-default" />
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Volver al índice", "Index")
+        </section>
     </div>
+</div>
+
+
+</div>
+<div class="row">
+    @Html.ActionLink("Volver al índice", "Index")
 </div>
 
 @section Scripts {

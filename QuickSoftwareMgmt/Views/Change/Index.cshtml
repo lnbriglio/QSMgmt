@@ -2,101 +2,107 @@
 @model IEnumerable<DAL.ChangeRequest>
 
 @{
-    ViewBag.Title = "Índice";
+    ViewBag.Title = "Índice de peticiones de cambio";
 }
 
+<div class="row">
+    <section class="panel">
+        <header>
+            <div class="text-center h4">
+                Índice de peticiones de cambio <a class="btn btn-white btn-circle btn-xs" href="@Url.Action("Create")" alt="Crear nuevo">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table" id="mainTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ApprovalId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ChangeTypeId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ImpactId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PriorityId)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
 
-<h2>Índice</h2>
+                            <tr class="treegrid-log-@item.Id">
+                                <td title="@Html.DisplayFor(modelItem => item.Description)" style="font-weight:bolder;">
+                                    [@Html.DisplayFor(modelItem => item.Id)] @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Approval.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ChangeType.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Impact.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Priority.Name)
+                                </td>
+                                <td>
+                                    <a href="#" class="addTaskLink" data-url="@Url.Action("Create", "Task", new { id= item.Id})">Nueva tarea</a> |
 
-<p>
-    @Html.ActionLink("Crear nuevo", "Create")
-</p>
-<table class="table" id="mainTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApprovalId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ChangeTypeId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImpactId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PriorityId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                                </td>
+                            </tr>
+                            foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
+                            {
+                                @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
+                                    @:<td>
+                                        switch ((TaskStateEnum)taskItem.TaskStateId)
+                                        {
+                                            case TaskStateEnum.ToDo:
+                                                @:<button class="btn btn-xs btn-danger" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button>
+                                        break;
+                                            case TaskStateEnum.Doing:
+                                            @:<button class="btn btn-xs btn-info" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button>
+                                        break;
+                                            case TaskStateEnum.Done:
+                                            @:<button class="btn btn-xs btn-success" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button>
+                                        break;
 
-        <tr class="treegrid-log-@item.Id">
-            <td title="@Html.DisplayFor(modelItem => item.Description)" style="font-weight:bolder;">
-                [@Html.DisplayFor(modelItem => item.Id)] @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Approval.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChangeType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Impact.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Priority.Name)
-            </td>
-            <td>
-                <a href="#" class="addTaskLink" data-url="@Url.Action("Create", "Task", new { id= item.Id})">Nueva tarea</a> |
-  
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-        foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
-        {
-            @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
-                @:<td>
-                switch ((TaskStateEnum)taskItem.TaskStateId)
-                {
-                    case TaskStateEnum.ToDo: 
-                        @:<button class="btn btn-xs btn-danger" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
-                        break;
-                        case TaskStateEnum.Doing: 
-                        @:<button class="btn btn-xs btn-info" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
-                        break;
-                        case TaskStateEnum.Done: 
-                        @:<button class="btn btn-xs btn-success" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
-                        break;
-                        
-                }
-        @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null)
-                }
-    }
+                                        }
+                                        @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null)
+                                        }
+                        }
 
 
-        </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 </div>
 <!-- /.modal -->
-
-
-
 @section Scripts{
     @*http://maxazan.github.io/jquery-treegrid/*@
-    <link rel="stylesheet" href="@Url.Content("~/Content/jquery.treegrid.css")"/>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/jquery.treegrid.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.bootstrap3.js")"></script>
 
     <script type="text/javascript">

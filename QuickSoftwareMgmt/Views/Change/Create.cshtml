@@ -1,70 +1,83 @@
 ﻿@model DAL.ChangeRequest
 
 @{
-    ViewBag.Title = "Crear";
+    ViewBag.Title = "Crear Solicitud de cambio";
 }
 
-<div class="col-lg-6 col-lg-offset-0">
-    <h2>Crear</h2>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-0">
+        <section class="panel">
+            <header>
+                <div class="text-center h4">
+                    Crear solicitud de cambio
+                </div>
+            </header>
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+            <div class="panel-body">
+                @using (Html.BeginForm("Create", "Change", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Solicitud de cambio</h4>
-            <hr />
-            @Html.ValidationSummary(false)
-            @Html.HiddenFor(model => model.CreationDate)
-            @Html.HiddenFor(model => model.ProjectId)
-            
+                    <hr />
+                    @Html.ValidationSummary(false)
+                    @Html.HiddenFor(model => model.CreationDate)
+                    @Html.HiddenFor(model => model.ProjectId)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Title)
-                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Title)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Title)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ApprovalId, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.DropDownList("ApprovalId", null, String.Empty, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ApprovalId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ChangeTypeId, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.DropDownList("ChangeTypeId", null, String.Empty, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ChangeTypeId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ImpactId, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.DropDownList("ImpactId", null, String.Empty, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ImpactId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PriorityId, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.DropDownList("PriorityId", null, String.Empty, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PriorityId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-9 col-lg-offset-3">
+                            <input type="submit" value="Crear" class="btn btn-primary" />
+                        </div>
+                    </div>
+                }
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description)
-                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ApprovalId)
-                @Html.DropDownList("ApprovalId", null, String.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ApprovalId)
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ChangeTypeId)
-                @Html.DropDownList("ChangeTypeId", null, String.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ChangeTypeId)
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.ImpactId)
-                @Html.DropDownList("ImpactId", null, String.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ImpactId)
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PriorityId)
-                @Html.DropDownList("PriorityId", null, String.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PriorityId)
-            </div>
-
-            <div class="form-group">
-                    <input type="submit" value="Crear" class="btn btn-default" />
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Volver al índice", "Index")
+        </section>
     </div>
 </div>
+
 
 @section Scripts {
     @*@Scripts.Render("~/bundles/jqueryval")*@

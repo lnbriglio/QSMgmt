@@ -12,106 +12,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Registro - Agil Devtil</title>
-
-    @Styles.Render("~/sbadmin/css")
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <style type="text/css">
-        body {
-            background-color: #000;
-            background-image: url("http://demo.duotive.org/duotive-fortune/assets/03-dark-grey_03.jpg");
-            background-size: cover;
-        }
-
-        .panel {
-            background-color: rgba(255,255,255,0.8);
-        }
-
-        .panel-heading {
-            background-color: rgba(0, 0, 0,0.5) !important;
-            color: #fff !important;
-        }
-
-            .panel-heading h1 {
-                text-align: center;
-            }
-    </style>
+    @*
+        <link rel="stylesheet" href="css/font.css">
+        <link rel="stylesheet" href="css/app.v2.css" type="text/css" /> <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
+    *@
+    <link rel="stylesheet" href="@Url.Content("~/Content/font.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/app.v2.css")" />
 
 
 </head>
 <body>
+    <!-- header --> <header id="header" class="navbar bg bg-black">
+        @*<a href="docs.html" class="btn btn-link pull-right m-t-mini"><i class="fa fa-question fa-lg text-default"></i></a>*@
+        <a class="navbar-brand" href="#">Agil Devtil</a>
+    </header> <!-- / header --> <section id="content">
+        <div class="main padder">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h1>Nuevo usuario</h1>
-
-                    </div>
-                    <div class="panel-body">
-                        @using (Html.BeginForm())
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 m-t-large">
+                    <section class="panel">
+                        <header class="panel-heading text-center"> Registro </header>
+                        @using (Html.BeginForm("SignUp", "Account", null, FormMethod.Post, new { @class = "panel-body" }))
                         {
-                            <fieldset>
-                                @Html.ValidationSummary(false)
+                            @Html.ValidationSummary(false)
+                            <div class="block">
+                                <label class="control-label">Escriba su e-mail</label>
+                                @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
+                                <span title="Email valido" class="btn btn-xs btn-success" id="mailCheck"
+                                      style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-check"></i></span>
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
 
-                                <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
-                                    <span title="Email valido" class="btn btn-xs btn-success" id="mailCheck"
-                                          style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-check"></i></span>
-                                    @Html.ValidationMessageFor(model => model.Email)
+                            <div class="block">
+                                <label class="control-label">Escriba una contraseña</label>
+                                @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password)
+                            </div>
+
+                            <div class="block">
+                                <label class="control-label">Escriba su nombre</label>
+                                @Html.TextBoxFor(model => model.FirstName, new { placeholder = "Nombre", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+
+                            <div class="block">
+                                <label class="control-label">Escriba su apellido</label>
+                                @Html.TextBoxFor(model => model.LastName, new { placeholder = "Apellido", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+                            <div class="line line-dashed"></div>
+                            <div id="companySection">
+                                <h4>Empresa</h4>
+                                @Html.HiddenFor(model => model.CompanyId)
+
+                                <div class="block">
+                                    <label class="control-label">Escriba el nombre de su empresa</label>
+                                    @Html.TextBoxFor(model => model.Company.Name, new { placeholder = "Nombre", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Company.Name)
                                 </div>
 
-                                <div class="form-group">
-                                    @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Password)
+                                <div class="block">
+                                    <label class="control-label">Describa su empresa</label>
+                                    @Html.TextAreaFor(model => model.Company.Description, new { placeholder = "Descripción", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Company.Description)
                                 </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(model => model.FirstName, new { placeholder = "Nombre", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.FirstName)
+
+                                <div class="block">
+                                    <label class="control-label">Escriba el dominio de su empresa</label>
+                                    @Html.TextBoxFor(model => model.Company.Domain, new { placeholder = "Dominio", @class = "form-control" })
+                                    <span title="El dominio representa es la parte después de la @(" @") en un mail, al determinar un dominio, todos los mails del mismo se asociarán a esta empresa"
+                                          class="btn btn-xs btn-info" id="domainInfo"
+                                          style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-info"></i></span>
+                                    @Html.ValidationMessageFor(model => model.Company.Domain)
                                 </div>
-                                <div class="form-group">
-                                    @Html.TextBoxFor(model => model.LastName, new { placeholder = "Apellido", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.LastName)
-                                </div>
-                                <div id="companySection">
-                                    <h3>Empresa</h3>
-                                    @Html.HiddenFor(model => model.CompanyId)
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(model => model.Company.Name, new { placeholder = "Nombre", @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Company.Name)
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextAreaFor(model => model.Company.Description, new { placeholder = "Descripción", @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Company.Description)
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(model => model.Company.Domain, new { placeholder = "Dominio", @class = "form-control" })
-                                        <span title="El dominio representa es la parte después de la @("@") en un mail, al determinar un dominio, todos los mails del mismo se asociarán a esta empresa"
-                                              class="btn btn-xs btn-info" id="domainInfo"
-                                              style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-info"></i></span>
-                                        @Html.ValidationMessageFor(model => model.Company.Domain)
-                                    </div>
-                                </div>
-                                <input type="submit" value="Registrase" class="btn btn-lg btn-block btn-info" />
-                            </fieldset>
+                            </div>
+                            <input type="submit" value="Registrase" class="btn btn-info" />
                         }
-                    </div>
+
+                        @*<div class="line line-dashed"></div>
+                            <div class="row">
+                                <div class="col-sm-6 text-center"> <a href="#" class="btn btn-facebook btn-circle btn-sm"><i class="fa fa-facebook"></i>Sign up with Facebook</a> </div>
+                                <div class="col-sm-6 text-center"> <a href="#" class="btn btn-twitter btn-circle btn-sm"><i class="fa fa-twitter"></i>Sign up with Twitter</a> </div>
+                            </div>
+                            <div class="line line-dashed"></div> <p class="text-muted text-center"><small>¿Ya tiene una cuenta?</small></p> <a href="@Url.Action("Login")" class="btn btn-white btn-block">Log in</a>*@
+                    </section>
                 </div>
             </div>
         </div>
-    </div>
-
-    @Scripts.Render("~/bundles/sbadmin")
-
+    </section> <!-- footer --> <footer id="footer">
+        <div class="text-center padder clearfix"> <p> <small>&copy; Agil Devtil @DateTime.Today.Year</small><br><br> <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="fa fa-twitter"></i></a> <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="fa fa-facebook"></i></a> <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="fa fa-google-plus"></i></a> </p> </div>
+    </footer> <!-- / footer --> <!-- Bootstrap --> <!-- app -->
+    <script src="@Url.Content("~/Scripts/app.v2.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/mail-validator.js")"></script>
 
     <script type="text/javascript">
@@ -132,7 +124,7 @@
                                 $("#mailCheck").attr("title", "Email válido").show();
                             }
 
-                            if (response.companyId != 0) {
+                            if (Number(response.companyId) != 0) {
                                 $("#CompanyId").val(response.companyId);
                                 $("#companySection").hide();
                             } else {

@@ -595,8 +595,10 @@
     <Content Include="bower_components\raphael\license.txt" />
     <Content Include="bower_components\raphael\raphael-min.js" />
     <Content Include="bower_components\raphael\raphael.js" />
+    <Content Include="Content\app.v2.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker2.css" />
+    <Content Include="Content\font.css" />
     <Content Include="Content\img\collapse.png" />
     <Content Include="Content\img\expand.png" />
     <Content Include="Content\img\file.png" />
@@ -612,9 +614,12 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app.v2.js" />
     <Content Include="Scripts\jquery.treegrid.bootstrap3.js" />
     <Content Include="Scripts\jquery.treegrid.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\opensans-bold-webfont.woff" />
+    <Content Include="fonts\opensans-webfont.woff" />
     <None Include="Properties\PublishProfiles\Agil-Devtil - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Agil-Devtil - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

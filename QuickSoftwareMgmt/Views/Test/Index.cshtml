@@ -2,124 +2,135 @@
 @model IEnumerable<DAL.Test>
 
 @{
-    ViewBag.Title = "Índice";
+    ViewBag.Title = "Índice de pruebas";
 }
 
-<h2>Índice</h2>
+<div class="row">
+    <section class="panel">
+        <header>
+            <div class="text-center h4">
+                Índice de proyectos <a class="btn btn-white btn-circle btn-xs" href="@Url.Action("Create")" alt="Crear nuevo">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </header>
+        <div class="panel-body">
 
-<p>
-    @Html.ActionLink("Crear nuevo", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TestOutcomeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VersionOriginId)
-        </th>
-        <th></th>
-    </tr>
+            <div class="table-responsive">
+                <table class="table" id="mainTable">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TestOutcomeId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.VersionOriginId)
+                        </th>
+                        <th></th>
+                    </tr>
 
-@foreach (var item in Model) {
-        <tr class="treegrid-log-@item.Id">
-            <td title="@Html.DisplayFor(modelItem => item.Description)" style="font-weight:bolder;">
-                [@Html.DisplayFor(modelItem => item.Id)] @Html.DisplayFor(modelItem => item.Title)
-            </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TestOutcome.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VersionOrigin.Name)
-        </td>
-        <td>
-            <a href="#" class="addTaskLink" data-url="@Url.Action("Create", "Task", new { id= item.Id})">Nueva tarea</a> |
-            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-            foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
-        {
-            @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
-                @:<td>
-                switch ((TaskStateEnum)taskItem.TaskStateId)
-                {
-                    case TaskStateEnum.ToDo: 
-                        @:<button class="btn btn-xs btn-danger" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
-                        break;
-                        case TaskStateEnum.Doing: 
-                        @:<button class="btn btn-xs btn-info" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
-                        break;
-                        case TaskStateEnum.Done: 
-                        @:<button class="btn btn-xs btn-success" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button> 
-                        break;
-                        
-                }
-        @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null)
-                }
-}
+                    @foreach (var item in Model)
+                    {
+                        <tr class="treegrid-log-@item.Id">
+                            <td title="@Html.DisplayFor(modelItem => item.Description)" style="font-weight:bolder;">
+                                [@Html.DisplayFor(modelItem => item.Id)] @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TestOutcome.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VersionOrigin.Name)
+                            </td>
+                            <td>
+                                <a href="#" class="addTaskLink" data-url="@Url.Action("Create", "Task", new { id= item.Id})">Nueva tarea</a> |
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                        foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
+                        {
+                            @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
+                                @:<td>
+                                switch ((TaskStateEnum)taskItem.TaskStateId)
+                                {
+                                    case TaskStateEnum.ToDo:
+                                        @:<button class="btn btn-xs btn-danger" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button>
+                                break;
+                                    case TaskStateEnum.Doing:
+                                    @:<button class="btn btn-xs btn-info" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button>
+                                break;
+                                    case TaskStateEnum.Done:
+                                    @:<button class="btn btn-xs btn-success" type="button" title="@Html.DisplayFor(task => taskItem.TaskState.Name)">@Html.DisplayFor(task => taskItem.Id)</button>
+                                break;
 
-</table>
+                                }
+                                @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null)
+                                }
+                    }
 
-<!-- Modal -->
-<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            </table>
+                </div>
+            </div>
+        </section>
+    </div>
 
-</div>
-<!-- /.modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-@section Scripts{
-    @*http://maxazan.github.io/jquery-treegrid/*@
-    <link rel="stylesheet" href="@Url.Content("~/Content/jquery.treegrid.css")" />
-    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.bootstrap3.js")"></script>
+    </div>
+    <!-- /.modal -->
+    @section Scripts{
+        @*http://maxazan.github.io/jquery-treegrid/*@
+        <link rel="stylesheet" href="@Url.Content("~/Content/jquery.treegrid.css")" />
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.treegrid.bootstrap3.js")"></script>
 
-    <script type="text/javascript">
-        //$("#mainTable").treegrid();
+        <script type="text/javascript">
+            $("#mainTable").treegrid();
 
-        $(".addTaskLink").click(function () {
-            var url = $(this).data("url");
+            $(".addTaskLink").click(function () {
+                var url = $(this).data("url");
 
-            $.get(url, function (partialResult) {
-                refreshModal(partialResult);
-            });
-
-            function refreshModal(data) {
-                $('#addTaskModal').html(data);
-
-                $("#addTaskModal").off("submit", "#form-createTask");
-
-                $("#addTaskModal").on("submit", "#form-createTask", function (e) {
-                    e.preventDefault();  // prevent standard form submission
-
-                    var form = $(this);
-                    $.ajax({
-                        url: form.attr("action"),
-                        method: form.attr("method"),  // post
-                        data: form.serialize(),
-                        success: function (partialResult) {
-                            refreshModal(partialResult);
-
-                            $('#addTaskModal').on('hidden.bs.modal', function () {
-                                window.location.reload(true);
-                            });
-                        }
-                    });
+                $.get(url, function (partialResult) {
+                    refreshModal(partialResult);
                 });
 
-                $('#addTaskModal').modal('show');
-            }
-        });
+                function refreshModal(data) {
+                    $('#addTaskModal').html(data);
+
+                    $("#addTaskModal").off("submit", "#form-createTask");
+
+                    $("#addTaskModal").on("submit", "#form-createTask", function (e) {
+                        e.preventDefault();  // prevent standard form submission
+
+                        var form = $(this);
+                        $.ajax({
+                            url: form.attr("action"),
+                            method: form.attr("method"),  // post
+                            data: form.serialize(),
+                            success: function (partialResult) {
+                                refreshModal(partialResult);
+
+                                $('#addTaskModal').on('hidden.bs.modal', function () {
+                                    window.location.reload(true);
+                                });
+                            }
+                        });
+                    });
+
+                    $('#addTaskModal').modal('show');
+                }
+            });
 
 
-    </script>
-}
+        </script>
+    }

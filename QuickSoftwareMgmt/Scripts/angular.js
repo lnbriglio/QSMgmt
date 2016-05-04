@@ -23390,7 +23390,7 @@ var CONSTANT_VALUE_REGEXP = /^(true|false|\d+)$/;
             }]);
        </script>
         <form ng-controller="ExampleController">
-          <h2>Which is your favorite?</h2>
+          <div class="clearfix">    <h4>Which is your favorite?</h4></div>
             <label ng-repeat="name in names" for="{{name}}">
               {{name}}
               <input type="radio"

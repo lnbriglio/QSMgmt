@@ -45,7 +45,7 @@ namespace QuickSoftwareMgmt.Controllers
                     .Select(tm => tm.User).ToList();
             }
 
-            ViewBag.UserId = new SelectList(users, "Id", "UserName");
+            ViewBag.UserId = new SelectList(users, "Id", "FullName");
 
             return PartialView("_CreateModal", task);
         }
@@ -89,7 +89,7 @@ namespace QuickSoftwareMgmt.Controllers
                     .Select(tm => tm.User).ToList();
             }
 
-            ViewBag.UserId = new SelectList(users, "Id", "UserName", task.UserId);
+            ViewBag.UserId = new SelectList(users, "Id", "FullName", task.UserId);
 
             return PartialView("_CreateModal", task);
         }
@@ -126,7 +126,7 @@ namespace QuickSoftwareMgmt.Controllers
                     .Select(tm => tm.User).ToList();
             }
 
-            ViewBag.UserId = new SelectList(users, "Id", "UserName", task.UserId);
+            ViewBag.UserId = new SelectList(users, "Id", "FullName", task.UserId);
 
             return PartialView("_EditModal", task);
         }
@@ -142,7 +142,7 @@ namespace QuickSoftwareMgmt.Controllers
                     await db.SaveChangesAsync();
 
                     await db.Entry(task).ReloadAsync();
-                    return PartialView("_CreateSuccessfulModal", task);
+                    return PartialView("_EditSuccessfulModal", task);
                 }
             }
             catch
@@ -170,7 +170,7 @@ namespace QuickSoftwareMgmt.Controllers
                     .Select(tm => tm.User).ToList();
             }
 
-            ViewBag.UserId = new SelectList(users, "Id", "UserName", task.UserId);
+            ViewBag.UserId = new SelectList(users, "Id", "FullName", task.UserId);
 
             return PartialView("_EditModal", task);
         }
