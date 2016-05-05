@@ -12,63 +12,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>¡Registro satisfactorio! - Agil Devtil</title>
-
-    @Styles.Render("~/sbadmin/css")
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <style type="text/css">
-        body {
-            background-color: #000;
-            background-image: url("http://demo.duotive.org/duotive-fortune/assets/03-dark-grey_03.jpg");
-            background-size: cover;
-        }
-
-        .panel {
-            background-color: rgba(255,255,255,0.4);
-        }
-
-        .panel-heading {
-            background-color: rgba(0, 0, 0,0.5) !important;
-            color: #fff !important;
-        }
-
-            .panel-heading h1 {
-                text-align: center;
-            }
-    </style>
-
+    <title>Registro satisfactorio - Agil Devtil</title>
+    @*
+        <link rel="stylesheet" href="css/font.css">
+        <link rel="stylesheet" href="css/app.v2.css" type="text/css" /> <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
+    *@
+@Styles.Render("~/Content/first")
 
 </head>
 <body>
+    <!-- header -->
+    <header id="header" class="navbar bg bg-black">
+        <a class="navbar-brand" href="@Url.Action("LogIn","Account")"></a>
+    </header>
+    <!-- / header -->
+    <section id="content">
+        <div class="main padder">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h1>¡Registro satisfactorio!</h1>
-
-                    </div>
-                    <div class="panel-body">
-
-                        <fieldset>
-
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4 m-t-large">
+                    <section class="panel">
+                        <header class="panel-heading text-center h2"> ¡Registro satisfactorio! </header>
+                        <div class="panel-body">
                             @Html.ActionLink("Volver al Log in", "LogIn", "Account", null, new { @class = "btn btn-lg btn-block btn-success" })
-                        </fieldset>
-                    </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
-    </div>
-
-    @Scripts.Render("~/bundles/sbadmin")
+    </section>
+    <!-- footer -->
+    <footer id="footer">
+        <div class="text-center padder clearfix"> <p> <small>&copy; Agil Devtil @DateTime.Today.Year</small><br><br> <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="fa fa-twitter"></i></a> <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="fa fa-facebook"></i></a> <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="fa fa-google-plus"></i></a> </p> </div>
+    </footer>
+    <!-- / footer -->
+    <!-- Bootstrap -->
+    <!-- app -->
+    @Scripts.Render("~/bundles/first")
 </body>
 </html>

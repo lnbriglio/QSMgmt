@@ -105,7 +105,10 @@ namespace QuickSoftwareMgmt.Controllers
                 ViewBag.SelectedSprintId = SelectedSprintId;
 
                 if (CurrentUser != null)
-                    ViewBag.CurrentUserNameAndCompany = String.Format("{0} {1} - {2}", CurrentUser.FirstName, CurrentUser.LastName, CurrentUser.Company.Name);
+                {
+                    ViewBag.CurrentUserName = String.Format("{0} {1}", CurrentUser.FirstName, CurrentUser.LastName );
+                    ViewBag.CurrentCompanyName = CurrentUser.Company.Name;
+                }
             }
 
             base.OnActionExecuting(filterContext);

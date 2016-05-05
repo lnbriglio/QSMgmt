@@ -13,19 +13,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Registro - Agil Devtil</title>
-    @*
-        <link rel="stylesheet" href="css/font.css">
-        <link rel="stylesheet" href="css/app.v2.css" type="text/css" /> <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
-    *@
-    <link rel="stylesheet" href="@Url.Content("~/Content/font.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/app.v2.css")" />
 
+@Styles.Render("~/Content/first")
 
 </head>
 <body>
     <!-- header --> <header id="header" class="navbar bg bg-black">
-        @*<a href="docs.html" class="btn btn-link pull-right m-t-mini"><i class="fa fa-question fa-lg text-default"></i></a>*@
-        <a class="navbar-brand" href="#">Agil Devtil</a>
+        <a class="navbar-brand" href="@Url.Action("LogIn","Account")"></a>
     </header> <!-- / header --> <section id="content">
         <div class="main padder">
 
@@ -87,15 +81,9 @@
                                     @Html.ValidationMessageFor(model => model.Company.Domain)
                                 </div>
                             </div>
-                            <input type="submit" value="Registrase" class="btn btn-info" />
+    <input type="submit" value="Registrase" class="btn btn-info btn-block" />
                         }
-
-                        @*<div class="line line-dashed"></div>
-                            <div class="row">
-                                <div class="col-sm-6 text-center"> <a href="#" class="btn btn-facebook btn-circle btn-sm"><i class="fa fa-facebook"></i>Sign up with Facebook</a> </div>
-                                <div class="col-sm-6 text-center"> <a href="#" class="btn btn-twitter btn-circle btn-sm"><i class="fa fa-twitter"></i>Sign up with Twitter</a> </div>
-                            </div>
-                            <div class="line line-dashed"></div> <p class="text-muted text-center"><small>¿Ya tiene una cuenta?</small></p> <a href="@Url.Action("Login")" class="btn btn-white btn-block">Log in</a>*@
+                        
                     </section>
                 </div>
             </div>
@@ -103,7 +91,7 @@
     </section> <!-- footer --> <footer id="footer">
         <div class="text-center padder clearfix"> <p> <small>&copy; Agil Devtil @DateTime.Today.Year</small><br><br> <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="fa fa-twitter"></i></a> <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="fa fa-facebook"></i></a> <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="fa fa-google-plus"></i></a> </p> </div>
     </footer> <!-- / footer --> <!-- Bootstrap --> <!-- app -->
-    <script src="@Url.Content("~/Scripts/app.v2.js")"></script>
+    @Scripts.Render("~/bundles/first")
     <script type="text/javascript" src="@Url.Content("~/Scripts/mail-validator.js")"></script>
 
     <script type="text/javascript">

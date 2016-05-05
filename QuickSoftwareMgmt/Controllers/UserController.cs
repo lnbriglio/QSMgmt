@@ -54,7 +54,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include="UserName,Password,CompanyId")] User user)
+        public async Task<ActionResult> Create([Bind(Include="Email,FirstName,LastName,Password,CompanyId")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,UserName,Password,CompanyId")] User user)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Email,FirstName,LastName,Password,CompanyId")] User user)
         {
             if (ModelState.IsValid)
             {

@@ -1,40 +1,53 @@
 ﻿@model DAL.Project
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar proyecto";
 }
 
-<div class="clearfix">    <h4>Eliminar</h4></div>
 
-<h3>¿Está seguro que desea eliminar esto?</h3>
-<div>
-    <h4>Proyecto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Eliminar proyecto 
+                </div>
+                <hr />
+                <div class="text-center h5">
+                    ¿Está seguro que desea eliminar esto?
+    
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
 
-    </dl>
+                    </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Volver al índice", "Index")
-        </div>
-    }
+                        <div class="form-actions no-color col-md-offset-3 col-md-6">
+                            <input type="submit" value="Eliminar" class="btn btn-danger btn-block" />
+                        </div>
+                    }
+                </div>
+            </header>
+        </section>
+    </div>
 </div>

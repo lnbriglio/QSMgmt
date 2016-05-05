@@ -15,22 +15,16 @@
 
     <title>Log in - Agil Devtil</title>
 
-    <link rel="stylesheet" href="@Url.Content("~/Content/font.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/app.v2.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/custom.css")" />
+@Styles.Render("~/Content/first")
     <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
 </head>
 <body>
 
     <!-- header -->
     <header id="header" class="navbar bg bg-black">
-        @*<a href="docs.html" class="btn btn-link pull-right m-t-mini">
-            <i class="fa fa-question fa-lg text-default">
-            </i>
-        </a>*@
+
         <a class="navbar-brand" href="#">
-            @*Agil Devtil*@
-            @*<img alt="Logo - Agil Devtil" src="@Url.Content("~/Content/img/l1.png")" />*@
+  
         </a>
     </header>
     <!-- / header -->
@@ -70,19 +64,10 @@
                                     </small>
                                 </a>*@
 
-                            <input type="submit" value="Log in" class="btn btn-info" />
+    <input type="submit" value="Log in" class="btn btn-info btn-block" />
                             <div class="line line-dashed">
                             </div>
-                            @*<a href="#" class="btn btn-facebook btn-block m-b-small">
-                                <i class="fa fa-facebook pull-left">
-                                </i>Sign in with Facebook
-                            </a>
-                            <a href="#" class="btn btn-twitter btn-block">
-                                <i class="fa fa-twitter pull-left">
-                                </i>Sign in with Twitter
-                            </a>
-                            <div class="line line-dashed">
-                            </div>*@
+           
                             <p class="text-muted text-center">
                                 <small>
                                     ¿No tiene una cuenta?
@@ -124,6 +109,6 @@
     <!-- / footer -->
     <!-- Bootstrap -->
     <!-- app -->
-    <script src="@Url.Content("~/Scripts/app.v2.js")"></script>
+    @Scripts.Render("~/bundles/first")
 </body>
 </html>

@@ -43,6 +43,10 @@ namespace DAL
         [MinLength(1)]
         [MaxLength(25)]
         public object LastName { get; set; }
+
+        [DisplayName("Empresa")]
+        public object CompanyId { get; set; }
+
         public object Erased { get; set; }
     }
 }

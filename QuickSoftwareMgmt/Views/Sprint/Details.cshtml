@@ -1,50 +1,56 @@
 ﻿@model DAL.Sprint
 
 @{
-    ViewBag.Title = "Detalles";
+    ViewBag.Title = "Detalles de sprint";
 }
 
-<div class="clearfix">    <h4>Detalles</h4></div>
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Detalles de sprint <a class="btn btn-circle btn-white btn-xs" href="@Url.Action(" edit", new { id=Model.Id })" alt="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
 
-<div>
-    <h4>Sprint</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.StartDate)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.StartDate)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EndDate)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.EndDate)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProjectId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Project.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
-
-    </dl>
+                    </dl>
+                </div>
+            </header>
+        </section>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver al índice", "Index")
-</p>

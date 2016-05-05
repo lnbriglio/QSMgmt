@@ -1,96 +1,110 @@
 ﻿@model DAL.ChangeRequest
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar petción de cambio";
 }
 
-<div class="clearfix">    <h4>Eliminar</h4></div>
 
-<h3>¿Está seguro que desea eliminar esto?</h3>
-<div>
-    <h4>Solicitud de cambio</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Eliminar petción de cambio
+                </div>
+                <hr />
+                <div class="text-center h5">
+                    ¿Está seguro que desea eliminar esto?
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                </div>
+                <div>
+                    <hr />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Title)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectId)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreationDate)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.CreationDate)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ChangeRequest.Title)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProjectId)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChangeRequest.Title)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Project.Name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApprovalId)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ChangeRequest.Title)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Approval.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.ChangeRequest.Title)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ChangeTypeId)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ApprovalId)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChangeType.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Approval.Name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImpactId)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ChangeTypeId)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Impact.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.ChangeType.Name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PriorityId)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ImpactId)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Priority.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Impact.Name)
+                        </dd>
 
-    </dl>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PriorityId)
+                        </dt>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                        <dd>
+                            @Html.DisplayFor(model => model.Priority.Name)
+                        </dd>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Volver al índice", "Index")
-        </div>
-    }
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color col-md-offset-3 col-md-6">
+                            <input type="submit" value="Eliminar" class="btn btn-danger btn-block" />
+                        </div>
+                    }
+                </div>
+            </header>
+        </section>
+    </div>
 </div>

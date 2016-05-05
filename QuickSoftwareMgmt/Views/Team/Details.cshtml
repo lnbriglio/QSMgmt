@@ -1,34 +1,41 @@
 ﻿@model DAL.Team
 
 @{
-    ViewBag.Title = "Detalles";
+    ViewBag.Title = "Detalles de equipo";
 }
 
-<div class="clearfix">    <h4>Detalles</h4></div>
 
-<div>
-    <h4>Equipo</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Detalles de equipo <a class="btn btn-circle btn-white btn-xs" href="@Url.Action(" edit", new { id=Model.Id })" alt="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectId)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProjectId)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Project.Name)
+                        </dd>
 
-    </dl>
+                    </dl>
+                </div>
+            </header>
+        </section>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver al índice", "Index")
-</p>

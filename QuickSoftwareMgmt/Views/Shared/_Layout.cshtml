@@ -8,13 +8,8 @@
     <meta name="author" content="">
 
     <title>@ViewBag.Title - Agil Devtil</title>
-    @*@Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")*@
-    @*<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:900">*@
-    @*@Styles.Render("~/sbadmin/css")*@
-    <link rel="stylesheet" href="@Url.Content("~/Content/font.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/app.v2.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/custom.css")" />
+    @Styles.Render("~/Content/first")
+
 
 </head>
 
@@ -29,8 +24,8 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="hidden-xs-only">
                         <i class="fa fa-user fa-fw" style="display:inline-block;top:-10px;position:relative;"></i>
-                        <span style="display:inline-block;">Leandro Briglio <br /> Some COmpany</span>
-                        <i class="fa fa-caret-down" style="display:inline-block;top:-10px;position:relative;"></i>
+                        <span style="display:inline-block;"> @ViewBag.CurrentUserName <br /> @ViewBag.CurrentCompanyName </span>
+                        @*<i class="fa fa-caret-down" style="display:inline-block;top:-10px;position:relative;"></i>*@
                     </span>
                     @*<span class="thumb-small avatar inline">
                         <img src="images/avatar.jpg" alt="Mika Sokeil" class="img-circle">
@@ -45,7 +40,7 @@
                         </a>
                     </li>*@
                     <li>
-                        <a href="@Url.Action(" logout","account")"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <a href="@Url.Action("LogOut","Account")"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
             </li>
@@ -180,7 +175,7 @@
     <!-- Sparkline Chart -->
     <!-- Easy Pie Chart -->
 
-    <script src="@Url.Content("~/Scripts/app.v2.js")"></script>
+    @Scripts.Render("~/bundles/first")
 
     <script src="@Url.Content("~/Scripts/ProjectSelector.js")" type="text/javascript"></script>
 

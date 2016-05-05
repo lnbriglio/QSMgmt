@@ -1,26 +1,53 @@
 ﻿@model DAL.User
 
 @{
-    ViewBag.Title = "Detalles";
+    ViewBag.Title = "Detalles de usaurio";
 }
 
-<div class="clearfix">    <h4>Detalles</h4></div>
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Detalles de usaurio <a class="btn btn-circle btn-white btn-xs" href="@Url.Action(" edit", new { id=Model.Id })" alt="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
 
-<div>
-    <h4>Usuario</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.FirstName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </dt>
 
-    </dl>
+                        <dd>
+                            @Html.DisplayFor(model => model.LastName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CompanyId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Company.Name)
+                        </dd>
+                    </dl>
+                </div>
+            </header>
+        </section>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver al índice", "Index")
-</p>
+

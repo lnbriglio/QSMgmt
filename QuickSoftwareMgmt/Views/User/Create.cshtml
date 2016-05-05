@@ -27,6 +27,20 @@
                             @Html.ValidationMessageFor(model => model.Email)
                         </div>
                     </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Password, new { @class = "col-lg-3 control-label" })
@@ -48,11 +62,6 @@
     </div>
 </div>
 
-
-</div>
-<div class="row">
-    @Html.ActionLink("Volver al índice", "Index")
-</div>
 
 @section Scripts {
     @*@Scripts.Render("~/bundles/jqueryval")*@

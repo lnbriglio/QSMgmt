@@ -1,90 +1,96 @@
 ﻿@model DAL.ChangeRequest
 
 @{
-    ViewBag.Title = "Detalles";
+    ViewBag.Title = "Detalles de solicitud de cambio";
 }
 
-<div class="clearfix">    <h4>Detalles</h4></div>
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Detalles de solicitud de cambio <a class="btn btn-circle btn-white btn-xs" href="@Url.Action(" edit", new { id=Model.Id })" alt="Editar">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </dt>
 
-<div>
-    <h4>Solicitud de cambio</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Title)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreationDate)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.CreationDate)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProjectId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Project.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Project.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ChangeRequest.Title)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ChangeRequest.Title)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ChangeRequest.Title)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChangeRequest.Title)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ApprovalId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApprovalId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Approval.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Approval.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ChangeTypeId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ChangeTypeId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ChangeTypeId)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChangeTypeId)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ImpactId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImpactId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Impact.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Impact.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PriorityId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PriorityId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Priority.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Priority.Name)
-        </dd>
-
-    </dl>
+                    </dl>
+                </div>
+            </header>
+        </section>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver al índice", "Index")
-</p>

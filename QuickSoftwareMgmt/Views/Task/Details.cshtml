@@ -1,137 +1,148 @@
 ﻿@model DAL.Task
 
 @{
-    ViewBag.Title = "Detalles";
+    ViewBag.Title = "Detalles de tarea";
 }
 
-<div class="clearfix">    <h4>Detalles</h4></div>
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Detalles de tarea
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </dt>
 
-<div>
-    <h4>Tarea</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Title)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreationDate)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.CreationDate)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RemainingTime)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.RemainingTime)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RemainingTime)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.RemainingTime)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EstimatedTime)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EstimatedTime)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.EstimatedTime)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.EstimatedTime)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.BacklogItemId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BacklogItemId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.BacklogItem.Title)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.BacklogItem.Title)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SprintId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SprintId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Sprint.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Sprint.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TaskStateId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TaskStateId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TaskState.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TaskState.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserId)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.User.Email)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
+                    </dl>
+                </div>
+            </header>
+        </section>
+    </div>
 
-    </dl>
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Cambios de estado
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                Fecha
+                            </td>
+                            <td>
+                                De
+                            </td>
+                            <td>
+                                A
+                            </td>
+                            <td>
+                                Tiempo invertido
+                            </td>
+                            <td>
+                                Comentario
+                            </td>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var taskUpdate in Model.TaskUpdates)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.EventDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.PreviousTaskState.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.TaskState.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.ElapsedTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.Comment)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </header>
+        </section>
+    </div>
 </div>
-
-<h3>Cambios de estado</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <td>
-                Fecha
-            </td>
-            <td>
-                De
-            </td>
-            <td>
-                A
-            </td>
-            <td>
-                Tiempo invertido
-            </td>
-            <td>
-                Comentario
-            </td>
-        </tr>
-
-    </thead>
-    <tbody>
-        @foreach (var taskUpdate in Model.TaskUpdates)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(item => taskUpdate.EventDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(item => taskUpdate.PreviousTaskState.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(item => taskUpdate.TaskState.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(item => taskUpdate.ElapsedTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(item => taskUpdate.Comment)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-@*<p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Volver al listado", "Index")
-</p>*@
