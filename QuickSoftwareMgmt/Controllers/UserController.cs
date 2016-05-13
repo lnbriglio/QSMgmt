@@ -36,6 +36,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(user);
+
             return View(user);
         }
 
@@ -78,6 +80,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(user);
+
             return View(user);
         }
 
@@ -109,6 +113,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(user);
+
             return View(user);
         }
 

@@ -39,6 +39,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(changerequest);
             return View(changerequest);
         }
 
@@ -92,6 +93,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(changerequest);
+
             ViewBag.ApprovalId = new SelectList(db.Approvals, "Id", "Name", changerequest.ApprovalId);
             ViewBag.ChangeTypeId = new SelectList(db.ChangeTypes, "Id", "Name", changerequest.ChangeTypeId);
             ViewBag.ImpactId = new SelectList(db.Impacts, "Id", "Name", changerequest.ImpactId);
@@ -132,6 +135,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(changerequest);
+
             return View(changerequest);
         }
 

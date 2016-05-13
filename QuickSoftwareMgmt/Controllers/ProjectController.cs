@@ -36,6 +36,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(project);
             return View(project);
         }
 
@@ -50,6 +51,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(project);
             return View(project);
         }
 
@@ -65,6 +67,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(project);
             return View(project);
         }
 
@@ -113,6 +116,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(project);
             return View(project);
         }
 
@@ -144,6 +148,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(project);
             return View(project);
         }
 

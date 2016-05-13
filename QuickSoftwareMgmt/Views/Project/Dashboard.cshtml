@@ -13,7 +13,7 @@
                 Burndown
             </header>
             <div class="panel-body">
-                <div id="burndownContainer"></div>
+                <div id="burndownContainer" class="loader"></div>
             </div>
         </section>
     </div>
@@ -27,7 +27,7 @@
                 Urgencia de cambios por fecha
             </header>
             <div class="panel-body">
-                <div id="changesUrgencyByDateContainer"></div>
+                <div id="changesUrgencyByDateContainer" class="loader"></div>
             </div>
         </section>
     </div>
@@ -44,7 +44,7 @@
                     Cambios por prioridad
                 </header>
                 <div class="panel-body">
-                    <div id="changesByPriorityContainer"></div>
+                    <div id="changesByPriorityContainer" class="loader"></div>
                 </div>
             </section>
         </div>
@@ -56,7 +56,7 @@
                     Cambios por tipo
                 </div>
                 <div class="panel-body">
-                    <div id="changesByTypeContainer"></div>
+                    <div id="changesByTypeContainer" class="loader"></div>
                 </div>
             </header>
         </section>
@@ -73,7 +73,7 @@
 
                     <div class="h4">Aprobaciones pendientes</div>
                     <div class="line m-l m-r"></div>
-                    <h4 class="text" id="pendingApprovalChangesCountContainer"></h4>
+                    <h4 class="text loader" id="pendingApprovalChangesCountContainer"></h4>
                     @*<small>Errores identificados</small>*@
                 </div>
             </section>
@@ -89,7 +89,7 @@
 
                     <div class="h4">Cambios de emergencia</div>
                     <div class="line m-l m-r"></div>
-                    <h4 class="text" id="emergencyChangesCountContainer"></h4>
+                    <h4 class="text loader" id="emergencyChangesCountContainer"></h4>
                     @*<small>Errores identificados</small>*@
                 </div>
             </section>
@@ -104,7 +104,7 @@
 
                     <div class="h4">Fracasos de pruebas de aceptación de servicio</div>
                     <div class="line m-l m-r"></div>
-                    <h4 class="text" id="serviceAcceptanceFailuresCountContainer">0</h4>
+                    <h4 class="text loader" id="serviceAcceptanceFailuresCountContainer">0</h4>
                     @*<small>hs</small>*@
                 </div>
             </section>
@@ -123,7 +123,7 @@
 
                         <div class="h4">Tiempo de corrección promedio</div>
                         <div class="line m-l m-r"></div>
-                        <h4 class="text" id="avgFixingTimeContainer">0</h4>
+                        <h4 class="text loader" id="avgFixingTimeContainer">0</h4>
                         <small>hs</small>
                     </div>
                 </section>
@@ -138,7 +138,7 @@
 
                         <div class="h4">Incidentes causados por versiones nuevas</div>
                         <div class="line m-l m-r"></div>
-                        <h4 class="text" id="newVersionErrorsCountContainer"></h4>
+                        <h4 class="text loader" id="newVersionErrorsCountContainer"></h4>
                         @*<small>Errores identificados</small>*@
                     </div>
                 </section>
@@ -156,7 +156,7 @@
 
                         <div class="h5">Errores identificados</div>
                         <div class="line m-l m-r"></div>
-                        <h4 class="text" id="identifiedErrorsCountContainer"></h4>
+                        <h4 class="text loader" id="identifiedErrorsCountContainer"></h4>
                         @*<small>Errores identificados</small>*@
                     </div>
                 </section>
@@ -167,6 +167,9 @@
 </div>
 
 @section Scripts{
+    <link rel="stylesheet" href="@Url.Content("~/Content/loading.css")" />
+
+
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
     <script type="text/javascript">
@@ -174,49 +177,49 @@
         $(function () {
             //Burndown
             $.get('@Url.Action("GetBurndownChart", "Sprint")', null, function (data) {
-                $('#burndownContainer').highcharts(data);
+                $('#burndownContainer').removeClass("loader").highcharts(data);
             });
 
 
             //
             $.get('@Url.Action("GetChangesByPriorityChart","Change")', null, function (data) {
-                $('#changesByPriorityContainer').highcharts(data);
+                $('#changesByPriorityContainer').removeClass("loader").highcharts(data);
             });
 
             $.get('@Url.Action("GetChangesByTypeChart","Change")', null, function (data) {
-                $('#changesByTypeContainer').highcharts(data);
+                $('#changesByTypeContainer').removeClass("loader").highcharts(data);
             });
 
             //Change
             $.get('@Url.Action("GetEmergencyChangesCount", "Change")', null, function (data) {
-                $('#emergencyChangesCountContainer').html(data);
+                $('#emergencyChangesCountContainer').removeClass("loader").html(data);
             });
 
             $.get('@Url.Action("GetPendingApprovalsCount", "Change")', null, function (data) {
-                $('#pendingApprovalChangesCountContainer').html(data);
+                $('#pendingApprovalChangesCountContainer').removeClass("loader").html(data);
             });
 
             $.get('@Url.Action("GetChangesUrgencyByDateChart", "Change")', null, function (data) {
-                $('#changesUrgencyByDateContainer').highcharts(data);
+                $('#changesUrgencyByDateContainer').removeClass("loader").highcharts(data);
             });
 
             //GetChangesUrgencyByDateChart
 
             //Test
             $.get('@Url.Action("GetIdentifiedErrorsCount", "Test")', null, function (data) {
-                $('#identifiedErrorsCountContainer').html(data);
+                $('#identifiedErrorsCountContainer').removeClass("loader").html(data);
             });
 
             $.get('@Url.Action("GetAvgFixingTime", "Test")', null, function (data) {
-                $('#avgFixingTimeContainer').html(data);
+                $('#avgFixingTimeContainer').removeClass("loader").html(data);
             });
 
             $.get('@Url.Action("GetNewVersionErrorsCount", "Test")', null, function (data) {
-                $('#newVersionErrorsCountContainer').html(data);
+                $('#newVersionErrorsCountContainer').removeClass("loader").html(data);
             });
 
             $.get('@Url.Action("GetServiceAcceptanceFailuresCount", "Test")', null, function (data) {
-                $('#serviceAcceptanceFailuresCountContainer').html(data);
+                $('#serviceAcceptanceFailuresCountContainer').removeClass("loader").html(data);
             });
 
 

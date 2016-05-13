@@ -37,6 +37,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(test);
+
             return View(test);
         }
 
@@ -86,6 +88,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(test);
+
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
             return View(test);
@@ -121,6 +125,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(test);
+
             return View(test);
         }
 
@@ -147,11 +153,14 @@ namespace QuickSoftwareMgmt.Controllers
 
         public async Task<JsonResult> GetAvgFixingTime()
         {
-            //TODO Implement this
+            double? avgTime = await db.TaskUpdates
+                .Where(u => u.Task.SprintId == SelectedSprintId &&
+                    u.ElapsedTime>0 &&
+                    u.Task.TaskStateId == (int)TaskStateEnum.Done &&
+                    u.Task.BacklogItem is Test)
+                .AverageAsync(u => u.ElapsedTime);
 
-            var count = 0;
-
-            return Json(count, JsonRequestBehavior.AllowGet);
+            return Json(avgTime, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetNewVersionErrorsCount()

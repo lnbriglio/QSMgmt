@@ -1,7 +1,9 @@
 ﻿using DAL;
+using DAL.Intefaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -112,6 +114,18 @@ namespace QuickSoftwareMgmt.Controllers
             }
 
             base.OnActionExecuting(filterContext);
+        }
+
+        protected void ValidateCompany(ICompany companyElement)
+        {
+            if (!companyElement.IsCompanyValid(CurrentUser.CompanyId))
+            {
+                var result = new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+
+                result.ExecuteResult(this.ControllerContext);
+                HttpContext.Response.End();
+                //TODO redirect to forbidden page
+            }
         }
 
     }

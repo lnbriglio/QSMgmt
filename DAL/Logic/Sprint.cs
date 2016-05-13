@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Intefaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -9,8 +10,12 @@ using System.Threading.Tasks;
 namespace DAL
 {
     [MetadataType(typeof(SprintMetadata))]
-    public partial class Sprint
+    public partial class Sprint:ICompany
     {
+        public bool IsCompanyValid(int companyId)
+        {
+            return this.Project.CompanyId == companyId;
+        }
     }
 
     public class SprintMetadata

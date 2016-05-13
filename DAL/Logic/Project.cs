@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Intefaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -9,8 +10,13 @@ using System.Threading.Tasks;
 namespace DAL
 {
     [MetadataType(typeof(ProjectMetadata))]
-    public partial class Project
+    public partial class Project:ICompany
     {
+
+        public bool IsCompanyValid(int companyId)
+        {
+            return this.CompanyId == companyId;
+        }
     }
 
     public class ProjectMetadata

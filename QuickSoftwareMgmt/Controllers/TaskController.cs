@@ -255,6 +255,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(task);
+
             return View(task);
         }
     }

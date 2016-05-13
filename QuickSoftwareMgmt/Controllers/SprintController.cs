@@ -38,6 +38,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(sprint);
+
             return View(sprint);
         }
 
@@ -50,6 +52,8 @@ namespace QuickSoftwareMgmt.Controllers
                 StartDate = DateTime.Today,
                 EndDate = DateTime.Today
             };
+            base.ValidateCompany(sprint);
+
             return View(sprint);
         }
 
@@ -82,6 +86,7 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(sprint);
 
             return View(sprint);
         }
@@ -115,6 +120,8 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+            base.ValidateCompany(sprint);
+
             return View(sprint);
         }
 

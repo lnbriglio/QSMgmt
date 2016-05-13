@@ -67,6 +67,7 @@
     <Compile Include="Impact.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Intefaces\ICompany.cs" />
     <Compile Include="Logic\Approval.cs" />
     <Compile Include="Logic\BacklogItem.cs" />
     <Compile Include="Logic\ChangeRequest.cs" />

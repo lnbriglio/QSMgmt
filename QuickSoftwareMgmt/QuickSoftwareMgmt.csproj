@@ -162,6 +162,7 @@
     <Content Include="Content\img\folder.png" />
     <Content Include="Content\img\l2.png" />
     <Content Include="Content\jquery.treegrid.css" />
+    <Content Include="Content\loading.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-mocks.js" />
