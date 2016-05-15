@@ -60,9 +60,20 @@ namespace QuickSoftwareMgmt.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var userExists = await db.Users.AnyAsync(u => !u.Erased && u.Email == user.Email);
+
+                if (!userExists)
+                {
+                    db.Users.Add(user);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError(String.Empty, "Ya existe un usuario con ese email");
+                }
+
+
             }
 
             return View(user);
