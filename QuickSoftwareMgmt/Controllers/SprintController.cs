@@ -52,7 +52,6 @@ namespace QuickSoftwareMgmt.Controllers
                 StartDate = DateTime.Today,
                 EndDate = DateTime.Today
             };
-            base.ValidateCompany(sprint);
 
             return View(sprint);
         }
