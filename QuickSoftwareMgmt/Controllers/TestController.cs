@@ -153,14 +153,24 @@ namespace QuickSoftwareMgmt.Controllers
 
         public async Task<JsonResult> GetAvgFixingTime()
         {
-            double? avgTime = await db.TaskUpdates
-                .Where(u => u.Task.SprintId == SelectedSprintId &&
-                    u.ElapsedTime>0 &&
-                    u.Task.TaskStateId == (int)TaskStateEnum.Done &&
-                    u.Task.BacklogItem is Test)
-                .AverageAsync(u => u.ElapsedTime);
+            double? avgTime = 0;
+            try
+            {
+                avgTime = await db.TaskUpdates
+                    .Where(u => u.Task.SprintId == SelectedSprintId &&
+                        u.ElapsedTime > 0 &&
+                        u.Task.TaskStateId == (int)TaskStateEnum.Done &&
+                        u.Task.BacklogItem is Test)
+                    .AverageAsync(u => u.ElapsedTime);
 
-            return Json(avgTime, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                //TODO Log
+                //TODO Handle
+            }
+
+            return Json(avgTime??0, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetNewVersionErrorsCount()
