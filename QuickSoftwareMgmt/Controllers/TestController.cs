@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using QuickSoftwareMgmt.Models.Views;
 
 namespace QuickSoftwareMgmt.Controllers
 {
@@ -43,18 +44,44 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         // GET: /Test/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name");
-            ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name");
-
-            var test = new Test
+            var testVM = new TestVM
             {
                 ProjectId = SelectedProjectId.Value,
                 CreationDate = DateTime.Now
             };
 
-            return View(test);
+
+            ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name");
+            ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name");
+
+            //task
+            var sprints = await db.Sprints
+   .Where(s => !s.Erased
+   && s.ProjectId == SelectedProjectId)
+   .ToListAsync();
+            ViewBag.SprintId = new SelectList(sprints, "Id", "Name", testVM.SprintId);
+
+            var team = await db.Teams
+                .Include(t => t.TeamMembers)
+                .Include("TeamMembers.User")
+                .FirstOrDefaultAsync(t => !t.Erased
+                && t.ProjectId == SelectedProjectId);
+
+            List<User> users = new List<User>();
+            if (team != null)
+            {
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
+            }
+
+            ViewBag.UserId = new SelectList(users, "Id", "FullName", testVM.UserId);
+
+
+
+            return View(testVM);
         }
 
         // POST: /Test/Create
@@ -62,18 +89,45 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
+        public async Task<ActionResult> Create(TestVM testVM)
         {
             if (ModelState.IsValid)
             {
-                db.BacklogItems.Add(test);
+                var entity = testVM.ToEntity();
+
+                db.BacklogItems.Add(entity);
                 await db.SaveChangesAsync();
+
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
-            ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
-            return View(test);
+            ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", testVM.TestOutcomeId);
+            ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", testVM.VersionOriginId);
+
+            //task
+            var sprints = await db.Sprints
+   .Where(s => !s.Erased
+   && s.ProjectId == SelectedProjectId)
+   .ToListAsync();
+            ViewBag.SprintId = new SelectList(sprints, "Id", "Name", testVM.SprintId);
+
+            var team = await db.Teams
+                .Include(t => t.TeamMembers)
+                .Include("TeamMembers.User")
+                .FirstOrDefaultAsync(t => !t.Erased
+                && t.ProjectId == SelectedProjectId);
+
+            List<User> users = new List<User>();
+            if (team != null)
+            {
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
+            }
+
+            ViewBag.UserId = new SelectList(users, "Id", "FullName", testVM.UserId);
+            return View(testVM);
         }
 
         // GET: /Test/Edit/5
@@ -83,16 +137,48 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Test test = await db.Tests.FindAsync(id);
+
+            //((DbContext)db).Configuration.ProxyCreationEnabled = false;
+
+            Test test = await db.Tests.AsNoTracking()
+                .Include(t => t.Tasks)
+                .Include(t => t.Project)
+                .FirstOrDefaultAsync(t => t.Id == id);
             if (test == null)
             {
                 return HttpNotFound();
             }
             base.ValidateCompany(test);
 
+            var testVM = new TestVM().FromEntity(test);
+
             ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
             ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
-            return View(test);
+
+            //task
+            var sprints = await db.Sprints
+   .Where(s => !s.Erased
+   && s.ProjectId == SelectedProjectId)
+   .ToListAsync();
+            ViewBag.SprintId = new SelectList(sprints, "Id", "Name", testVM.SprintId);
+
+            var team = await db.Teams
+                .Include(t => t.TeamMembers)
+                .Include("TeamMembers.User")
+                .FirstOrDefaultAsync(t => !t.Erased
+                && t.ProjectId == SelectedProjectId);
+
+            List<User> users = new List<User>();
+            if (team != null)
+            {
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
+            }
+
+            ViewBag.UserId = new SelectList(users, "Id", "FullName", testVM.UserId);
+
+            return View(testVM);
         }
 
         // POST: /Test/Edit/5
@@ -100,17 +186,42 @@ namespace QuickSoftwareMgmt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,CreationDate,ProjectId,Steps,VersionOriginId,TestOutcomeId")] Test test)
+        public async Task<ActionResult> Edit(TestVM testVM)
         {
             if (ModelState.IsValid)
             {
+                var test = testVM.ToEntity();
+
                 db.Entry(test).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", test.TestOutcomeId);
-            ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", test.VersionOriginId);
-            return View(test);
+            ViewBag.TestOutcomeId = new SelectList(db.TestOutcomes, "Id", "Name", testVM.TestOutcomeId);
+            ViewBag.VersionOriginId = new SelectList(db.VersionOrigins, "Id", "Name", testVM.VersionOriginId);
+
+            //task
+            var sprints = await db.Sprints
+   .Where(s => !s.Erased
+   && s.ProjectId == SelectedProjectId)
+   .ToListAsync();
+            ViewBag.SprintId = new SelectList(sprints, "Id", "Name", testVM.SprintId);
+
+            var team = await db.Teams
+                .Include(t => t.TeamMembers)
+                .Include("TeamMembers.User")
+                .FirstOrDefaultAsync(t => !t.Erased
+                && t.ProjectId == SelectedProjectId);
+
+            List<User> users = new List<User>();
+            if (team != null)
+            {
+                users = team.TeamMembers
+                    .Where(m => !m.Erased)
+                    .Select(tm => tm.User).ToList();
+            }
+
+            ViewBag.UserId = new SelectList(users, "Id", "FullName", testVM.UserId);
+            return View(testVM);
         }
 
         // GET: /Test/Delete/5
@@ -170,7 +281,7 @@ namespace QuickSoftwareMgmt.Controllers
                 //TODO Handle
             }
 
-            return Json(avgTime??0, JsonRequestBehavior.AllowGet);
+            return Json(String.Format("{0:0.00}",avgTime ?? 0), JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetNewVersionErrorsCount()

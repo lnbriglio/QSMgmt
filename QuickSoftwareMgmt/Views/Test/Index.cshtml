@@ -50,13 +50,13 @@
                                 @Html.DisplayFor(modelItem => item.VersionOrigin.Name)
                             </td>
                             <td>
-                                <a href="#" class="addTaskLink" data-url="@Url.Action("Create", "Task", new { id= item.Id})">Nueva tarea</a> |
+                                @*<a href="#" class="addTaskLink" data-url="@Url.Action("Create", "Task", new { id= item.Id})">Nueva tarea</a> |*@
                                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                                 @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
                             </td>
                         </tr>
-                        foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
+                        @*foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
                         {
                             @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
                                 @:<td>
@@ -74,7 +74,7 @@
 
                                 }
                                 @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null)
-                                }
+                        }*@
                     }
 
             </table>

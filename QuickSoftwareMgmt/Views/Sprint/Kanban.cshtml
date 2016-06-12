@@ -17,20 +17,22 @@
             </header>
             <div class="thumbnail" draggable="true" kanban-board-dragg="task"
                  ng-repeat="task in col.Tasks" style="margin-bottom: 10px;">
-                <div class="caption">
+                <div class="caption" ng-class="task.Parent.IsTest ? 'testCard' : 'changeCard'">
                     <h5>
-                        <strong>(#{{task.Id}}) {{task.Name}}</strong>
+                        <strong>(#{{task.Parent.IsTest ? task.Parent.Id : task.Id}}) {{task.Name}}</strong>
 
                         <button class="btn btn-warning btn-xs btn-circle pull-right" type="button" title="Editar tarea"
-                                ng-click="editTask(task.Id)"><i class="fa fa-pencil"></i></button>
+                                ng-click="editTask(task.Id)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
                     </h5>
                     <p>{{task.Description}}</p>
                     <p>
                         <button class="btn btn-primary btn-xs" type="button" title="" data-id="{{task.User.Id}}" disabled><i class="fa fa-user"></i> {{task.User.Name}}</button>
                         <button class="btn btn-info btn-xs" type="button" title="" disabled><i class="fa fa-spinner"></i> {{task.RemainingTime}}Hs</button>
                         <button class="btn btn-default btn-xs pull-right" data-original-title="{{task.Parent.Name}} - {{task.Parent.Description}}" type="button"
-                                data-toggle="tooltip" data-placement="left" title="" >
-                            <i class="fa" ng-class="task.Parent.IsTest ? 'fa-flask' : 'fa-repeat'"></i> #{{task.Parent.Id}}
+                                data-toggle="tooltip" data-placement="left" title="">
+                            @*<i class="fa" ng-class="task.Parent.IsTest ? 'fa-flask' : 'fa-repeat'"></i>*@ {{task.Parent.IsTest ? "Prueba" : "Cambio"}} #{{task.Parent.Id}}
                         </button>
                     </p>
                 </div>
@@ -96,6 +98,14 @@
         .over {
             background-color: #fff;
             border: 2px dashed red;
+        }
+
+        .testCard {
+            background-color:#daebe8; 
+        }
+
+        .changeCard{
+            background-color:#cfe0e8; 
         }
     </style>
 

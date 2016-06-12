@@ -1,4 +1,4 @@
-﻿@model DAL.Test
+﻿@model QuickSoftwareMgmt.Models.Views.TestVM
 
 @{
     ViewBag.Title = "Crear prueba";
@@ -19,9 +19,16 @@
 
                     <hr />
                     @Html.ValidationSummary(false)
-                    @Html.HiddenFor(model => model.CreationDate)
+
                     @Html.HiddenFor(model => model.ProjectId)
 
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CreationDate, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.CreationDate, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.CreationDate)
+                        </div>
+                    </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Title, new { @class = "col-lg-3 control-label" })
                         <div class="col-lg-8">
@@ -58,6 +65,34 @@
                             @Html.ValidationMessageFor(model => model.TestOutcomeId)
                         </div>
                     </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EstimatedTime, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.EstimatedTime, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.EstimatedTime)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RemainingTime, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.RemainingTime, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.RemainingTime)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SprintId, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.DropDownList("SprintId", null, String.Empty, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.SprintId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserId, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.DropDownList("UserId", null, String.Empty, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserId)
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-lg-9 col-lg-offset-3">
@@ -70,6 +105,6 @@
 
     </div>
 </div>
-            @section Scripts {
-                @*@Scripts.Render("~/bundles/jqueryval")*@
-            }
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+}

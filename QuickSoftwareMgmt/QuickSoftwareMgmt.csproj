@@ -148,6 +148,7 @@
     <Compile Include="Models\Hicharts\AreaChart\AreaChart.cs" />
     <Compile Include="Models\Hicharts\LineChart\LineChart.cs" />
     <Compile Include="Models\Hicharts\PieChart\PieChart.cs" />
+    <Compile Include="Models\Views\TestVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

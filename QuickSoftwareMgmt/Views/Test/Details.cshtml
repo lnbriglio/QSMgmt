@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Detalles de prueba";
+    DAL.Task task = Model.Tasks.FirstOrDefault();
 }
 
 <div class="row">
@@ -9,7 +10,7 @@
         <section class="panel">
             <header class="panel-heading">
                 <div class="text-center h4">
-                    Detalles de prueba <a class="btn btn-circle btn-white btn-xs" href="@Url.Action(" edit", new { id=Model.Id })" alt="Editar">
+                    Detalles de prueba <a class="btn btn-circle btn-white btn-xs" href="@Url.Action("edit", new { id=Model.Id })" alt="Editar">
                         <i class="fa fa-pencil"></i>
                     </a>
                 </div>
@@ -77,4 +78,124 @@
             </header>
         </section>
     </div>
+
+    @if (task != null) { 
+
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Detalles de tarea
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => task.RemainingTime)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.RemainingTime)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.EstimatedTime)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.EstimatedTime)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.BacklogItemId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.BacklogItem.Title)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.SprintId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.Sprint.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.TaskStateId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.TaskState.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.UserId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.User.Email)
+                        </dd>
+
+                    </dl>
+                </div>
+            </header>
+        </section>
+    </div>
+
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Cambios de estado
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                Fecha
+                            </td>
+                            <td>
+                                De
+                            </td>
+                            <td>
+                                A
+                            </td>
+                            <td>
+                                Tiempo invertido
+                            </td>
+                            <td>
+                                Comentario
+                            </td>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var taskUpdate in task.TaskUpdates)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.EventDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.PreviousTaskState.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.TaskState.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.ElapsedTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(item => taskUpdate.Comment)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </header>
+        </section>
+    </div>
+    }
 </div>

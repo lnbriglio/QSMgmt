@@ -142,6 +142,17 @@ namespace QuickSoftwareMgmt.Controllers
                     await db.SaveChangesAsync();
 
                     await db.Entry(task).ReloadAsync();
+
+                    var backlogItem =await db.BacklogItems.FindAsync(task.BacklogItemId);
+
+                    backlogItem.Title = task.Title;
+                    backlogItem.Description = task.Description;
+
+                    db.Entry(backlogItem).State = EntityState.Modified;
+
+                    await db.SaveChangesAsync();
+
+                    
                     return PartialView("_EditSuccessfulModal", task);
                 }
             }
