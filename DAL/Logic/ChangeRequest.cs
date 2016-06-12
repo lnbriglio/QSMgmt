@@ -47,6 +47,16 @@ namespace DAL
         [DisplayName("Prioridad")]
         [Required]
         public int PriorityId { get; set; }
+        [DisplayName("Solicitante")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(255)]
+        public string Applicant { get; set; }
+        [DisplayName("Área")]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(255)]
+        public string Area { get; set; }
 
     }
 }

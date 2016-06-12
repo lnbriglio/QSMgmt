@@ -33,6 +33,8 @@
           <Property Name="ChangeTypeId" Type="int" Nullable="false" />
           <Property Name="ImpactId" Type="int" Nullable="false" />
           <Property Name="PriorityId" Type="int" Nullable="false" />
+          <Property Name="Applicant" Type="nvarchar" MaxLength="255" />
+          <Property Name="Area" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ChangeType">
           <Key>
@@ -963,6 +965,8 @@
           <NavigationProperty Name="ChangeType" Relationship="DAL.FK__ChageRequ__Chang__3B75D760" FromRole="ChangeRequest" ToRole="ChangeType" />
           <NavigationProperty Name="Impact" Relationship="DAL.FK__ChageRequ__Impac__3C69FB99" FromRole="ChangeRequest" ToRole="Impact" />
           <NavigationProperty Name="Priority" Relationship="DAL.FK__ChageRequ__Prior__3D5E1FD2" FromRole="ChangeRequest" ToRole="Priority" />
+          <Property Name="Applicant" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Test" BaseType="DAL.BacklogItem">
           <Property Name="Steps" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1167,6 +1171,8 @@
             </EntityTypeMapping>
             <EntityTypeMapping TypeName="IsTypeOf(DAL.ChangeRequest)">
               <MappingFragment StoreEntitySet="ChangeRequest">
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Applicant" ColumnName="Applicant" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ApprovalId" ColumnName="ApprovalId" />
                 <ScalarProperty Name="ChangeTypeId" ColumnName="ChangeTypeId" />

@@ -39,6 +39,20 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        @Html.LabelFor(model => model.Applicant, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.Applicant, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Applicant)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Area, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.Area, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Area)
+                        </div>
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(model => model.ApprovalId, new { @class = "col-lg-3 control-label" })
                         <div class="col-lg-8">
                             @Html.DropDownList("ApprovalId", null, String.Empty, new { @class = "form-control" })

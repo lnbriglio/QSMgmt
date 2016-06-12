@@ -18,6 +18,8 @@ namespace DAL
         public int ChangeTypeId { get; set; }
         public int ImpactId { get; set; }
         public int PriorityId { get; set; }
+        public string Applicant { get; set; }
+        public string Area { get; set; }
     
         public virtual Approval Approval { get; set; }
         public virtual ChangeType ChangeType { get; set; }

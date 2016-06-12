@@ -23,6 +23,9 @@
                                 @Html.DisplayNameFor(model => model.Title)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.Area)
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.ApprovalId)
                             </th>
                             <th>
@@ -45,6 +48,9 @@
                                 <td title="@Html.DisplayFor(modelItem => item.Description)" style="font-weight:bolder;">
                                     [@Html.DisplayFor(modelItem => item.Id)] @Html.DisplayFor(modelItem => item.Title)
                                 </td>
+                                <th>
+                                    @Html.DisplayFor(modelItem => item.Area)
+                                </th>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Approval.Name)
                                 </td>

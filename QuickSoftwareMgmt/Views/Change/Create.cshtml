@@ -25,6 +25,13 @@
 
 
                     <div class="form-group">
+                        @Html.LabelFor(model => model.CreationDate, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.CreationDate, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.CreationDate)
+                        </div>
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(model => model.Title, new { @class = "col-lg-3 control-label" })
                         <div class="col-lg-8">
                             @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
@@ -36,6 +43,20 @@
                         <div class="col-lg-8">
                             @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Description)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Applicant, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.Applicant, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Applicant)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Area, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(model => model.Area, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Area)
                         </div>
                     </div>
                     <div class="form-group">
