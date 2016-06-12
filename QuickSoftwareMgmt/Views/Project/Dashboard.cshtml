@@ -36,7 +36,7 @@
 @*<h1>Cambios</h1>*@
 <div class="row">
     <div class="col-lg-6">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <section class="panel">
                 <header class="panel-heading">
                     <i class="fa fa-bell fa-fw">
@@ -48,70 +48,82 @@
                 </div>
             </section>
         </div>
-        <section class="col-lg-6">
-            <header class="panel">
-                <div class="panel-heading">
+        <div class="col-lg-4">
+            <section class="panel">
+                <header class="panel-heading">
                     <i class="fa fa-bell fa-fw">
                     </i>
                     Cambios por tipo
-                </div>
+                </header>
                 <div class="panel-body">
                     <div id="changesByTypeContainer" class="loader"></div>
                 </div>
-            </header>
-        </section>
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <section class="panel">
+                <header class="panel-heading">
+                    <i class="fa fa-bell fa-fw">
+                    </i>
+                    Cambios por impacto
+                </header>
+                <div class="panel-body">
+                    <div id="changesByImpactContainer" class="loader"></div>
+                </div>
+            </section>
+        </div>
     </div>
     <div class="col-lg-6">
-    <div class="row">
-        <!--Aprobaciones pendientes-->
-        <div class="col-lg-4">
-            <section class="panel text-center">
-                <div class="panel-body">
-                    <a class="btn btn-circle btn-info btn-lg">
-                        <i class="fa fa-exclamation-triangle"></i>
-                    </a>
+        <div class="row">
+            <!--Aprobaciones pendientes-->
+            <div class="col-lg-4">
+                <section class="panel text-center">
+                    <div class="panel-body">
+                        <a class="btn btn-circle btn-info btn-lg">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </a>
 
-                    <div class="h4">Aprobaciones pendientes</div>
-                    <div class="line m-l m-r"></div>
-                    <h4 class="text loader" id="pendingApprovalChangesCountContainer"></h4>
-                    @*<small>Errores identificados</small>*@
-                </div>
-            </section>
+                        <div class="h4">Aprobaciones pendientes</div>
+                        <div class="line m-l m-r"></div>
+                        <h4 class="text loader" id="pendingApprovalChangesCountContainer"></h4>
+                        @*<small>Errores identificados</small>*@
+                    </div>
+                </section>
+            </div>
+
+            <!--Cambios de emergencia-->
+            <div class="col-lg-4">
+                <section class="panel text-center">
+                    <div class="panel-body">
+                        <a class="btn btn-circle btn-default btn-lg">
+                            <i class="fa fa-bolt"></i>
+                        </a>
+
+                        <div class="h4">Cambios de emergencia</div>
+                        <div class="line m-l m-r"></div>
+                        <h4 class="text loader" id="emergencyChangesCountContainer"></h4>
+                        @*<small>Errores identificados</small>*@
+                    </div>
+                </section>
+            </div>
+            <!--Fracasos de pruebas de aceptación de servicio-->
+            <div class="col-lg-4">
+                <section class="panel text-center">
+                    <div class="panel-body">
+                        <a class="btn btn-circle btn-danger btn-lg">
+                            <i class="fa fa-times"></i>
+                        </a>
+
+                        <div class="h4">Fracasos de pruebas de aceptación de servicio</div>
+                        <div class="line m-l m-r"></div>
+                        <h4 class="text loader" id="serviceAcceptanceFailuresCountContainer">0</h4>
+                        @*<small>hs</small>*@
+                    </div>
+                </section>
+            </div>
+
+
         </div>
-
-        <!--Cambios de emergencia-->
-        <div class="col-lg-4">
-            <section class="panel text-center">
-                <div class="panel-body">
-                    <a class="btn btn-circle btn-default btn-lg">
-                        <i class="fa fa-bolt"></i>
-                    </a>
-
-                    <div class="h4">Cambios de emergencia</div>
-                    <div class="line m-l m-r"></div>
-                    <h4 class="text loader" id="emergencyChangesCountContainer"></h4>
-                    @*<small>Errores identificados</small>*@
-                </div>
-            </section>
-        </div>
-        <!--Fracasos de pruebas de aceptación de servicio-->
-        <div class="col-lg-4">
-            <section class="panel text-center">
-                <div class="panel-body">
-                    <a class="btn btn-circle btn-danger btn-lg">
-                        <i class="fa fa-times"></i>
-                    </a>
-
-                    <div class="h4">Fracasos de pruebas de aceptación de servicio</div>
-                    <div class="line m-l m-r"></div>
-                    <h4 class="text loader" id="serviceAcceptanceFailuresCountContainer">0</h4>
-                    @*<small>hs</small>*@
-                </div>
-            </section>
-        </div>
-        
-        
-    </div>
         <div class="row">
             <!--Tiempo de corrección promedio-->
             <div class="col-lg-4">
@@ -189,6 +201,12 @@
             $.get('@Url.Action("GetChangesByTypeChart","Change")', null, function (data) {
                 $('#changesByTypeContainer').removeClass("loader").highcharts(data);
             });
+
+            $.get('@Url.Action("GetChangesByImpact", "Change")', null, function (data) {
+                $('#changesByImpactContainer').removeClass("loader").highcharts(data);
+            });
+
+
 
             //Change
             $.get('@Url.Action("GetEmergencyChangesCount", "Change")', null, function (data) {

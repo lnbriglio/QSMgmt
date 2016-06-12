@@ -303,6 +303,30 @@ namespace QuickSoftwareMgmt.Controllers
             return Json(chart, JsonRequestBehavior.AllowGet);
         }
 
+        public async Task<JsonResult> GetChangesByImpact()
+        {
+            var changesByPriority = await db.ChangeRequests
+                .Where(c => !c.Erased
+                && c.ProjectId == SelectedProjectId)
+                .GroupBy(c => c.Impact)
+                .Select(c => new
+                {
+                    Name = c.Key.Name,
+                    Quantity = c.Count()
+                })
+                .ToArrayAsync();
+
+            var data = changesByPriority.Select(c => new Datum
+            {
+                name = c.Name,
+                y = c.Quantity
+            }).ToArray();
+
+            var chart = GetBasePieChart("Cambios por impacto", data);
+
+            return Json(chart, JsonRequestBehavior.AllowGet);
+        }
+
         public async Task<JsonResult> GetEmergencyChangesCount()
         {
             var changesCount = await db.ChangeRequests
