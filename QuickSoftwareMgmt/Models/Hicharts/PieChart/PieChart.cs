@@ -12,6 +12,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts.PieChart
         public Tooltip tooltip { get; set; }
         public Plotoptions plotOptions { get; set; }
         public Series[] series { get; set; }
+        public Exportable exporting { get; set; }
     }
 
     public class Chart
@@ -64,5 +65,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts.PieChart
         public bool sliced { get; set; }
         public bool selected { get; set; }
     }
+
+
 
 }

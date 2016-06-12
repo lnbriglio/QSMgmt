@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using DAL;
 using QuickSoftwareMgmt.Models.Hicharts.PieChart;
 using QuickSoftwareMgmt.Models.Hicharts.LineChart;
+using QuickSoftwareMgmt.Models.Hicharts;
 
 namespace QuickSoftwareMgmt.Controllers
 {
@@ -246,7 +247,8 @@ namespace QuickSoftwareMgmt.Controllers
                     verticalAlign = "middle",
                     borderWidth = 0
                 },
-                series = series
+                series = series,
+                exporting = Exportable.GetDefault("Urgencia de cambios por fecha"),
             };
 
 
@@ -391,7 +393,8 @@ namespace QuickSoftwareMgmt.Controllers
                             colorByPoint=true,
                             data= data
                         }
-                    }
+                    },
+                    exporting = Exportable.GetDefault(seriesName),
                 };
         }
 

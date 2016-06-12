@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using DAL;
 using QuickSoftwareMgmt.Models.Hicharts.AreaChart;
+using QuickSoftwareMgmt.Models.Hicharts;
 
 namespace QuickSoftwareMgmt.Controllers
 {
@@ -286,7 +287,8 @@ namespace QuickSoftwareMgmt.Controllers
                         }
                     }
                 },
-                series = series.ToArray()
+                series = series.ToArray(),
+                exporting = Exportable.GetDefault("Burndown"),
             };
 
 

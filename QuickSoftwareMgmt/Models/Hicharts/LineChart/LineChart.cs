@@ -15,6 +15,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts.LineChart
         public Tooltip tooltip { get; set; }
         public Legend legend { get; set; }
         public Series[] series { get; set; }
+        public Exportable exporting { get; set; }
     }
 
     public class Title

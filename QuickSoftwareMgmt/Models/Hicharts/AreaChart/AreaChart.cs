@@ -16,6 +16,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts.AreaChart
         public Tooltip tooltip { get; set; }
         public Plotoptions plotOptions { get; set; }
         public Series[] series { get; set; }
+        public Exportable exporting { get; set; }
     }
 
     public class Chart
