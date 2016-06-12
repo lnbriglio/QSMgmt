@@ -36,6 +36,8 @@ namespace DAL
         [Required]
         public object ProjectId { get; set; }
         [DisplayName("Pasos para reproducirlo")]
+        [Required]
+        [MinLength(1)]
         public object Steps { get; set; }
         [DisplayName("Incidente por nueva versión")]
         [Required]

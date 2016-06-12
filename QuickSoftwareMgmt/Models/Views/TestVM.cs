@@ -24,6 +24,8 @@ namespace QuickSoftwareMgmt.Models.Views
         [Required]
         public int ProjectId { get; set; }
         [DisplayName("Pasos para reproducirlo")]
+        [Required]
+        [MinLength(1)]
         public String Steps { get; set; }
         [DisplayName("Incidente por nueva versión")]
         [Required]
@@ -44,6 +46,7 @@ namespace QuickSoftwareMgmt.Models.Views
         [Range(0, 999)]
         public int EstimatedTime { get; set; }
         [DisplayName("Sprint")]
+        [Required]
         public int? SprintId { get; set; }
         [DisplayName("Usuario")]
         public int? UserId { get; set; }

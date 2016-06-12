@@ -96,7 +96,9 @@ namespace QuickSoftwareMgmt.Controllers
                 var entity = testVM.ToEntity();
 
                 db.BacklogItems.Add(entity);
+
                 await db.SaveChangesAsync();
+
 
 
                 return RedirectToAction("Index");
@@ -281,7 +283,7 @@ namespace QuickSoftwareMgmt.Controllers
                 //TODO Handle
             }
 
-            return Json(String.Format("{0:0.00}",avgTime ?? 0), JsonRequestBehavior.AllowGet);
+            return Json(String.Format("{0:0.00}", avgTime ?? 0), JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> GetNewVersionErrorsCount()
