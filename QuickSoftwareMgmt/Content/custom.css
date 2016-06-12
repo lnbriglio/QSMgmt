@@ -1,5 +1,7 @@
 ﻿.navbar-brand{
-    background-image: url('img/l2.png');
+    background-image: url('img/agil-logo3.png');
+    /*background-image: url('img/l2.png');*/
+
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
