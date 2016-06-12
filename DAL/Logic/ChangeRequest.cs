@@ -26,7 +26,7 @@ namespace DAL
         [DisplayName("Título")]
         [Required]
         [MinLength(1)]
-        [MaxLength(100)]
+        [MaxLength(255)]
         public object Title { get; set; }
         [DisplayName("Descripción")]
         public object Description { get; set; }
