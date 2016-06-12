@@ -152,9 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app.v2.css" />
+    <Content Include="Content\changeMgntBack.png" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\datepicker2.css" />
+    <Content Include="Content\devtil-logo-big-alt.png" />
+    <Content Include="Content\devtil-logo-big.png" />
     <Content Include="Content\font.css" />
     <Content Include="Content\img\collapse.png" />
     <Content Include="Content\img\expand.png" />
@@ -163,6 +166,8 @@
     <Content Include="Content\img\l2.png" />
     <Content Include="Content\jquery.treegrid.css" />
     <Content Include="Content\loading.css" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\rotateImage.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-mocks.js" />

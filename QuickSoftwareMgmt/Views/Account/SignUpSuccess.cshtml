@@ -18,19 +18,23 @@
         <link rel="stylesheet" href="css/app.v2.css" type="text/css" /> <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
     *@
 @Styles.Render("~/Content/first")
-
+    <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" />
 </head>
 <body>
     <!-- header -->
-    <header id="header" class="navbar bg bg-black">
+    @*<header id="header" class="navbar bg bg-black">
         <a class="navbar-brand" href="@Url.Action("LogIn","Account")"></a>
-    </header>
+    </header>*@
     <!-- / header -->
     <section id="content">
         <div class="main padder">
 
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 m-t-large">
+            <div class="row" style="margin-top:4em;">
+                <div class="col-lg-4 col-lg-offset-2 imageCol">
+
+                    <img src="@Url.Content("~/Content/devtil-logo-big-alt.png")" alt="logo" class="mainLogo col-lg-offset-1" />
+                </div>
+                <div class="col-lg-4">
                     <section class="panel">
                         <header class="panel-heading text-center h2"> ¡Registro satisfactorio! </header>
                         <div class="panel-body">

@@ -15,30 +15,35 @@
 
     <title>Log in - Agil Devtil</title>
 
-@Styles.Render("~/Content/first")
+    @Styles.Render("~/Content/first")
     <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
+    <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" />
 </head>
 <body>
 
     <!-- header -->
-    <header id="header" class="navbar bg bg-black">
+    @*<header id="header" class="navbar bg bg-black">
 
-        <a class="navbar-brand" href="#">
-  
-        </a>
-    </header>
+            <a class="navbar-brand" href="#">
+
+            </a>
+        </header>*@
     <!-- / header -->
     <section id="content">
         <div class="main padder">
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 m-t-large">
+            <div class="row" style="margin-top:4em;">
+                <div class="col-lg-4 col-lg-offset-2 imageCol">
+                    
+                    <img src="@Url.Content("~/Content/devtil-logo-big-alt.png")" alt="logo" class="mainLogo col-lg-offset-1" />
+                </div>
+                <div class="col-lg-4">
                     <section class="panel">
                         <header class="panel-heading text-center">
                             Inicio
                         </header>
                         @using (Html.BeginForm("LogIn", "Account", null, FormMethod.Post, new { @class = "panel-body" }))
                         {
-                            @Html.Hidden("FirstName","-")
+                            @Html.Hidden("FirstName", "-")
                             @Html.Hidden("LastName", "-")
 
                             @Html.ValidationSummary(true)
@@ -56,21 +61,11 @@
                                 @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Password)
                             </div>
-                            @*<div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Keep me logged in
-                                    </label>
-                                </div>
-                                <a href="#" class="pull-right m-t-mini">
-                                    <small>
-                                        Forgot password?
-                                    </small>
-                                </a>*@
 
-    <input type="submit" value="Log in" class="btn btn-info btn-block" />
+                            <input type="submit" value="Log in" class="btn btn-info btn-block" />
                             <div class="line line-dashed">
                             </div>
-           
+
                             <p class="text-muted text-center">
                                 <small>
                                     ¿No tiene una cuenta?
@@ -82,33 +77,36 @@
                         }
                     </section>
                 </div>
+                @*<div class="col-lg-4 col-lg-offset-2 m-t-large">
+
+                </div>*@
             </div>
         </div>
     </section>
     <!-- footer -->
     <footer id="footer">
-        <div class="text-center padder clearfix">
-            <p>
-                <small>
-                    &copy; Agil Devtil @DateTime.Today.Year
-                </small>
-                <br>
-                <br>
-                <a href="#" class="btn btn-xs btn-circle btn-twitter">
-                    <i class="fa fa-twitter">
-                    </i>
-                </a>
-                <a href="#" class="btn btn-xs btn-circle btn-facebook">
-                    <i class="fa fa-facebook">
-                    </i>
-                </a>
-                <a href="#" class="btn btn-xs btn-circle btn-gplus">
-                    <i class="fa fa-google-plus">
-                    </i>
-                </a>
-            </p>
-        </div>
-    </footer>
+            <div class="text-center padder clearfix">
+                <p>
+                    <small>
+                        &copy; Agil Devtil @DateTime.Today.Year
+                    </small>
+                    <br>
+                    <br>
+                    <a href="#" class="btn btn-xs btn-circle btn-twitter">
+                        <i class="fa fa-twitter">
+                        </i>
+                    </a>
+                    <a href="#" class="btn btn-xs btn-circle btn-facebook">
+                        <i class="fa fa-facebook">
+                        </i>
+                    </a>
+                    <a href="#" class="btn btn-xs btn-circle btn-gplus">
+                        <i class="fa fa-google-plus">
+                        </i>
+                    </a>
+                </p>
+            </div>
+        </footer>
     <!-- / footer -->
     <!-- Bootstrap -->
     <!-- app -->

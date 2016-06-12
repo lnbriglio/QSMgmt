@@ -14,81 +14,87 @@
     <meta name="author" content="">
     <title>Registro - Agil Devtil</title>
 
-@Styles.Render("~/Content/first")
-
+    @Styles.Render("~/Content/first")
+    <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" />
 </head>
 <body>
-    <!-- header --> <header id="header" class="navbar bg bg-black">
-        <a class="navbar-brand" href="@Url.Action("LogIn","Account")"></a>
-    </header> <!-- / header --> <section id="content">
-        <div class="main padder">
+    @*<!-- header --> <header id="header" class="navbar bg bg-black">
+            <a class="navbar-brand" href="@Url.Action("LogIn","Account")"></a>
+        </header> <!-- / header --> <section id="content">*@
+    <div class="main padder">
 
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-4 m-t-large">
-                    <section class="panel">
-                        <header class="panel-heading text-center"> Registro </header>
-                        @using (Html.BeginForm("SignUp", "Account", null, FormMethod.Post, new { @class = "panel-body" }))
-                        {
-                            @Html.ValidationSummary(false)
+        <div class="row" style="margin-top:4em;">
+            <div class="col-lg-4 col-lg-offset-2 imageCol">
+
+                <img src="@Url.Content("~/Content/devtil-logo-big-alt.png")" alt="logo" class="mainLogo col-lg-offset-1" />
+            </div>
+            <div class="col-lg-4">
+                <section class="panel">
+                    <header class="panel-heading text-center"> Registro </header>
+                    @using (Html.BeginForm("SignUp", "Account", null, FormMethod.Post, new { @class = "panel-body" }))
+                    {
+                        @Html.ValidationSummary(false)
+                        <div class="block">
+                            <label class="control-label">Escriba su e-mail</label>
+                            @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
+                            <span title="Email valido" class="btn btn-xs btn-success" id="mailCheck"
+                                  style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-check"></i></span>
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+
+                        <div class="block">
+                            <label class="control-label">Escriba una contraseña</label>
+                            @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+
+                        <div class="block">
+                            <label class="control-label">Escriba su nombre</label>
+                            @Html.TextBoxFor(model => model.FirstName, new { placeholder = "Nombre", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FirstName)
+                        </div>
+
+                        <div class="block">
+                            <label class="control-label">Escriba su apellido</label>
+                            @Html.TextBoxFor(model => model.LastName, new { placeholder = "Apellido", @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LastName)
+                        </div>
+                        <div class="line line-dashed"></div>
+                        <div id="companySection">
+                            <h4>Empresa</h4>
+                            @Html.HiddenFor(model => model.CompanyId)
+
                             <div class="block">
-                                <label class="control-label">Escriba su e-mail</label>
-                                @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", @class = "form-control", autofocus = "autofocus" })
-                                <span title="Email valido" class="btn btn-xs btn-success" id="mailCheck"
-                                      style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-check"></i></span>
-                                @Html.ValidationMessageFor(model => model.Email)
+                                <label class="control-label">Escriba el nombre de su empresa</label>
+                                @Html.TextBoxFor(model => model.Company.Name, new { placeholder = "Nombre", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Company.Name)
                             </div>
 
                             <div class="block">
-                                <label class="control-label">Escriba una contraseña</label>
-                                @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña", @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Password)
+                                <label class="control-label">Describa su empresa</label>
+                                @Html.TextAreaFor(model => model.Company.Description, new { placeholder = "Descripción", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Company.Description)
                             </div>
 
                             <div class="block">
-                                <label class="control-label">Escriba su nombre</label>
-                                @Html.TextBoxFor(model => model.FirstName, new { placeholder = "Nombre", @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.FirstName)
+                                <label class="control-label">Escriba el dominio de su empresa</label>
+                                @Html.TextBoxFor(model => model.Company.Domain, new { placeholder = "Dominio", @class = "form-control" })
+                                <span title="El dominio representa es la parte después de la @(" @") en un mail, al determinar un dominio, todos los mails del mismo se asociarán a esta empresa"
+                                      class="btn btn-xs btn-info" id="domainInfo"
+                                      style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-info"></i></span>
+                                @Html.ValidationMessageFor(model => model.Company.Domain)
                             </div>
+                        </div>
+                        <input type="submit" value="Registrese" class="btn btn-info btn-block" />
+                    }
 
-                            <div class="block">
-                                <label class="control-label">Escriba su apellido</label>
-                                @Html.TextBoxFor(model => model.LastName, new { placeholder = "Apellido", @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.LastName)
-                            </div>
-                            <div class="line line-dashed"></div>
-                            <div id="companySection">
-                                <h4>Empresa</h4>
-                                @Html.HiddenFor(model => model.CompanyId)
-
-                                <div class="block">
-                                    <label class="control-label">Escriba el nombre de su empresa</label>
-                                    @Html.TextBoxFor(model => model.Company.Name, new { placeholder = "Nombre", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Company.Name)
-                                </div>
-
-                                <div class="block">
-                                    <label class="control-label">Describa su empresa</label>
-                                    @Html.TextAreaFor(model => model.Company.Description, new { placeholder = "Descripción", @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Company.Description)
-                                </div>
-
-                                <div class="block">
-                                    <label class="control-label">Escriba el dominio de su empresa</label>
-                                    @Html.TextBoxFor(model => model.Company.Domain, new { placeholder = "Dominio", @class = "form-control" })
-                                    <span title="El dominio representa es la parte después de la @(" @") en un mail, al determinar un dominio, todos los mails del mismo se asociarán a esta empresa"
-                                          class="btn btn-xs btn-info" id="domainInfo"
-                                          style="float:right;position:relative;top:-29px;right:2px;display:inherit;margin:0px;"><i class="fa fa-info"></i></span>
-                                    @Html.ValidationMessageFor(model => model.Company.Domain)
-                                </div>
-                            </div>
-    <input type="submit" value="Registrese" class="btn btn-info btn-block" />
-                        }
-                        
-                    </section>
-                </div>
+                </section>
             </div>
         </div>
-    </section> <!-- footer --> <footer id="footer">
+    </div>
+
+
+    <!-- footer --> <footer id="footer">
         <div class="text-center padder clearfix"> <p> <small>&copy; Agil Devtil @DateTime.Today.Year</small><br><br> <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="fa fa-twitter"></i></a> <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="fa fa-facebook"></i></a> <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="fa fa-google-plus"></i></a> </p> </div>
     </footer> <!-- / footer --> <!-- Bootstrap --> <!-- app -->
     @Scripts.Render("~/bundles/first")
