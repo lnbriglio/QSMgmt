@@ -32,6 +32,7 @@ namespace DAL
         [Required]
         [MinLength(1)]
         [MaxLength(50)]
+        [EmailAddress]
         [DataType(DataType.EmailAddress)]
         public object Email { get; set; }
         [DisplayName("Contraseña")]

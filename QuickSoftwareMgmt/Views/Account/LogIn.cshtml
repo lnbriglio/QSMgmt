@@ -38,6 +38,9 @@
                         </header>
                         @using (Html.BeginForm("LogIn", "Account", null, FormMethod.Post, new { @class = "panel-body" }))
                         {
+                            @Html.Hidden("FirstName","-")
+                            @Html.Hidden("LastName", "-")
+
                             @Html.ValidationSummary(true)
                             <div class="block">
                                 <label class="control-label">

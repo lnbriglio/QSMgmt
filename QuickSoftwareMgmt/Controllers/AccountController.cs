@@ -20,21 +20,24 @@ namespace QuickSoftwareMgmt.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> LogIn([Bind(Include = "Email,Password")] User user)
+        public async Task<ActionResult> LogIn([Bind(Include = "Email,Password,FirstName,LastName")] User user)
         {
-            var foundUser = await db.Users
-                .Where(u => !u.Erased
-                && u.Email == user.Email
-                && u.Password == user.Password)
-                .FirstOrDefaultAsync();
-
-            if (foundUser != null)
+            if (ModelState.IsValid)
             {
-                CurrentUser = foundUser;
-                return RedirectToAction("Index", "Project");
-            }
+                var foundUser = await db.Users
+                    .Where(u => !u.Erased
+                    && u.Email == user.Email
+                    && u.Password == user.Password)
+                    .FirstOrDefaultAsync();
 
-            ModelState.AddModelError(String.Empty, "Usuario o contraseña incorrectas");
+                if (foundUser != null)
+                {
+                    CurrentUser = foundUser;
+                    return RedirectToAction("Index", "Project");
+                }
+
+                ModelState.AddModelError(String.Empty, "Usuario o contraseña incorrectas");
+            }
             return View(user);
         }
 
