@@ -135,7 +135,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             User user = await db.Users.FindAsync(id);
-            db.Users.Remove(user);
+            user.Erased = true;
+            db.Entry(user).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

@@ -186,7 +186,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Team team = await db.Teams.FindAsync(id);
-            db.Teams.Remove(team);
+            team.Erased = true;
+            db.Entry(team).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

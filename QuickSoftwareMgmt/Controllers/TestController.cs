@@ -249,7 +249,8 @@ namespace QuickSoftwareMgmt.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Test test = await db.Tests.FindAsync(id);
-            db.BacklogItems.Remove(test);
+            test.Erased = true;
+            db.Entry(test).State = EntityState.Modified;
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
