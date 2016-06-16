@@ -106,4 +106,60 @@
             </header>
         </section>
     </div>
+    @foreach (var task in Model.Tasks) { 
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Detalles tarea #@task.Id
+                </div>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => task.RemainingTime)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.RemainingTime)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.EstimatedTime)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.EstimatedTime)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.SprintId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.Sprint.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.TaskStateId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.TaskState.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => task.UserId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => task.User.Email)
+                        </dd>
+
+                    </dl>
+                </div>
+            </header>
+        </section>
+    </div>
+    }
 </div>

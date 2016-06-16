@@ -31,6 +31,7 @@ namespace DAL
         public object Description { get; set; }
         [DisplayName("Fecha de creación")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "dd/MM/yyyy", ApplyFormatInEditMode = true)]
         public object CreationDate { get; set; }
         [DisplayName("Tiempo restante")]
         [Required]

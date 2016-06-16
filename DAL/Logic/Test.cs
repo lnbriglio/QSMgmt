@@ -31,6 +31,7 @@ namespace DAL
         [DisplayName("Descripción")]
         public object Description { get; set; }
         [DisplayName("Fecha de creación")]
+        [DataType(DataType.Date)]
         public object CreationDate { get; set; }
         [DisplayName("Proyecto")]
         [Required]

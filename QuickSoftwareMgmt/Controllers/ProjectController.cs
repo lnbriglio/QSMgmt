@@ -183,7 +183,8 @@ namespace QuickSoftwareMgmt.Controllers
                 .ToList();
 
             var sprintList = db.Sprints
-                .Where(s => s.ProjectId == SelectedProjectId)
+                .Where(s => s.ProjectId == SelectedProjectId
+                && !s.Erased)
                 .OrderBy(s => s.Name)
                 .ToList();
 

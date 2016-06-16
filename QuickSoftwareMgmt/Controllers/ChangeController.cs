@@ -149,7 +149,14 @@ namespace QuickSoftwareMgmt.Controllers
             ChangeRequest changerequest = await db.ChangeRequests.FindAsync(id);
             changerequest.Erased = true;
             db.Entry(changerequest).State = EntityState.Modified;
-            await db.SaveChangesAsync();
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
             return RedirectToAction("Index");
         }
 

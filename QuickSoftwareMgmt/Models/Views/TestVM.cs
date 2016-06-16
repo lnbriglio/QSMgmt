@@ -19,6 +19,7 @@ namespace QuickSoftwareMgmt.Models.Views
         [DisplayName("Descripción")]
         public String Description { get; set; }
         [DisplayName("Fecha de creación")]
+        [DataType(DataType.Date)]
         public DateTime CreationDate { get; set; }
         [DisplayName("Proyecto")]
         [Required]

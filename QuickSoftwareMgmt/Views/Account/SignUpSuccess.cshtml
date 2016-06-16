@@ -17,14 +17,14 @@
         <link rel="stylesheet" href="css/font.css">
         <link rel="stylesheet" href="css/app.v2.css" type="text/css" /> <!--[if lt IE 9]> <script src="js/ie/respond.min.js"></script> <script src="js/ie/html5.js"></script> <![endif]-->
     *@
-@Styles.Render("~/Content/first")
+    @Styles.Render("~/Content/first")
     <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" />
 </head>
 <body>
     <!-- header -->
     @*<header id="header" class="navbar bg bg-black">
-        <a class="navbar-brand" href="@Url.Action("LogIn","Account")"></a>
-    </header>*@
+            <a class="navbar-brand" href="@Url.Action("LogIn","Account")"></a>
+        </header>*@
     <!-- / header -->
     <section id="content">
         <div class="main padder">
@@ -47,7 +47,21 @@
     </section>
     <!-- footer -->
     <footer id="footer">
-        <div class="text-center padder clearfix"> <p> <small>&copy; Agil Devtil @DateTime.Today.Year</small><br><br> <a href="#" class="btn btn-xs btn-circle btn-twitter"><i class="fa fa-twitter"></i></a> <a href="#" class="btn btn-xs btn-circle btn-facebook"><i class="fa fa-facebook"></i></a> <a href="#" class="btn btn-xs btn-circle btn-gplus"><i class="fa fa-google-plus"></i></a> </p> </div>
+        <div class="text-center padder clearfix">
+            <p>
+                <small>&copy; Agile Devtil @DateTime.Today.Year</small>
+                <br>
+                <br>
+                <a href="https://twitter.com/AgileDevtil" class="btn btn-xs btn-circle btn-twitter">
+                    <i class="fa fa-twitter">
+                    </i>
+                </a>
+                <a href="https://www.facebook.com/agiledevtil" class="btn btn-xs btn-circle btn-facebook">
+                    <i class="fa fa-facebook">
+                    </i>
+                </a>
+            </p>
+        </div>
     </footer>
     <!-- / footer -->
     <!-- Bootstrap -->

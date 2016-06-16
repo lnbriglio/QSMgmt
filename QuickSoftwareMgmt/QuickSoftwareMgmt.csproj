@@ -162,6 +162,7 @@
     <Content Include="Content\devtil-logo-big.png" />
     <Content Include="Content\font.css" />
     <Content Include="Content\img\agil-logo3.png" />
+    <Content Include="Content\img\agile-logo4.png" />
     <Content Include="Content\img\collapse.png" />
     <Content Include="Content\img\expand.png" />
     <Content Include="Content\img\file.png" />
