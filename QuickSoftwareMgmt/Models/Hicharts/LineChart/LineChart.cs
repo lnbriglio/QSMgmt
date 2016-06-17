@@ -30,6 +30,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts.LineChart
 
     public class Xaxis
     {
+        public Title title { get; set; }
         public string[] categories { get; set; }
     }
 

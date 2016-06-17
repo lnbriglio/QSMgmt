@@ -189,8 +189,8 @@
     <Content Include="fonts\opensans-webfont.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Properties\PublishProfiles\Agil-Devtil - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\Agil-Devtil - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\agile-devtil - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\agile-devtil - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -245,6 +245,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

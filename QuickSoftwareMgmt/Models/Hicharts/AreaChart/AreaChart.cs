@@ -36,6 +36,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts.AreaChart
 
     public class Xaxis
     {
+        public Title title { get; set; }
         public bool allowDecimals { get; set; }
         public object labels { get; set; }
 

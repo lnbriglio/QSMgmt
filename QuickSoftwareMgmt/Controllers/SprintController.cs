@@ -247,6 +247,9 @@ namespace QuickSoftwareMgmt.Controllers
                 xAxis = new Xaxis
                 {
                     //allowDecimals = false,
+                    title = new Title{
+                        text = "Fecha"
+                    },
                     labels = new Labels
                     {
                         format = "{value}"

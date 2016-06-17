@@ -228,6 +228,9 @@ namespace QuickSoftwareMgmt.Controllers
                 },
                 xAxis = new Xaxis
                 {
+                    title= new QuickSoftwareMgmt.Models.Hicharts.LineChart.Title{
+                        text="Cantidad de cambios"
+                    },
                     categories = dates.Select(d => d.ToString("{dd/MM}")).ToArray()
                 },
                 yAxis = new Yaxis
