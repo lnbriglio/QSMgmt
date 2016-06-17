@@ -275,7 +275,8 @@ namespace QuickSoftwareMgmt.Controllers
                         u.ElapsedTime > 0 &&
                         u.Task.TaskStateId == (int)TaskStateEnum.Done &&
                         u.Task.BacklogItem is Test)
-                    .AverageAsync(u => u.ElapsedTime);
+                    .GroupBy(u => u.TaskId)
+                    .AverageAsync(u => u.Sum(tu => tu.ElapsedTime));
 
             }
             catch (Exception ex)

@@ -49,6 +49,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts.PieChart
     public class Datalabels
     {
         public bool enabled { get; set; }
+        public string format { get; set; }
     }
 
     public class Series

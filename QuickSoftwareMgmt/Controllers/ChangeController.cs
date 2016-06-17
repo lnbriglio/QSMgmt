@@ -229,7 +229,7 @@ namespace QuickSoftwareMgmt.Controllers
                 xAxis = new Xaxis
                 {
                     title= new QuickSoftwareMgmt.Models.Hicharts.LineChart.Title{
-                        text="Cantidad de cambios"
+                        text = "Fechas"
                     },
                     categories = dates.Select(d => d.ToString("{dd/MM}")).ToArray()
                 },
@@ -237,7 +237,7 @@ namespace QuickSoftwareMgmt.Controllers
                 {
                     title = new Models.Hicharts.LineChart.Title
                     {
-                        text = "Fechas"
+                        text="Cantidad de cambios"
                     },
                     plotLines = new Plotline[]{
                         new Plotline{
@@ -393,7 +393,9 @@ namespace QuickSoftwareMgmt.Controllers
                             cursor = "pointer",
                             dataLabels = new Datalabels
                             {
-                                enabled = false
+                                enabled = true,
+                                format = "<b>{point.name}</b>: {point.percentage:.1f} %",
+                                
                             },
                             showInLegend = true
                         }

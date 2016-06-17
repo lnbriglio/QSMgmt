@@ -18,7 +18,7 @@ namespace QuickSoftwareMgmt.Models.Hicharts
             return new Exportable
             {
                 enabled = true,
-                filename = String.Format("{1:dd/MM/yyyy}_{0}", name,DateTime.Today),
+                filename = String.Format("{1:dd/MM/yyyy}_{0}", name, DateTime.Today),
                 type = TYPE_PNG,
             };
         }
@@ -27,4 +27,8 @@ namespace QuickSoftwareMgmt.Models.Hicharts
         public static String TYPE_JPEG = "image/jpeg";
         public static String TYPE_PDF = "application/pdf";
     }
+
+
+
+
 }
