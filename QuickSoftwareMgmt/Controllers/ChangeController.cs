@@ -394,7 +394,7 @@ namespace QuickSoftwareMgmt.Controllers
                             dataLabels = new Datalabels
                             {
                                 enabled = true,
-                                format = "<b>{point.name}</b>: {point.percentage:.1f} %",
+                                format = "{point.percentage:.1f} %",
                                 
                             },
                             showInLegend = true
