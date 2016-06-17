@@ -57,11 +57,18 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(task).State = EntityState.Added;
-                    await db.SaveChangesAsync();
+                    if (task.EstimatedTime >= task.RemainingTime)
+                    {
+                        db.Entry(task).State = EntityState.Added;
+                        await db.SaveChangesAsync();
 
-                    await db.Entry(task).ReloadAsync();
-                    return PartialView("_CreateSuccessfulModal", task);
+                        await db.Entry(task).ReloadAsync();
+                        return PartialView("_CreateSuccessfulModal", task);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(String.Empty, "El tiempo restante debe ser menor o igual al tiempo estimado.");
+                    }
                 }
             }
             catch

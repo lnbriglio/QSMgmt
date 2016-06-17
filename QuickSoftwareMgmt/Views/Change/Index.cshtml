@@ -129,19 +129,38 @@
                 $("#addTaskModal").on("submit", "#form-createTask", function (e) {
                     e.preventDefault();  // prevent standard form submission
 
-                    var form = $(this);
-                    $.ajax({
-                        url: form.attr("action"),
-                        method: form.attr("method"),  // post
-                        data: form.serialize(),
-                        success: function (partialResult) {
-                            refreshModal(partialResult);
+                    var valid = true;
+                    
+                    var estimatedTime = $("#EstimatedTime").val();
+                    var remainingTime = $("#RemainingTime").val();
+                    var sprint = $("#SprintId").val();
+                    var user = $("#UserId").val();
 
-                            $('#addTaskModal').on('hidden.bs.modal', function () {
-                                window.location.reload(true);
-                            });
-                        }
-                    });
+                    valid = estimatedTime > 0
+                    && remainingTime > 0
+                    && sprint != ""
+                    && user!="";
+
+                    if (!valid) {
+                        valid = confirm("Hay campos sin completar, ¿Está seguro que desea continuar?");
+                    }
+
+                    if (valid) {
+
+                        var form = $(this);
+                        $.ajax({
+                            url: form.attr("action"),
+                            method: form.attr("method"),  // post
+                            data: form.serialize(),
+                            success: function (partialResult) {
+                                refreshModal(partialResult);
+
+                                $('#addTaskModal').on('hidden.bs.modal', function () {
+                                    window.location.reload(true);
+                                });
+                            }
+                        });
+                    }
                 });
 
                 $('#addTaskModal').modal('show');
