@@ -168,7 +168,8 @@ namespace QuickSoftwareMgmt.Controllers
 
             int totalWorkLoad = await db.Tasks
                 .Where(t => !t.Erased
-                && t.SprintId == sprintId)
+                && t.SprintId == sprintId
+                && !(t.BacklogItem is Test))
                 .SumAsync(t => t.EstimatedTime);
 
             var workableDates = new List<DateTime>();
@@ -183,17 +184,26 @@ namespace QuickSoftwareMgmt.Controllers
                 }
             }
 
+            var actualSprintDuration = 1;
+            if (workableDates.Count > 1)
+               actualSprintDuration = workableDates.Count - 1;
+
 
             var sprintTaskUpdates = await db.TaskUpdates
                 .Where(u => !u.Erased
                     && u.Task.SprintId == sprintId
+                    && !(u.Task.BacklogItem is Test)
                     && u.EventDate >= sprint.StartDate
                     && u.EventDate <= sprint.EndDate)
                     .ToListAsync();
 
-            int idealDailyBurn = 0;
+            float idealDailyBurn = 0;
             if (workableDates.Count > 0)
-                idealDailyBurn = (int)Math.Ceiling(totalWorkLoad / (workableDates.Count * 1.0f));
+            {
+                //idealDailyBurn = (int)Math.Ceiling(totalWorkLoad / (actualSprintDuration * 1.0f));
+                idealDailyBurn = totalWorkLoad / (actualSprintDuration * 1.0f);
+
+            }
 
             var idealBurn = new List<int>();
             var actualBurn = new List<int>();
@@ -204,13 +214,16 @@ namespace QuickSoftwareMgmt.Controllers
                 var date = workableDates[i];
                 //Ideal
                 if (totalWorkLoad - i * idealDailyBurn > 0)
-                    idealBurn.Add(totalWorkLoad - i * idealDailyBurn);
+                    idealBurn.Add((int)Math.Ceiling(totalWorkLoad - i * idealDailyBurn));
                 else
                     idealBurn.Add(0);
                 //Actual
                 burned-= sprintTaskUpdates
                     .Where(u => u.EventDate.Date == date)
                     .Sum(u => u.ElapsedTime);
+
+                if (burned < 0) burned = 0;
+
                 actualBurn.Add(burned);
                 
             }
