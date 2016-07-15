@@ -169,18 +169,30 @@ namespace QuickSoftwareMgmt.Controllers
             base.Dispose(disposing);
         }
 
-        public async Task<JsonResult> GetChangesUrgencyByDateChart()
+        public async Task<JsonResult> GetChangesUrgencyByDateChart(String StartDate, String EndDate)
         {
             int maxDaysBack = -15;
 
+            
             var startDate = DateTime.Today.AddDays(maxDaysBack);//Take changes from the last 15 days
+            var endDate = DateTime.Today;
+
+            if (!String.IsNullOrWhiteSpace(StartDate) && !String.IsNullOrWhiteSpace(EndDate))
+            {
+                var initialDate = DateTime.ParseExact(StartDate, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentUICulture);
+                var finalDate = DateTime.ParseExact(EndDate, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentUICulture);
+
+                endDate = finalDate;
+                maxDaysBack = (int)(initialDate - finalDate).TotalDays;
+                startDate = finalDate.AddDays(maxDaysBack);//Take changes from the last 15 days
+            }
 
             var priorities = await db.Priorities.ToListAsync();
 
             var dates = new List<DateTime>();
             for (int i = maxDaysBack; i <= 0; i++)
             {
-                dates.Add(DateTime.Today.AddDays(i));
+                dates.Add(endDate.AddDays(i));
             }
 
             var series = new Models.Hicharts.LineChart.Series[priorities.Count];

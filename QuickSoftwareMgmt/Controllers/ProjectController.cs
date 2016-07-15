@@ -67,6 +67,10 @@ namespace QuickSoftwareMgmt.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.EndDate = DateTime.Today.ToString("dd/MM/yyyy");
+            ViewBag.StartDate = DateTime.Today.AddDays(-15).ToString("dd/MM/yyyy");
+
             base.ValidateCompany(project);
             return View(project);
         }

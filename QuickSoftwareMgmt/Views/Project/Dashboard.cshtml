@@ -25,6 +25,14 @@
                 <i class="fa fa-area-chart fa-fw">
                 </i>
                 Urgencia de cambios por fecha
+
+                <div class="pull-right">
+
+                    <input type="text" id="StartDate" class="input-sm form-control" style="width:45%;display:inline;" value="@ViewBag.StartDate"/>
+                    <input type="text" id="EndDate" class="input-sm form-control" style="width:45%;display:inline;" value="@ViewBag.EndDate" />
+                    <button id="btnCustomChanges" class="btn btn-xs btn-success"><i class="fa fa-chevron-right"> </i></button>
+
+                </div>
             </header>
             <div class="panel-body">
                 <div id="changesUrgencyByDateContainer" class="loader"></div>
@@ -182,8 +190,29 @@
 
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
-<script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="http://code.highcharts.com/modules/offline-exporting.js"></script>
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/datepicker.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment-with-locales.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.i18n/es.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment-datepicker.min.js")"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#StartDate").datepicker({
+                language: 'es'
+            });
+            $("#EndDate").datepicker({
+                language: 'es'
+            });
+
+        });
+    </script>
+
+
 
     <script type="text/javascript">
 
@@ -221,6 +250,22 @@
             $.get('@Url.Action("GetChangesUrgencyByDateChart", "Change")', null, function (data) {
                 $('#changesUrgencyByDateContainer').removeClass("loader").highcharts(data);
             });
+
+            $("#btnCustomChanges").click(function () {
+                $('#changesUrgencyByDateContainer').html('');
+                $('#changesUrgencyByDateContainer').addClass("loader");
+
+                $.get('@Url.Action("GetChangesUrgencyByDateChart", "Change")',
+                    {
+                        StartDate: $("#StartDate").val(),
+                        EndDate: $("#EndDate").val()
+                    },
+                    function (data) {
+                    $('#changesUrgencyByDateContainer').removeClass("loader").highcharts(data);
+                });
+
+            });
+
 
             //GetChangesUrgencyByDateChart
 
