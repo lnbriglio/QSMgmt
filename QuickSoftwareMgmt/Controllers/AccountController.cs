@@ -61,8 +61,7 @@ namespace QuickSoftwareMgmt.Controllers
             if (user.CompanyId != 0)
             {
                 user.Company = null;
-                if (TryValidateModel(user))//TODO Review
-                //if (true)
+                if (TryValidateModel(user))
                 {
                     //Registrar
                     db.Entry(user).State = EntityState.Added;
@@ -77,8 +76,7 @@ namespace QuickSoftwareMgmt.Controllers
                 var domainAlreadyExists = await db.Companies.AnyAsync(c => !c.Erased && c.Domain == user.Company.Domain);
                 if (!domainAlreadyExists)
                 {
-                    if (TryValidateModel(user))//TODO Review
-                    //if (true)
+                    if (TryValidateModel(user))
                     {
                         if (!String.IsNullOrWhiteSpace(user.Company.Name))
                         {
