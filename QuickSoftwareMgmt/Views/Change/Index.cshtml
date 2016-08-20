@@ -71,7 +71,7 @@
                                     @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
                                 </td>
                             </tr>
-                            foreach (var taskItem in item.Tasks.Where(t => t.SprintId == ViewBag.SelectedSprintId))
+                            foreach (var taskItem in item.Tasks.Where(t => !t.Erased && t.SprintId == ViewBag.SelectedSprintId))
                             {
                                 @:<tr class="treegrid-parent-log-@item.Id treegrid-task-@taskItem.Id">
                                     @:<td>
@@ -88,7 +88,8 @@
                                         break;
 
                                         }
-                                        @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null)
+                                        @:@Html.ActionLink(taskItem.Title, "Details", "Task", new { id = taskItem.Id }, null) | 
+                                        @:@Html.ActionLink("Eliminar", "Delete", "Task", new { id = taskItem.Id }, null)
                                         }
                         }
 

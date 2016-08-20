@@ -35,7 +35,8 @@ namespace QuickSoftwareMgmt.Controllers.API
                 Id = s.Id,
                 Name = s.Name,
                 Tasks = s.Tasks
-                .Where(t => t.SprintId == sprintId
+                .Where(t => !t.Erased
+                    && t.SprintId == sprintId
                 && !t.BacklogItem.Erased)
                 .Select(t => new
                 {

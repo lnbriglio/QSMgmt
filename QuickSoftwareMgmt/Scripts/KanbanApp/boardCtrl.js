@@ -134,6 +134,19 @@
         }
     };
 
+    $scope.deleteTask = function (taskId) {
+        if (confirm("¿Desea eliminar esta tarea?")) {
+            $.ajax({
+                url: $("#deleteURL").val(),
+                method: "POST",  // post
+                data: {id: taskId},
+                success: function (partialResult) {
+                    $scope.refreshBoard();
+                }
+            });
+        }
+    }
+
     angular.element(document).ready(function () {
         init();
     });

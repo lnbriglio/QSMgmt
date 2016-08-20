@@ -4,6 +4,8 @@
 
 <div class="clearfix">    <h4>Kanban - <span id="sprintName"></span></h4></div>
 
+<input type="hidden" id="deleteURL"  value="@Url.Action("DeleteAjax","Task")" />
+
 <div style="width:100%; margin: 0 auto 0 auto;" ng-app="kanbanBoardApp">
 
     <div class="row tooltip-toggle" ng-controller="boardCtrl">
@@ -21,6 +23,10 @@
                     <h5>
                         <strong>(#{{task.Parent.IsTest ? task.Parent.Id : task.Id}}) {{task.Name}}</strong>
 
+                        <button class="btn btn-danger btn-xs btn-circle pull-right" type="button" title="Editar tarea"
+                                ng-click="deleteTask(task.Id)">
+                            <i class="fa fa-minus"></i>
+                        </button>
                         <button class="btn btn-warning btn-xs btn-circle pull-right" type="button" title="Editar tarea"
                                 ng-click="editTask(task.Id)">
                             <i class="fa fa-pencil"></i>

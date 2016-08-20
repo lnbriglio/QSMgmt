@@ -277,5 +277,65 @@ namespace QuickSoftwareMgmt.Controllers
 
             return View(task);
         }
+
+        // GET: /Change/Delete/5
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DAL.Task task = await db.Tasks.FindAsync(id);
+            if (task == null)
+            {
+                return HttpNotFound();
+            }
+            base.ValidateCompany(task);
+
+            return View(task);
+        }
+
+        // POST: /Change/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            DAL.Task task = await db.Tasks.FindAsync(id);
+            task.Erased = true;
+            db.Entry(task).State = EntityState.Modified;
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("Index","Change");
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DeleteAjax(int? id)
+        {
+            DAL.Task task = await db.Tasks.FindAsync(id);
+            task.Erased = true;
+
+            if (task.BacklogItem is Test)
+            {
+                task.BacklogItem.Erased = true;
+            }
+
+            db.Entry(task).State = EntityState.Modified;
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Json(true);
+        }
     }
 }

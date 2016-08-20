@@ -1,0 +1,113 @@
+﻿@model DAL.Task
+
+@{
+    ViewBag.Title = "Eliminar tarea";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <section class="panel">
+            <header class="panel-heading">
+                <div class="text-center h4">
+                    Eliminar tarea
+                </div>
+                <hr />
+                <div class="text-center h5">
+                    ¿Está seguro que desea eliminar esto?
+
+                </div>
+                <div>
+                    <hr />
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Title)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CreationDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CreationDate)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RemainingTime)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.RemainingTime)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EstimatedTime)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EstimatedTime)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.BacklogItemId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.BacklogItem.Title)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SprintId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Sprint.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TaskStateId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TaskState.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.User.Email)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color col-md-offset-3 col-md-6">
+                            <input type="submit" value="Eliminar" class="btn btn-danger btn-block" />
+                        </div>
+                    }
+                </div>
+            </header>
+        </section>
+        <p>
+            @Html.ActionLink("Volver al índice", "Index")
+        </p>
+    </div>
+</div>
