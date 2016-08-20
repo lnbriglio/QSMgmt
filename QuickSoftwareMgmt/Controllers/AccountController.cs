@@ -57,11 +57,12 @@ namespace QuickSoftwareMgmt.Controllers
         [HttpPost]
         public async Task<ActionResult> SignUp(User user)
         {
+            ModelState.Clear();
             if (user.CompanyId != 0)
             {
                 user.Company = null;
-                //if (TryValidateModel(user))//TODO Review
-                if (true)
+                if (TryValidateModel(user))//TODO Review
+                //if (true)
                 {
                     //Registrar
                     db.Entry(user).State = EntityState.Added;
@@ -76,14 +77,21 @@ namespace QuickSoftwareMgmt.Controllers
                 var domainAlreadyExists = await db.Companies.AnyAsync(c => !c.Erased && c.Domain == user.Company.Domain);
                 if (!domainAlreadyExists)
                 {
-                    //if (TryValidateModel(user))//TODO Review
-                    if (true)
+                    if (TryValidateModel(user))//TODO Review
+                    //if (true)
                     {
-                        //Registrar
-                        db.Entry(user).State = EntityState.Added;
-                        await db.SaveChangesAsync();
+                        if (!String.IsNullOrWhiteSpace(user.Company.Name))
+                        {
+                            //Registrar
+                            db.Entry(user).State = EntityState.Added;
+                            await db.SaveChangesAsync();
 
-                        return RedirectToAction("SignUpSuccess");
+                            return RedirectToAction("SignUpSuccess");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(String.Empty, "El nombre de la empresa es requerido");
+                        }
                     }
                 }
                 else
