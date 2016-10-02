@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickSoftwareMgmt", "QuickSoftwareMgmt\QuickSoftwareMgmt.csproj", "{D3078E36-FEE3-439F-8D3C-329D00E074A1}"
 EndProject
@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{057CF4F3-2795-4580-8416-D714C5A37DD6}"
 	ProjectSection(SolutionItems) = preProject
 		DBCreation.sql = DBCreation.sql
+		DBCreationWithData-2016-10-02.sql = DBCreationWithData-2016-10-02.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyDataGenerator", "DummyDataGenerator\DummyDataGenerator.csproj", "{431BEE31-DA0E-4F0B-9FBE-54B68F8F7B57}"
